@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#3a2e22"/><stop offset="1" stop-color="#8a6c48"/>
+  </linearGradient>
+  <linearGradient id="colina-lejos" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#9a7c58"/><stop offset="1" stop-color="#6e5640"/>
+  </linearGradient>
+  <linearGradient id="colina-cerca" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5e4a37"/><stop offset="1" stop-color="#3a2f25"/>
+  </linearGradient>
+  <linearGradient id="suelo" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2b2520"/><stop offset="1" stop-color="#121110"/>
+  </linearGradient>
+  <filter id="grano" filterUnits="userSpaceOnUse" x="0" y="0" width="1200" height="600">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="ruido"/>
+  <feColorMatrix in="ruido" values="0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0 0.04  0 0 0 0.35 -0.05" result="ruidoA"/>
+  <feComposite in="ruidoA" in2="SourceGraphic" operator="in" result="ruidoC"/>
+  <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="ruidoC"/></feMerge>
+</filter>
+  <clipPath id="cielo-recorte"><rect width="1200" height="402"/></clipPath>
+</defs>
+<g filter="url(#grano)">
+  <rect width="1200" height="402" fill="url(#cielo)"/>
+  <g clip-path="url(#cielo-recorte)"><circle cx="860" cy="180" r="564" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="522" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="480" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="438" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="396" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="354" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="312" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="270" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="228" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="186" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="144" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="102" fill="#f0cf98" opacity="0.13"/>
+<circle cx="860" cy="180" r="60" fill="#f0cf98" opacity="0.13"/>
+  </g>
+  <path d="M0 348 C 216.0 304, 384.0 330, 576.0 342 S 960.0 296, 1200 334 V 400 H 0 Z" fill="url(#colina-lejos)"/>
+  <path d="M0 382 C 264.0 348, 480.0 380, 744.0 366 S 1080.0 354, 1200 378 V 400 H 0 Z" fill="url(#colina-cerca)"/>
+  <rect y="400" width="1200" height="200" fill="url(#suelo)"/>
+  <rect y="400" width="1200" height="1.5" fill="#f3e2c0" opacity="0.18"/>
+  <line x1="600.0" y1="400" x2="-800" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="-600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="-400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="-200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="0" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="800" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="1000" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="1200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="1400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="1600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="1800" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="600.0" y1="400" x2="2000" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+  <rect x="20" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="96" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="172" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="248" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="324" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="400" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="476" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="552" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="628" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="704" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="780" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="856" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="932" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="1008" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="1084" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+<rect x="1160" y="564" width="38" height="3" rx="1.5" fill="#fff" opacity="0.12"/>
+</g>
+</svg>

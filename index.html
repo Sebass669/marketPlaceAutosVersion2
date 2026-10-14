@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="es-CR" data-tema="negro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solera | Autos con historia en Costa Rica</title>
+  <meta name="description" content="Autos nuevos, usados y clásicos seleccionados uno a uno en Costa Rica. Intermediación honesta para comprar y vender, con todo el contacto por WhatsApp.">
+  <meta name="theme-color" content="#0c0c0c">
+  <meta property="og:title" content="Solera | Autos con historia, listos para tu camino">
+  <meta property="og:description" content="Intermediación honesta para comprar y vender autos en Costa Rica.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/og.jpg">
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+
+  <!-- Aplica el tema guardado antes de pintar, para que no parpadee -->
+  <script>
+    try {
+      const tema = localStorage.getItem('solera-tema');
+      if (['negro', 'hueso', 'dorado'].includes(tema)) document.documentElement.dataset.tema = tema;
+    } catch {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Michroma&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+
+  <link rel="preload" as="image" href="assets/ilustraciones/escena.svg">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <!-- Marca Solera: cuadro redondeado con la S de trazo continuo (colores según el tema) -->
+  <svg width="0" height="0" class="sr-only" aria-hidden="true">
+    <symbol id="logo-solera" viewBox="0 0 100 100">
+      <clipPath id="logo-recorte"><rect width="100" height="100" rx="21"/></clipPath>
+      <rect width="100" height="100" rx="21" fill="var(--logo-bg)"/>
+      <path clip-path="url(#logo-recorte)" d="M104 32.6H40a8.5 8.5 0 0 0 0 17h19.3a8.4 8.4 0 0 1 0 16.8H-4" fill="none" stroke="var(--logo-fg)" stroke-width="8.4"/>
+    </symbol>
+  </svg>
+
+  <a class="skip-link" href="#carros">Saltar al inventario</a>
+  <div data-top-sentinel aria-hidden="true"></div>
+
+  <header class="header" data-header>
+    <div class="container header__inner">
+      <a class="logo" href="#inicio" aria-label="Solera, inicio">
+        <svg class="logo__marca" aria-hidden="true"><use href="#logo-solera"/></svg>
+        <span class="logo__texto">
+          <span class="logo__nombre">solera</span>
+          <span class="logo__lema">automotriz · costa rica</span>
+        </span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#inicio">inicio</a>
+        <a href="#carros">inventario</a>
+        <a href="#conocenos">conócenos</a>
+        <a href="#contacto">contacto</a>
+      </nav>
+
+      <div class="header__acciones">
+        <div class="temas" role="radiogroup" aria-label="Tema de color" data-temas>
+          <button type="button" class="temas__punto temas__punto--negro" role="radio" aria-checked="true" data-tema-opcion="negro" aria-label="Tema negro"></button>
+          <button type="button" class="temas__punto temas__punto--hueso" role="radio" aria-checked="false" data-tema-opcion="hueso" aria-label="Tema hueso"></button>
+          <button type="button" class="temas__punto temas__punto--dorado" role="radio" aria-checked="false" data-tema-opcion="dorado" aria-label="Tema dorado"></button>
+        </div>
+        <a class="btn btn--primary btn--sm header__wa" href="#" data-wa="Hola Solera, tengo una consulta.">
+          <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>whatsapp
+        </a>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-controls="nav" aria-expanded="false" aria-label="Abrir menú">
+          <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-list"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-titulo">
+      <img class="hero__fondo" src="assets/ilustraciones/escena.svg" alt="" width="1200" height="600">
+      <div class="hero__velo" aria-hidden="true"></div>
+
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <span class="sobretitulo hero__anim">automotriz · costa rica</span>
+          <h1 class="hero__titulo hero__anim" id="hero-titulo">autos con historia, listos para tu camino</h1>
+          <p class="hero__sub hero__anim">Nuevos, usados y clásicos seleccionados uno a uno, con revisión mecánica y un traspaso sin complicaciones.</p>
+          <div class="hero__ctas hero__anim">
+            <a class="btn btn--primary btn--lg" href="#carros">ver inventario
+              <span class="btn__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#" data-wa="Hola Solera, quiero información sobre sus autos.">
+              <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>escribinos por whatsapp
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__escena">
+          <!--sedan-->
+          <svg class="hero__carro" viewBox="-6 0 532 178" aria-hidden="true" data-carro><defs>
+  <linearGradient id="hv-carro" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#4f6b5c"/><stop offset=".55" stop-color="#4f6b5c"/><stop offset="1" stop-color="#000" stop-opacity=".55"/>
+  </linearGradient>
+  <linearGradient id="hv-luz" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity=".22"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="hv-vidrio" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2c3b3a"/><stop offset=".55" stop-color="#1b2423"/><stop offset="1" stop-color="#3b4a47"/>
+  </linearGradient>
+</defs>
+<ellipse cx="262" cy="164" rx="272" ry="11" fill="#000" opacity=".5"/>
+<path d="M14 98 Q10 84 24 80 L124 74 L174 33 Q181 27 191 27 L333 27 Q343 27 351 33 L414 74 L496 80 Q512 82 512 98 L512 126 Q512 136 502 136 L24 136 Q14 136 14 126 Z" fill="#4f6b5c"/>
+<path d="M14 98 Q10 84 24 80 L124 74 L174 33 Q181 27 191 27 L333 27 Q343 27 351 33 L414 74 L496 80 Q512 82 512 98 L512 126 Q512 136 502 136 L24 136 Q14 136 14 126 Z" fill="url(#hv-carro)" opacity=".55"/>
+<path d="M14 98 Q10 84 24 80 L124 74 L174 33 Q181 27 191 27 L333 27 Q343 27 351 33 L414 74 L496 80 Q512 82 512 98 L512 126 Q512 136 502 136 L24 136 Q14 136 14 126 Z" fill="url(#hv-luz)"/>
+<path d="M181 40 L252 40 L252 72 L141 72 Z" fill="url(#hv-vidrio)"/><path d="M264 40 L338 40 L396 72 L264 72 Z" fill="url(#hv-vidrio)"/>
+<path d="M190 44 L214 44 L176 68 L160 68 Z" fill="#fff" opacity=".06"/>
+<rect x="255" y="28" width="6" height="104" fill="#000" opacity=".35"/>
+<path d="M28 92 L498 92" stroke="#fff" stroke-opacity=".18" stroke-width="2"/>
+<path d="M18 112 L508 112" stroke="#000" stroke-opacity=".25" stroke-width="1.5"/>
+<rect x="222" y="98" width="16" height="4" rx="2" fill="#000" opacity=".4"/>
+<rect x="298" y="98" width="16" height="4" rx="2" fill="#000" opacity=".4"/>
+<rect x="15" y="90" width="16" height="11" rx="2.5" fill="#efe6cf"/>
+<rect x="498" y="88" width="13" height="14" rx="2.5" fill="#a9583a"/>
+<rect x="2" y="116" width="44" height="9" rx="4" fill="#161514"/>
+<rect x="478" y="116" width="44" height="9" rx="4" fill="#161514"/>
+<circle cx="110" cy="136" r="46" fill="#0d0d0c"/><circle cx="414" cy="136" r="46" fill="#0d0d0c"/>
+<g class="rueda" style="transform-origin:110px 136px"><circle cx="110" cy="136" r="38" fill="#141413"/><circle cx="110" cy="136" r="23.94" fill="#cfc8b8"/><circle cx="110" cy="136" r="17.1" fill="#9b958a"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(0 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(45 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(90 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(135 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(180 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(225 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(270 110 136)"/><rect x="108.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(315 110 136)"/><circle cx="110" cy="136" r="7.9799999999999995" fill="#e9e3d5"/><circle cx="110" cy="136" r="3.04" fill="#2a2926"/></g><g class="rueda" style="transform-origin:414px 136px"><circle cx="414" cy="136" r="38" fill="#141413"/><circle cx="414" cy="136" r="23.94" fill="#cfc8b8"/><circle cx="414" cy="136" r="17.1" fill="#9b958a"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(0 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(45 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(90 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(135 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(180 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(225 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(270 414 136)"/><rect x="412.5" y="115.86" width="3" height="7.9799999999999995" rx="1" fill="#6f6a60" transform="rotate(315 414 136)"/><circle cx="414" cy="136" r="7.9799999999999995" fill="#e9e3d5"/><circle cx="414" cy="136" r="3.04" fill="#2a2926"/></g></svg>
+          <!--/sedan-->
+        </div>
+      </div>
+
+      <div class="container">
+        <ul class="garantias">
+          <li class="garantias__item">
+            <p class="garantias__titulo display">revisión mecánica</p>
+            <p>Cada auto se inspecciona antes de publicarse.</p>
+          </li>
+          <li class="garantias__item">
+            <p class="garantias__titulo display">traspaso con abogado</p>
+            <p>Nos encargamos del papeleo de principio a fin.</p>
+          </li>
+          <li class="garantias__item">
+            <p class="garantias__titulo display">pago en custodia</p>
+            <p>Tu dinero queda protegido hasta que el traspaso se concreta.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DESTACADOS -->
+    <section class="destacados" aria-labelledby="destacados-titulo" data-destacados>
+      <div class="container">
+        <div class="encabezado encabezado--accion">
+          <div>
+            <span class="sobretitulo">selección</span>
+            <h2 class="titulo" id="destacados-titulo">autos destacados</h2>
+          </div>
+          <div class="carrusel__flechas">
+            <button class="btn-icono" type="button" data-anterior aria-label="Autos anteriores">
+              <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-arrow-left"/></svg>
+            </button>
+            <button class="btn-icono btn-icono--activo" type="button" data-siguiente aria-label="Más autos">
+              <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="carrusel__pista" data-pista tabindex="0" aria-label="Autos destacados, deslizá para ver más"></div>
+        <div class="carrusel__progreso" data-progreso aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <!-- POR QUÉ SOLERA -->
+    <section class="pasos" aria-labelledby="pasos-titulo">
+      <div class="container">
+        <div class="encabezado" data-reveal>
+          <span class="sobretitulo">por qué solera</span>
+          <h2 class="titulo" id="pasos-titulo">comprar y vender con respaldo</h2>
+        </div>
+
+        <ul class="pasos__grid">
+          <li class="paso" data-reveal>
+            <div class="paso__cabeza">
+              <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-wrench"/></svg></span>
+              <span class="paso__num display" aria-hidden="true">01</span>
+            </div>
+            <h3 class="paso__titulo display">revisión mecánica certificada</h3>
+            <p>Inspeccionamos cada vehículo antes de publicarlo para que compres con información real, sin sorpresas.</p>
+          </li>
+          <li class="paso" data-reveal>
+            <div class="paso__cabeza">
+              <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-file-text"/></svg></span>
+              <span class="paso__num display" aria-hidden="true">02</span>
+            </div>
+            <h3 class="paso__titulo display">traspaso sin complicaciones</h3>
+            <p>Un abogado se encarga del traspaso y los trámites. Vos solo firmás.</p>
+          </li>
+          <li class="paso" data-reveal>
+            <div class="paso__cabeza">
+              <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-users-three"/></svg></span>
+              <span class="paso__num display" aria-hidden="true">03</span>
+            </div>
+            <h3 class="paso__titulo display">trato personal</h3>
+            <p>Te acompañamos en toda la negociación, desde la primera consulta hasta la entrega.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- INVENTARIO -->
+    <section class="inventario" id="carros" aria-labelledby="catalogo-titulo">
+      <div class="container">
+        <div class="encabezado">
+          <span class="sobretitulo">nuestros autos</span>
+          <h2 class="titulo" id="catalogo-titulo">inventario</h2>
+        </div>
+
+        <div class="inventario__layout">
+          <form class="filtros" id="filtros" data-filtros role="search" aria-label="Filtrar autos">
+            <label class="filtros__grupo filtros__grupo--buscar">
+              <span class="filtros__etiqueta display">buscar</span>
+              <span class="campo campo--buscar">
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-magnifying-glass"/></svg>
+                <input type="search" name="q" placeholder="Marca, modelo o lugar" autocomplete="off">
+              </span>
+            </label>
+
+            <div class="filtros__grupo">
+              <p class="filtros__etiqueta display" id="filtro-tipo">tipo</p>
+              <div class="filtros__chips" data-chips="tipo" role="group" aria-labelledby="filtro-tipo"></div>
+            </div>
+
+            <fieldset class="filtros__grupo">
+              <legend class="filtros__etiqueta display">marca</legend>
+              <div class="filtros__marcas" data-marcas></div>
+            </fieldset>
+
+            <div class="filtros__grupo">
+              <p class="filtros__etiqueta display" id="filtro-transmision">transmisión</p>
+              <div class="filtros__chips" data-chips="transmision" role="group" aria-labelledby="filtro-transmision"></div>
+            </div>
+
+            <div class="filtros__grupo">
+              <p class="filtros__etiqueta display" id="filtro-combustible">combustible</p>
+              <div class="filtros__chips" data-chips="combustible" role="group" aria-labelledby="filtro-combustible"></div>
+            </div>
+
+            <label class="filtros__grupo">
+              <span class="filtros__etiqueta display">provincia</span>
+              <span class="campo"><select name="provincia"></select></span>
+            </label>
+
+            <label class="filtros__grupo">
+              <span class="filtros__etiqueta display">precio máximo</span>
+              <span class="campo"><select name="precioMax"></select></span>
+            </label>
+
+            <label class="check check--favoritos">
+              <input type="checkbox" name="soloFavoritos">
+              <span class="check__caja" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-check"/></svg></span>
+              <span class="check__texto">solo mis favoritos</span>
+              <span class="check__num" data-conteo-favoritos>0</span>
+            </label>
+
+            <button class="btn btn--ghost btn--block filtros__limpiar" type="reset">limpiar filtros</button>
+          </form>
+
+          <div class="inventario__principal">
+            <div class="inventario__barra">
+              <p class="inventario__conteo" data-conteo aria-live="polite"></p>
+              <label class="campo campo--orden">
+                <span class="sr-only">Ordenar por</span>
+                <select name="orden" form="filtros"></select>
+              </label>
+            </div>
+            <div class="grid-autos" data-grid aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONÓCENOS -->
+    <section class="conocenos" id="conocenos" aria-labelledby="conocenos-titulo">
+      <div class="container">
+        <div class="conocenos__grid">
+          <figure class="conocenos__imagen" data-reveal>
+            <img src="assets/ilustraciones/atardecer.svg" alt="" width="800" height="640" loading="lazy">
+          </figure>
+          <div class="conocenos__texto" data-reveal>
+            <span class="sobretitulo">conócenos</span>
+            <h2 class="titulo" id="conocenos-titulo">una idea sencilla: hacerlo bien</h2>
+            <p>Solera nace para que comprar o vender un auto en Costa Rica sea una experiencia clara, honesta y bien acompañada. Seleccionamos cada vehículo, cuidamos cómo se presenta y llevamos la negociación de principio a fin.</p>
+            <p>Trabajamos con vendedores independientes y compradores que buscan tranquilidad: sin trámites confusos y con un abogado que se encarga del traspaso.</p>
+            <blockquote class="cita">solera: herencia, tradición y calidad que mejora con el tiempo.</blockquote>
+            <ul class="valores">
+              <li>transparencia</li>
+              <li>respaldo</li>
+              <li>trato personal</li>
+              <li>pasión por los autos</li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="equipo" data-reveal>
+          <li class="persona">
+            <img src="assets/ilustraciones/persona.svg" alt="" width="120" height="120" loading="lazy">
+            <span><strong class="display">nombre apellido</strong>fundador</span>
+          </li>
+          <li class="persona">
+            <img src="assets/ilustraciones/persona.svg" alt="" width="120" height="120" loading="lazy">
+            <span><strong class="display">nombre apellido</strong>asesor comercial</span>
+          </li>
+          <li class="persona">
+            <img src="assets/ilustraciones/persona.svg" alt="" width="120" height="120" loading="lazy">
+            <span><strong class="display">nombre apellido</strong>asesor legal</span>
+          </li>
+        </ul>
+
+        <dl class="cifras" data-reveal>
+          <div class="cifra"><dt>autos vendidos</dt><dd>150+</dd></div>
+          <div class="cifra"><dt>de experiencia</dt><dd>5 años</dd></div>
+          <div class="cifra"><dt>clientes satisfechos</dt><dd>98 %</dd></div>
+        </dl>
+        <p class="nota-ejemplo">Equipo y cifras de ejemplo: reemplazar por datos reales.</p>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonios" aria-labelledby="testimonios-titulo">
+      <div class="container">
+        <div class="encabezado" data-reveal>
+          <span class="sobretitulo">testimonios</span>
+          <h2 class="titulo" id="testimonios-titulo">lo que dicen nuestros clientes</h2>
+        </div>
+        <ul class="testimonios__grid">
+          <li class="testimonio" data-reveal>
+            <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg></span>
+            <blockquote>Me ayudaron a vender mi carro sin tener que lidiar con compradores ni papeleo. Todo fue claro y rápido.</blockquote>
+            <p class="testimonio__autor"><img src="assets/ilustraciones/persona.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Nombre del cliente</strong>testimonio de ejemplo</span></p>
+          </li>
+          <li class="testimonio" data-reveal>
+            <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg></span>
+            <blockquote>Encontré justo el auto que buscaba y el traspaso quedó listo en pocos días. Muy buen acompañamiento.</blockquote>
+            <p class="testimonio__autor"><img src="assets/ilustraciones/persona.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Nombre del cliente</strong>testimonio de ejemplo</span></p>
+          </li>
+          <li class="testimonio" data-reveal>
+            <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg><svg class="icono"><use href="assets/icons.svg#i-star-fill"/></svg></span>
+            <blockquote>Se nota el cuidado en cada detalle: las fotos, la revisión y la atención. Los recomiendo sin dudar.</blockquote>
+            <p class="testimonio__autor"><img src="assets/ilustraciones/persona.svg" alt="" width="40" height="40" loading="lazy"><span><strong>Nombre del cliente</strong>testimonio de ejemplo</span></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS -->
+    <section class="preguntas" id="preguntas" aria-labelledby="preguntas-titulo">
+      <div class="container preguntas__grid">
+        <div class="preguntas__lado" data-reveal>
+          <span class="sobretitulo">preguntas</span>
+          <h2 class="titulo" id="preguntas-titulo">lo que más nos preguntan</h2>
+          <p class="preguntas__cta">¿Otra duda? <a href="#" data-wa="Hola Solera, tengo una consulta.">Escribinos por WhatsApp</a></p>
+        </div>
+
+        <div class="acordeon" data-reveal>
+          <details>
+            <summary>¿Solera compra autos?</summary>
+            <p>No. Somos intermediarios: publicamos autos de vendedores independientes y acompañamos a las dos partes hasta el traspaso.</p>
+          </details>
+          <details>
+            <summary>¿Por qué no aparece el teléfono del dueño?</summary>
+            <p>Para proteger a quien vende. Todos los mensajes llegan primero a nosotros, filtramos a los interesados y coordinamos la visita.</p>
+          </details>
+          <details>
+            <summary>¿Puedo ver el auto antes de comprarlo?</summary>
+            <p>Sí. Escribinos desde la ficha del auto y coordinamos un día y un lugar para verlo y probarlo.</p>
+          </details>
+          <details>
+            <summary>¿Qué debo revisar antes de pagar?</summary>
+            <p>Pedí el estudio registral en el Registro Nacional para confirmar dueño, gravámenes y anotaciones. Revisá que marchamo y RTV estén al día.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="container">
+        <div class="encabezado" data-reveal>
+          <span class="sobretitulo">contacto</span>
+          <h2 class="titulo" id="contacto-titulo">hablemos de tu próximo auto</h2>
+        </div>
+
+        <div class="contacto__grid">
+          <div class="panel contacto__formularios" data-contacto>
+            <div class="segmentos" role="tablist" aria-label="Tipo de consulta">
+              <button type="button" role="tab" id="tab-comprar" aria-controls="panel-comprar" aria-selected="true">quiero comprar</button>
+              <button type="button" role="tab" id="tab-vender" aria-controls="panel-vender" aria-selected="false" tabindex="-1">quiero vender</button>
+            </div>
+
+            <!-- Compradores -->
+            <form class="form" id="panel-comprar" role="tabpanel" aria-labelledby="tab-comprar" data-form-contacto novalidate>
+              <div class="form__grid">
+                <div class="campo-form">
+                  <label for="c-nombre">Nombre</label>
+                  <input id="c-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre" aria-describedby="error-c-nombre" required>
+                  <p class="campo-form__error" id="error-c-nombre"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="c-telefono">Teléfono <span class="opcional">(opcional)</span></label>
+                  <input id="c-telefono" name="telefono" type="tel" autocomplete="tel" placeholder="+506">
+                </div>
+                <div class="campo-form campo-form--full">
+                  <label for="c-auto">Auto de interés</label>
+                  <select id="c-auto" name="auto">
+                    <option value="">Seleccioná un auto</option>
+                  </select>
+                </div>
+                <div class="campo-form campo-form--full">
+                  <label for="c-mensaje">Mensaje</label>
+                  <textarea id="c-mensaje" name="mensaje" rows="5" placeholder="Contanos qué estás buscando..."></textarea>
+                </div>
+              </div>
+              <button class="btn btn--primary btn--lg btn--block" type="submit">
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>enviar por whatsapp
+              </button>
+              <p class="form__exito" data-exito hidden role="status">
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-check-circle"/></svg>Listo. Si WhatsApp no se abrió, revisá que tu navegador permita ventanas nuevas.
+              </p>
+            </form>
+
+            <!-- Vendedores -->
+            <form class="form form-venta" id="panel-vender" role="tabpanel" aria-labelledby="tab-vender" data-form-venta novalidate hidden>
+              <div class="form__grid">
+                <div class="campo-form campo-form--full">
+                  <label for="f-nombre">Tu nombre</label>
+                  <input id="f-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre" aria-describedby="error-nombre" required>
+                  <p class="campo-form__error" id="error-nombre"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-marca">Marca</label>
+                  <input id="f-marca" name="marca" placeholder="Toyota" aria-describedby="error-marca" required>
+                  <p class="campo-form__error" id="error-marca"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-modelo">Modelo</label>
+                  <input id="f-modelo" name="modelo" placeholder="Corolla" aria-describedby="error-modelo" required>
+                  <p class="campo-form__error" id="error-modelo"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-anio">Año</label>
+                  <input id="f-anio" name="anio" type="number" inputmode="numeric" min="1980" placeholder="2018" aria-describedby="error-anio" required>
+                  <p class="campo-form__error" id="error-anio"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-km">Kilometraje</label>
+                  <input id="f-km" name="kilometraje" type="number" inputmode="numeric" min="0" step="1" placeholder="85000" aria-describedby="error-kilometraje" required>
+                  <p class="campo-form__error" id="error-kilometraje"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-transmision">Transmisión</label>
+                  <select id="f-transmision" name="transmision" aria-describedby="error-transmision" required>
+                    <option value="">Elegir</option>
+                    <option>Automática</option>
+                    <option>Manual</option>
+                  </select>
+                  <p class="campo-form__error" id="error-transmision"></p>
+                </div>
+                <div class="campo-form">
+                  <label for="f-provincia">Provincia</label>
+                  <select id="f-provincia" name="provincia" aria-describedby="error-provincia" required>
+                    <option value="">Elegir</option>
+                  </select>
+                  <p class="campo-form__error" id="error-provincia"></p>
+                </div>
+                <div class="campo-form campo-form--full">
+                  <label for="f-precio">Precio que esperás (colones)</label>
+                  <input id="f-precio" name="precio" type="number" inputmode="numeric" min="0" step="1000" placeholder="9500000" aria-describedby="ayuda-precio error-precio" required>
+                  <p class="campo-form__ayuda" id="ayuda-precio">Solo números, sin puntos ni el símbolo ₡. Las fotos las mandás por WhatsApp.</p>
+                  <p class="campo-form__error" id="error-precio"></p>
+                </div>
+                <div class="campo-form campo-form--full">
+                  <label for="f-comentario">Algo más que debamos saber <span class="opcional">(opcional)</span></label>
+                  <textarea id="f-comentario" name="comentario" rows="3" placeholder="Único dueño, mantenimientos en agencia, detalles a mencionar..."></textarea>
+                </div>
+              </div>
+              <button class="btn btn--primary btn--lg btn--block" type="submit">
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>enviar por whatsapp
+              </button>
+              <p class="form__exito" data-exito hidden role="status">
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-check-circle"/></svg>Listo. Si WhatsApp no se abrió, revisá que tu navegador permita ventanas nuevas.
+              </p>
+            </form>
+          </div>
+
+          <div class="contacto__lado">
+            <ul class="panel lista-info">
+              <li>
+                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg></span>
+                <span><small>whatsapp</small><a href="#" data-wa="Hola Solera, tengo una consulta." data-dato="whatsapp">+506 0000 0000</a></span>
+              </li>
+              <li>
+                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-envelope-simple"/></svg></span>
+                <span><small>correo</small><a href="#" data-dato="correo">info@tudominio.com</a></span>
+              </li>
+              <li>
+                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-clock"/></svg></span>
+                <span><small>horario</small><span data-dato="horario"></span></span>
+              </li>
+            </ul>
+
+            <div class="mapa">
+              <svg class="mapa__calles" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <path d="M-10 18 L410 64 M-10 128 L410 112 M-10 214 L410 166 M70 -10 L84 270 M170 -10 L160 270 M262 -10 L252 270 M346 -10 L360 270"/>
+              </svg>
+              <span class="mapa__pin" aria-hidden="true"><span></span></span>
+              <p class="mapa__direccion"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-map-pin"/></svg><span data-dato="direccion"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__marca">
+        <svg class="footer__logo" aria-hidden="true"><use href="#logo-solera"/></svg>
+        <p class="footer__nombre">solera</p>
+        <p class="footer__lema">automotriz · costa rica</p>
+        <p class="footer__desc">Autos con historia, listos para tu camino. Intermediación honesta para comprar y vender en Costa Rica.</p>
+      </div>
+      <nav class="footer__col" aria-label="Navegación del pie">
+        <p class="footer__titulo display">navegación</p>
+        <a href="#inicio">inicio</a>
+        <a href="#carros">inventario</a>
+        <a href="#conocenos">conócenos</a>
+        <a href="#contacto">contacto</a>
+      </nav>
+      <nav class="footer__col" aria-label="Autos por tipo">
+        <p class="footer__titulo display">autos</p>
+        <a href="#carros" data-filtro="tipo:SUV">suv</a>
+        <a href="#carros" data-filtro="tipo:Pickup">pickup</a>
+        <a href="#carros" data-filtro="tipo:Sedán">sedán</a>
+        <a href="#contacto" data-abrir-venta>vendé tu auto</a>
+      </nav>
+      <div class="footer__col">
+        <p class="footer__titulo display">contacto</p>
+        <a href="#" data-wa="Hola Solera, tengo una consulta." data-dato="whatsapp">+506 0000 0000</a>
+        <a href="#" data-dato="correo">info@tudominio.com</a>
+        <span data-dato="horario"></span>
+        <div class="redes">
+          <a class="red" href="#" data-red="instagram" aria-label="Instagram"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-instagram-logo"/></svg></a>
+          <a class="red" href="#" data-red="facebook" aria-label="Facebook"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-facebook-logo"/></svg></a>
+          <a class="red" href="#" data-wa="Hola Solera, tengo una consulta." aria-label="WhatsApp"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__base">
+      <p>© 2026 Solera Automotriz. Todos los derechos reservados. <span data-actualizado></span> Ilustraciones propias; fotos de ejemplo de <a href="assets/autos/CREDITOS.md">Wikimedia Commons</a>.</p>
+      <p class="footer__firma">Hecho con calma y café por DODO Estudio · <a href="mailto:contacto@dodo-estudio.com">contacto@dodo-estudio.com</a></p>
+    </div>
+  </footer>
+
+  <a class="wa-flotante" href="#" data-wa="Hola Solera, tengo una consulta." aria-label="Escribinos por WhatsApp">
+    <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>
+  </a>
+
+  <dialog class="dialogo" data-dialog aria-labelledby="ficha-titulo">
+    <div class="dialogo__panel">
+      <button class="dialogo__cerrar" type="button" data-cerrar aria-label="Cerrar ficha">
+        <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-x"/></svg>
+      </button>
+      <div class="dialogo__cuerpo" data-dialog-body></div>
+    </div>
+  </dialog>
+</body>
+</html>

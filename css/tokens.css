@@ -1,0 +1,120 @@
+/*
+ * Tokens de diseño de Solera (versión 2).
+ * Lenguaje premium automotriz: superficies redondeadas, acento dorado, títulos extendidos
+ * en cursiva (Michroma) y texto corrido en Inter.
+ * Tres temas tomados de las maquetas: negro (por defecto), hueso y dorado.
+ * El tema se elige con el selector del header y se guarda en el navegador.
+ */
+:root,
+[data-tema='negro'] {
+  color-scheme: dark;
+  --bg: #0c0c0c;
+  --surface: #161616;
+  --surface-2: #1f1e1c;
+  --field: #0c0c0c;
+  --line: rgb(233 228 216 / 0.1);
+  --text: #e9e4d8;
+  --text-soft: #a39d92;
+  --eyebrow: #b08d57;
+  --accent: #b08d57;
+  --btn: #b08d57;
+  --btn-text: #0c0c0c;
+  --btn-hover: #c19d66;
+  --ghost: #e9e4d8;
+  --tag-bg: rgb(12 12 12 / 0.82);
+  --tag-text: #c9a46c;
+  --logo-bg: #e9e4d8;
+  --logo-fg: #0c0c0c;
+  --scrim: rgb(0 0 0 / 0.72);
+  --error: #ff8a7a;
+}
+
+[data-tema='hueso'] {
+  color-scheme: light;
+  --bg: #e9e4d8;
+  --surface: #f3efe6;
+  --surface-2: #dfd9cc;
+  --field: #e9e4d8;
+  --line: rgb(12 12 12 / 0.12);
+  --text: #0c0c0c;
+  --text-soft: #5b564c;
+  --eyebrow: #8b6b3d;
+  --accent: #8b6b3d;
+  --btn: #0c0c0c;
+  --btn-text: #e9e4d8;
+  --btn-hover: #2a2926;
+  --ghost: #0c0c0c;
+  --tag-bg: rgb(233 228 216 / 0.9);
+  --tag-text: #0c0c0c;
+  --logo-bg: #0c0c0c;
+  --logo-fg: #e9e4d8;
+  --scrim: rgb(12 12 12 / 0.55);
+  --error: #a3261a;
+}
+
+[data-tema='dorado'] {
+  color-scheme: light;
+  --bg: #b08d57;
+  --surface: #a28049;
+  --surface-2: #977642;
+  --field: #b08d57;
+  --line: rgb(12 12 12 / 0.16);
+  --text: #0c0c0c;
+  --text-soft: #3b2e1b;
+  --eyebrow: #3b2e1b;
+  --accent: #0c0c0c;
+  --btn: #0c0c0c;
+  --btn-text: #e9e4d8;
+  --btn-hover: #2a2926;
+  --ghost: #0c0c0c;
+  --tag-bg: rgb(12 12 12 / 0.82);
+  --tag-text: #d9b884;
+  --logo-bg: #0c0c0c;
+  --logo-fg: #e9e4d8;
+  --scrim: rgb(12 12 12 / 0.6);
+  --error: #6e0f06;
+}
+
+:root {
+  /* Tipografía */
+  --font-display: 'Michroma', 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.15rem, 1rem + 0.5vw, 1.35rem);
+  --text-2xl: clamp(1.6rem, 1.1rem + 2vw, 2.6rem);
+  --text-hero: clamp(1.7rem, 0.9rem + 2.5vw, 3rem);
+
+  /* Espaciado (escala de 4) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  /* Radios: tarjetas suaves, botones pill */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --container: 1240px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --header-h: 76px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 320ms;
+
+  /* Capas: único lugar donde se definen z-index */
+  --z-raised: 2;
+  --z-header: 20;
+  --z-flotante: 25;
+  --z-skip: 30;
+}
