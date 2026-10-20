@@ -2,8 +2,8 @@
 
 - **Auto de la portada** (`assets/portada/`): "2018 Aston Martin DB11 V8 Automatic 4.0 Side" de Vauxford,
   [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2018_Aston_Martin_DB11_V8_Automatic_4.0_Side.jpg),
-  licencia [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Recortado sin fondo y con
-  corrección de color; la versión modificada se comparte bajo la misma licencia.
+  licencia [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Recortado sin fondo (llantas redondeadas,
+  sin la sombra de la calle y con vidrios oscurecidos); la versión modificada se comparte bajo la misma licencia.
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 
