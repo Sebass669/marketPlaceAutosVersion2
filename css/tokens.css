@@ -28,7 +28,7 @@
   --scrim: rgb(0 0 0 / 0.72);
   --error: #ff8a7a;
   --portada: url('../assets/portada/portada-oscura.webp');
-  --portada-ratio: 1800 / 1374;
+  --portada-ratio: 2200 / 1348;
 }
 
 [data-tema='hueso'] {
