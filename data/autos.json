@@ -20,9 +20,20 @@
       "estado": "disponible",
       "destacado": true,
       "publicado": "2026-10-06",
-      "fotos": ["assets/autos/montero-1.webp"],
-      "extras": ["Siete pasajeros", "Aros aftermarket", "Estribos", "Cámara de retroceso"],
-      "descripcion": "Único dueño. Mantenimientos en agencia hasta los 80 000 km, después en taller de confianza con facturas. Llantas con un año de uso. Marchamo y RTV al día."
+      "extras": [
+        "Siete pasajeros",
+        "Aros aftermarket",
+        "Estribos",
+        "Cámara de retroceso"
+      ],
+      "descripcion": "Único dueño. Mantenimientos en agencia hasta los 80 000 km, después en taller de confianza con facturas. Llantas con un año de uso. Marchamo y RTV al día.",
+      "descripcion_en": "Single owner. Dealer maintenance up to 80,000 km, then a trusted shop with receipts. Tires one year old. Circulation tax and technical inspection up to date.",
+      "extras_en": [
+        "Seven seats",
+        "Aftermarket wheels",
+        "Side steps",
+        "Backup camera"
+      ]
     },
     {
       "id": "MV-008",
@@ -43,9 +54,18 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-10-04",
-      "fotos": ["assets/autos/rav4-1.webp", "assets/autos/rav4-2.webp"],
-      "extras": ["Rieles de techo", "Sensores de parqueo", "Bluetooth"],
-      "descripcion": "Carro de uso familiar, nunca chocado. Se vende por cambio a un vehículo más grande. Tiene un rayón leve en la puerta trasera derecha, se ve en persona."
+      "extras": [
+        "Rieles de techo",
+        "Sensores de parqueo",
+        "Bluetooth"
+      ],
+      "descripcion": "Carro de uso familiar, nunca chocado. Se vende por cambio a un vehículo más grande. Tiene un rayón leve en la puerta trasera derecha, se ve en persona.",
+      "descripcion_en": "Family car, never in an accident. Selling to upgrade to a bigger vehicle. Light scratch on the rear right door, visible in person.",
+      "extras_en": [
+        "Roof rails",
+        "Parking sensors",
+        "Bluetooth"
+      ]
     },
     {
       "id": "MV-007",
@@ -66,9 +86,18 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-10-01",
-      "fotos": ["assets/autos/hilux-1.webp"],
-      "extras": ["Estribos cromados", "Bedliner", "Ventanas eléctricas"],
-      "descripcion": "Pickup de trabajo bien cuidada. Embrague cambiado hace 15 000 km. Ideal para finca o negocio. Papeles en regla, traspaso inmediato."
+      "extras": [
+        "Estribos cromados",
+        "Bedliner",
+        "Ventanas eléctricas"
+      ],
+      "descripcion": "Pickup de trabajo bien cuidada. Embrague cambiado hace 15 000 km. Ideal para finca o negocio. Papeles en regla, traspaso inmediato.",
+      "descripcion_en": "Well-kept work pickup. Clutch replaced 15,000 km ago. Ideal for a farm or business. Papers in order, immediate transfer.",
+      "extras_en": [
+        "Chrome side steps",
+        "Bedliner",
+        "Power windows"
+      ]
     },
     {
       "id": "MV-006",
@@ -89,9 +118,18 @@
       "estado": "reservado",
       "destacado": false,
       "publicado": "2026-09-28",
-      "fotos": ["assets/autos/crv-1.webp"],
-      "extras": ["Sunroof", "Asientos de cuero", "Cámara de retroceso"],
-      "descripcion": "Segundo dueño. Interior en muy buen estado, sin olores. Batería nueva. Se puede revisar con el mecánico de su preferencia."
+      "extras": [
+        "Sunroof",
+        "Asientos de cuero",
+        "Cámara de retroceso"
+      ],
+      "descripcion": "Segundo dueño. Interior en muy buen estado, sin olores. Batería nueva. Se puede revisar con el mecánico de su preferencia.",
+      "descripcion_en": "Second owner. Interior in very good condition, no odors. New battery. You can have it checked by your own mechanic.",
+      "extras_en": [
+        "Sunroof",
+        "Leather seats",
+        "Backup camera"
+      ]
     },
     {
       "id": "MV-004",
@@ -112,9 +150,18 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-22",
-      "fotos": ["assets/autos/mazda3-1.webp", "assets/autos/mazda3-2.webp"],
-      "extras": ["Head-up display", "Asientos de cuero", "Cámara de retroceso"],
-      "descripcion": "Sedán de uso personal, poco kilometraje para el año. Mantenimientos al día con facturas. Precio levemente negociable."
+      "extras": [
+        "Head-up display",
+        "Asientos de cuero",
+        "Cámara de retroceso"
+      ],
+      "descripcion": "Sedán de uso personal, poco kilometraje para el año. Mantenimientos al día con facturas. Precio levemente negociable.",
+      "descripcion_en": "Personally used sedan, low mileage for its year. Maintenance up to date with receipts. Price slightly negotiable.",
+      "extras_en": [
+        "Head-up display",
+        "Leather seats",
+        "Backup camera"
+      ]
     },
     {
       "id": "MV-003",
@@ -135,9 +182,16 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-18",
-      "fotos": ["assets/autos/tucson-1.webp"],
-      "extras": ["Pantalla con Android Auto", "Sensores traseros"],
-      "descripcion": "Se vende por viaje. Revisado de tren delantero el mes pasado. Recibo ofertas razonables."
+      "extras": [
+        "Pantalla con Android Auto",
+        "Sensores traseros"
+      ],
+      "descripcion": "Se vende por viaje. Revisado de tren delantero el mes pasado. Recibo ofertas razonables.",
+      "descripcion_en": "Selling because of a move abroad. Front suspension checked last month. Reasonable offers considered.",
+      "extras_en": [
+        "Screen with Android Auto",
+        "Rear sensors"
+      ]
     },
     {
       "id": "MV-002",
@@ -158,9 +212,18 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-14",
-      "fotos": ["assets/autos/swift-1.webp", "assets/autos/swift-2.webp"],
-      "extras": ["Aire acondicionado", "Bluetooth", "Bolsas de aire frontales"],
-      "descripcion": "Primer carro ideal. Muy rendidor de combustible. Única dueña, nunca chocado."
+      "extras": [
+        "Aire acondicionado",
+        "Bluetooth",
+        "Bolsas de aire frontales"
+      ],
+      "descripcion": "Primer carro ideal. Muy rendidor de combustible. Única dueña, nunca chocado.",
+      "descripcion_en": "Ideal first car. Very fuel efficient. Single owner, never in an accident.",
+      "extras_en": [
+        "Air conditioning",
+        "Bluetooth",
+        "Front airbags"
+      ]
     },
     {
       "id": "MV-001",
@@ -181,9 +244,16 @@
       "estado": "vendido",
       "destacado": false,
       "publicado": "2026-09-02",
-      "fotos": ["assets/autos/yaris-1.webp", "assets/autos/yaris-2.webp"],
-      "extras": ["Aire acondicionado", "Radio con USB"],
-      "descripcion": "Vendido en 11 días."
+      "extras": [
+        "Aire acondicionado",
+        "Radio con USB"
+      ],
+      "descripcion": "Vendido en 11 días.",
+      "descripcion_en": "Sold in 11 days.",
+      "extras_en": [
+        "Air conditioning",
+        "Radio with USB"
+      ]
     }
   ]
 }

@@ -7,10 +7,10 @@ export const SITE = Object.freeze({
 
   // Número de WhatsApp que recibe TODOS los mensajes (compradores y vendedores).
   // Formato internacional sin "+", espacios ni guiones. Ej: 50688887777
-  whatsapp: '50600000000',
+  whatsapp: '50662379935',
 
   // Datos que se muestran en la sección de contacto y en el pie de página.
-  correo: 'info@tudominio.com',
+  correo: 'solera.automotriz@gmail.com',
   horario: 'lun a sáb · 9:00 a. m. a 6:00 p. m.',
   direccion: '[dirección], Costa Rica',
   redes: {
@@ -18,11 +18,6 @@ export const SITE = Object.freeze({
     facebook: '',
   },
 
-  // Portada de cada auto en tarjetas y ficha:
-  //  'ilustracion' usa assets/ilustraciones/autos/<ID>.svg (las genera tools/ilustraciones.py)
-  //  'foto' usa la primera foto del auto
-  // Si falta la ilustración de un auto, se usa su foto automáticamente.
-  portadas: 'ilustracion',
 
   // Tipo de cambio para mostrar el precio aproximado en dólares. 0 = no mostrar.
   tipoCambio: 510,

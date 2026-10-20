@@ -16,7 +16,6 @@ function validar(auto) {
   for (const campo of CAMPOS_NUMERO) {
     if (!Number.isFinite(auto[campo]) || auto[campo] < 0) problemas.push(`"${campo}" debe ser un número`);
   }
-  if (!Array.isArray(auto.fotos) || auto.fotos.length === 0) problemas.push('necesita al menos una foto en "fotos"');
   if (auto.estado && !CATALOGO.estados.includes(auto.estado)) {
     problemas.push(`"estado" debe ser uno de: ${CATALOGO.estados.join(', ')}`);
   }
@@ -33,6 +32,7 @@ function normalizar(auto) {
     canton: '',
     descripcion: '',
     extras: [],
+    fotos: [],
     destacado: false,
     publicado: '',
     ...auto,

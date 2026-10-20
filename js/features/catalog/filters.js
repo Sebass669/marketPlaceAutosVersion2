@@ -22,13 +22,8 @@ const ORDENES = {
   anio: (a, b) => b.anio - a.anio,
 };
 
-export const OPCIONES_ORDEN = [
-  ['recientes', 'ordenar: más recientes'],
-  ['precio-asc', 'ordenar: menor precio'],
-  ['precio-desc', 'ordenar: mayor precio'],
-  ['km', 'ordenar: menos kilometraje'],
-  ['anio', 'ordenar: año más nuevo'],
-];
+/** Claves de orden; el texto de cada opción está en i18n.js ('orden.<clave>'). */
+export const OPCIONES_ORDEN = ['recientes', 'precio-asc', 'precio-desc', 'km', 'anio'];
 
 const textoBuscable = (auto) =>
   normalizarTexto([auto.marca, auto.modelo, auto.version, auto.anio, auto.color, auto.provincia, auto.canton].join(' '));

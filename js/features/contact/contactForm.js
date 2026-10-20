@@ -1,7 +1,11 @@
 import { SITE } from '../../config.js';
+import { alCambiarIdioma, t } from '../../i18n.js';
 import { $, $$, h } from '../../utils/dom.js';
 import { formatTelefono, tituloAuto } from '../../utils/format.js';
+import { abrirSeguro, esBot, limpiarTexto, muyRapido, registrarEnvio, segundosParaEnviar } from '../../utils/seguridad.js';
 import { linkWhatsApp, mensajeContacto } from '../../utils/whatsapp.js';
+
+const TELEFONO_VALIDO = /^[+\d][\d\s()-]{5,19}$/;
 
 /**
  * Formulario "hablemos de tu próximo auto" (compradores). Arma el mensaje y abre WhatsApp.
@@ -9,34 +13,74 @@ import { linkWhatsApp, mensajeContacto } from '../../utils/whatsapp.js';
  */
 export function createContactForm({ form }) {
   const exito = $('[data-exito]', form);
-  const error = $('#error-c-nombre', form);
+  const aviso = $('[data-aviso]', form);
+  const errNombre = $('#error-c-nombre', form);
+  const errTelefono = $('#error-c-telefono', form);
+  let autosValidos = new Set();
+
+  const marcar = (input, error, clave) => {
+    input.setAttribute('aria-invalid', String(Boolean(clave)));
+    error.dataset.clave = clave;
+    error.textContent = clave ? t(clave) : '';
+    return !clave;
+  };
+
+  const validarNombre = () => marcar(form.elements.nombre, errNombre, limpiarTexto(form.elements.nombre.value, 60).length < 2 ? 'form.errNombre' : '');
+  const validarTelefono = () => {
+    const tel = form.elements.telefono.value.trim();
+    return marcar(form.elements.telefono, errTelefono, tel && !TELEFONO_VALIDO.test(tel) ? 'form.errTelefono' : '');
+  };
+
+  form.elements.nombre.addEventListener('blur', validarNombre);
+  form.elements.telefono.addEventListener('blur', validarTelefono);
+
+  alCambiarIdioma(() => {
+    for (const error of [errNombre, errTelefono]) if (error.dataset.clave) error.textContent = t(error.dataset.clave);
+    aviso.textContent = '';
+  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const datos = Object.fromEntries(new FormData(form));
-    const nombre = String(datos.nombre ?? '').trim();
-    form.elements.nombre.setAttribute('aria-invalid', String(nombre.length < 2));
-    error.textContent = nombre.length < 2 ? 'Escribí tu nombre.' : '';
-    if (nombre.length < 2) {
-      form.elements.nombre.focus();
+    aviso.textContent = '';
+
+    // Bots: si llenaron el campo trampa o enviaron al instante, se ignora en silencio.
+    if (esBot(form) || muyRapido()) {
+      exito.hidden = false;
       return;
     }
+
+    const okNombre = validarNombre();
+    const okTelefono = validarTelefono();
+    if (!okNombre || !okTelefono) {
+      (okNombre ? form.elements.telefono : form.elements.nombre).focus();
+      return;
+    }
+
+    const espera = segundosParaEnviar('contacto');
+    if (espera) {
+      aviso.textContent = t('form.errEspera', { s: espera });
+      return;
+    }
+
+    // El auto de interés solo puede ser uno de la lista (se ignora cualquier valor inyectado).
+    const auto = autosValidos.has(form.elements.auto.value) ? form.elements.auto.value : '';
     const mensaje = mensajeContacto({
-      nombre,
-      telefono: String(datos.telefono ?? '').trim(),
-      auto: String(datos.auto ?? ''),
-      mensaje: String(datos.mensaje ?? '').trim(),
+      nombre: limpiarTexto(form.elements.nombre.value, 60),
+      telefono: limpiarTexto(form.elements.telefono.value, 20),
+      auto,
+      mensaje: limpiarTexto(form.elements.mensaje.value, 500),
     });
-    window.open(linkWhatsApp(mensaje), '_blank', 'noopener');
+    registrarEnvio('contacto');
+    abrirSeguro(linkWhatsApp(mensaje));
     exito.hidden = false;
   });
 
   return {
     /** Llena "auto de interés" con los autos disponibles. */
     setAutos(autos) {
-      form.elements.auto.append(
-        ...autos.filter((a) => a.estado !== 'vendido').map((a) => h('option', { value: `${tituloAuto(a)} (${a.id})` }, tituloAuto(a))),
-      );
+      const lista = autos.filter((a) => a.estado !== 'vendido').map((a) => `${tituloAuto(a)} (${a.id})`);
+      autosValidos = new Set(lista);
+      form.elements.auto.append(...lista.map((texto) => h('option', { value: texto }, texto)));
     },
   };
 }
@@ -45,11 +89,11 @@ export function createContactForm({ form }) {
 export function initPestanasContacto(root) {
   const tabs = $$('[role="tab"]', root);
   const activar = (tab) => {
-    for (const t of tabs) {
-      const activo = t === tab;
-      t.setAttribute('aria-selected', String(activo));
-      t.tabIndex = activo ? 0 : -1;
-      $(`#${t.getAttribute('aria-controls')}`).hidden = !activo;
+    for (const tb of tabs) {
+      const activo = tb === tab;
+      tb.setAttribute('aria-selected', String(activo));
+      tb.tabIndex = activo ? 0 : -1;
+      $(`#${tb.getAttribute('aria-controls')}`).hidden = !activo;
     }
   };
   tabs.forEach((tab, i) => {
@@ -62,7 +106,7 @@ export function initPestanasContacto(root) {
       sig.focus();
     });
   });
-  // Links con data-abrir-venta (ej. "vendé tu auto" del menú) abren directo la pestaña de venta.
+  // Links con data-abrir-venta (ej. "vendé tu auto" del pie) abren directo la pestaña de venta.
   $$('[data-abrir-venta]').forEach((a) => a.addEventListener('click', () => activar(tabs[1])));
 }
 
@@ -75,14 +119,17 @@ export function pintarDatosContacto() {
     direccion: SITE.direccion,
   };
   for (const el of $$('[data-dato]')) {
-    const valor = valores[el.dataset.dato];
-    if (!valor) continue;
-    el.textContent = valor;
+    const v = valores[el.dataset.dato];
+    if (!v) continue;
+    el.textContent = v;
     if (el.dataset.dato === 'correo' && el.tagName === 'A') el.href = `mailto:${SITE.correo}`;
   }
   for (const el of $$('[data-red]')) {
     const url = SITE.redes[el.dataset.red];
-    if (url) el.href = url;
-    else el.hidden = true;
+    if (url && /^https:\/\//.test(url)) {
+      el.href = url;
+      el.target = '_blank';
+      el.rel = 'noopener noreferrer';
+    } else el.hidden = true;
   }
 }

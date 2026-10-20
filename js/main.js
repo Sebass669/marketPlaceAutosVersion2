@@ -6,23 +6,20 @@ import { renderDestacados } from './features/destacados/destacados.js';
 import { createCarDialog } from './features/detail/carDialog.js';
 import { createSellForm } from './features/sell/sellForm.js';
 import { initAnclas, initNav, initReveal, initTema } from './features/ui/enhancements.js';
+import { alCambiarIdioma, initIdioma, t } from './i18n.js';
 import { $, $$ } from './utils/dom.js';
 import { formatFecha } from './utils/format.js';
 import { linkWhatsApp, whatsappConfigurado } from './utils/whatsapp.js';
 
-const TITULO_BASE = document.title;
 const RUTA_AUTO = /^#carro\/(.+)$/;
 
-/** Links genéricos de WhatsApp en el HTML: <a data-wa="mensaje">. */
-function initLinksWhatsApp() {
+/** Links genéricos de WhatsApp: <a data-wa="clave-del-mensaje"> (el mensaje sale de i18n.js). */
+function pintarLinksWhatsApp() {
   $$('[data-wa]').forEach((a) => {
-    a.href = linkWhatsApp(a.dataset.wa);
+    a.href = linkWhatsApp(t(a.dataset.wa));
     a.target = '_blank';
-    a.rel = 'noopener';
+    a.rel = 'noopener noreferrer';
   });
-  if (!whatsappConfigurado()) {
-    console.warn(`[${SITE.nombre}] Configurá tu número de WhatsApp en js/config.js`);
-  }
 }
 
 /** Similares para la ficha: mismo tipo primero, después el resto; sin el propio auto ni vendidos. */
@@ -50,27 +47,40 @@ function initRouter(autos, dialogo) {
 }
 
 async function init() {
+  initIdioma();
   initTema();
   initNav();
   initAnclas();
   initReveal();
-  initLinksWhatsApp();
+  pintarLinksWhatsApp();
   pintarDatosContacto();
   initPestanasContacto($('[data-contacto]'));
   createSellForm({ form: $('[data-form-venta]') });
   const contacto = createContactForm({ form: $('[data-form-contacto]') });
+  if (!whatsappConfigurado()) console.warn(`[${SITE.nombre}] Configurá tu número de WhatsApp en js/config.js`);
 
   const catalogo = createCatalog({ root: $('#carros') });
   initLinksFiltro(catalogo);
   let autos = [];
+  let actualizado = '';
   const dialogo = createCarDialog({
     dialog: $('[data-dialog]'),
     obtenerSimilares: (auto) => similaresDe(autos)(auto),
     onClose: () => {
-      document.title = TITULO_BASE;
+      document.title = t('meta.titulo');
       // Quita el #carro/ID sin saltar de posición ni agregar historial.
       if (RUTA_AUTO.test(location.hash)) history.replaceState(null, '', location.pathname + location.search);
     },
+  });
+
+  const pintarActualizado = () => {
+    if (actualizado) $('[data-actualizado]').textContent = t('actualizado', { fecha: formatFecha(actualizado) });
+  };
+
+  alCambiarIdioma(() => {
+    pintarLinksWhatsApp();
+    pintarActualizado();
+    dialogo.refrescar();
   });
 
   catalogo.mostrarCargando();
@@ -78,10 +88,11 @@ async function init() {
   try {
     const datos = await cargarAutos();
     autos = datos.autos;
+    actualizado = datos.actualizado;
     catalogo.setAutos(autos);
     contacto.setAutos(autos);
     renderDestacados($('[data-destacados]'), autos);
-    if (datos.actualizado) $('[data-actualizado]').textContent = `Inventario actualizado el ${formatFecha(datos.actualizado)}.`;
+    pintarActualizado();
     initRouter(autos, dialogo);
   } catch (error) {
     console.error(error);

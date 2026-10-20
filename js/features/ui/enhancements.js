@@ -1,3 +1,4 @@
+import { alCambiarIdioma, t } from '../../i18n.js';
 import { $, $$, ICON_SPRITE } from '../../utils/dom.js';
 
 /**
@@ -32,12 +33,14 @@ export function initNav() {
   const setAbierto = (abierto) => {
     header.toggleAttribute('data-menu-abierto', abierto);
     toggle.setAttribute('aria-expanded', String(abierto));
-    toggle.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    toggle.setAttribute('aria-label', t(abierto ? 'menu.cerrar' : 'menu.abrir'));
     icono.setAttribute('href', `${ICON_SPRITE}#i-${abierto ? 'x' : 'list'}`);
   };
   const cerrar = () => setAbierto(false);
 
   toggle.addEventListener('click', () => setAbierto(!header.hasAttribute('data-menu-abierto')));
+  alCambiarIdioma(() => setAbierto(header.hasAttribute('data-menu-abierto')));
+  setAbierto(false);
   $$('.nav a', header).forEach((a) => a.addEventListener('click', cerrar));
   document.addEventListener('keydown', (e) => e.key === 'Escape' && cerrar());
 
@@ -50,8 +53,8 @@ export function initNav() {
 
 
 /**
- * Scroll suave para enlaces internos (#carros, #vender...). Se hace aquí y no con
- * `scroll-behavior: smooth` en CSS porque ese modo interfiere con ScrollTrigger.
+ * Scroll suave para enlaces internos (#carros, #contacto...). Se hace por JS para
+ * respetar la preferencia de reducir movimiento.
  * Los links de ficha (#carro/ID) los maneja el router.
  */
 export function initAnclas() {
@@ -67,12 +70,12 @@ export function initAnclas() {
   });
 }
 
-const TEMAS = ['negro', 'hueso', 'dorado'];
+const TEMAS = ['negro', 'hueso'];
 const CLAVE_TEMA = 'solera-tema';
-const COLOR_BARRA = { negro: '#0c0c0c', hueso: '#e9e4d8', dorado: '#b08d57' };
+const COLOR_BARRA = { negro: '#0c0c0c', hueso: '#e9e4d8' };
 
 /**
- * Selector de tema (negro / hueso / dorado). Cambia data-tema en <html>, lo guarda en el
+ * Selector de tema (negro / claro). Cambia data-tema en <html>, lo guarda en el
  * navegador y actualiza el color de la barra del celular. Funciona como radiogroup con flechas.
  */
 export function initTema() {

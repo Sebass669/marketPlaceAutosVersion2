@@ -1,67 +1,29 @@
+import { campoAuto, t, valor } from '../../i18n.js';
 import { h, icon } from '../../utils/dom.js';
 import { formatFecha, formatKm, tituloAuto } from '../../utils/format.js';
-import { imagenesAuto, respaldoFoto } from '../../utils/portada.js';
+import { liberarPortadas } from '../../utils/portada.js';
 import { linkWhatsApp, mensajeAgendar, mensajeInteres } from '../../utils/whatsapp.js';
-import { carCard, etiquetaAuto, metaAuto, precioAuto } from '../catalog/carCard.js';
+import { carCard, etiquetaAuto, metaAuto, portadaAuto, precioAuto } from '../catalog/carCard.js';
 
 /** Ficha técnica: [etiqueta, valor]. Se omiten los campos vacíos. */
 const especificaciones = (auto) =>
   [
-    ['Año', auto.anio],
-    ['Kilometraje', formatKm(auto.kilometraje)],
-    ['Transmisión', auto.transmision],
-    ['Combustible', auto.combustible],
-    ['Motor', auto.motor],
-    ['Tracción', auto.traccion],
-    ['Color', auto.color],
-    ['Tipo', auto.tipo],
-    ['Ubicación', [auto.canton, auto.provincia].filter(Boolean).join(', ')],
-  ].filter(([, valor]) => valor !== '' && valor !== undefined);
+    [t('spec.anio'), auto.anio],
+    [t('spec.km'), formatKm(auto.kilometraje)],
+    [t('spec.transmision'), valor('transmision', auto.transmision)],
+    [t('spec.combustible'), valor('combustible', auto.combustible)],
+    [t('spec.motor'), auto.motor],
+    [t('spec.traccion'), auto.traccion],
+    [t('spec.color'), auto.color],
+    [t('spec.tipo'), valor('tipo', auto.tipo)],
+    [t('spec.ubicacion'), [auto.canton, auto.provincia].filter(Boolean).join(', ')],
+  ].filter(([, v]) => v !== '' && v !== undefined);
 
-const PROCESO = [
-  ['Nos escribís', 'Consultás por WhatsApp desde esta ficha y te confirmamos disponibilidad.'],
-  ['Coordinamos la visita', 'Acordamos con el dueño un día y un lugar para verlo y probarlo.'],
-  ['Revisás y cerrás', 'Pedí el estudio registral y la revisión mecánica antes de pagar.'],
-];
+const checks = (items) => h('ul', { class: 'checks' }, items.map((texto) => h('li', {}, icon('check'), texto)));
 
-const checks = (items) => h('ul', { class: 'checks' }, items.map((t) => h('li', {}, icon('check'), t)));
-
-function galeria(auto) {
-  const imagenes = imagenesAuto(auto);
-  const principal = h('img', {
-    class: 'galeria__principal',
-    src: imagenes[0],
-    alt: `${tituloAuto(auto)}, imagen 1 de ${imagenes.length}`,
-    width: 800,
-    height: 600,
-    onerror: respaldoFoto(auto),
-  });
-
-  const marco = h('div', { class: 'galeria__marco' }, principal, etiquetaAuto(auto));
-  if (imagenes.length === 1) return h('div', { class: 'galeria' }, marco);
-
-  const miniaturas = imagenes.map((src, i) =>
-    h(
-      'button',
-      {
-        type: 'button',
-        class: 'galeria__thumb',
-        'aria-label': `Ver imagen ${i + 1}`,
-        'aria-current': i === 0 ? 'true' : 'false',
-        onclick: (e) => {
-          delete principal.dataset.respaldo;
-          principal.src = src;
-          principal.alt = `${tituloAuto(auto)}, imagen ${i + 1} de ${imagenes.length}`;
-          for (const btn of e.currentTarget.parentElement.children) btn.setAttribute('aria-current', 'false');
-          e.currentTarget.setAttribute('aria-current', 'true');
-        },
-      },
-      h('img', { src, alt: '', loading: 'lazy', onerror: (ev) => ev.currentTarget.closest('button').remove() }),
-    ),
-  );
-
-  return h('div', { class: 'galeria' }, marco, h('div', { class: 'galeria__thumbs' }, miniaturas));
-}
+/** Galería: la portada animada del auto, en grande. */
+const galeria = (auto) =>
+  h('div', { class: 'galeria' }, h('div', { class: 'galeria__marco' }, portadaAuto(auto, { eager: true, clase: 'portada--grande' }), etiquetaAuto(auto)));
 
 async function compartir(auto, boton) {
   const url = location.href;
@@ -72,8 +34,8 @@ async function compartir(auto, boton) {
       return;
     }
     await navigator.clipboard.writeText(url);
-    texto.textContent = 'link copiado';
-    setTimeout(() => (texto.textContent = 'compartir'), 2000);
+    texto.textContent = t('ficha.copiado');
+    setTimeout(() => (texto.textContent = t('ficha.compartir')), 2000);
   } catch {
     /* El usuario canceló el diálogo de compartir. */
   }
@@ -84,22 +46,22 @@ function acciones(auto) {
     return h(
       'div',
       { class: 'ficha__acciones' },
-      h('p', { class: 'ficha__aviso' }, 'este auto ya se vendió'),
-      h('a', { class: 'btn btn--primary btn--block', href: '#carros', 'data-cerrar': '' }, 'ver otros autos'),
+      h('p', { class: 'ficha__aviso' }, t('ficha.vendido')),
+      h('a', { class: 'btn btn--primary btn--block', href: '#carros', 'data-cerrar': '' }, t('ficha.verOtros')),
     );
   }
 
-  const wa = (mensaje) => ({ href: linkWhatsApp(mensaje), target: '_blank', rel: 'noopener' });
+  const wa = (mensaje) => ({ href: linkWhatsApp(mensaje), target: '_blank', rel: 'noopener noreferrer' });
   return h(
     'div',
     { class: 'ficha__acciones' },
-    h('a', { class: 'btn btn--primary btn--lg btn--block', ...wa(mensajeInteres(auto)) }, icon('chat-circle'), 'consultar por whatsapp'),
-    h('a', { class: 'btn btn--ghost btn--lg btn--block', ...wa(mensajeAgendar(auto)) }, icon('calendar-blank'), 'agendar visita'),
+    h('a', { class: 'btn btn--primary btn--lg btn--block', ...wa(mensajeInteres(auto)) }, icon('chat-circle'), t('ficha.consultar')),
+    h('a', { class: 'btn btn--ghost btn--lg btn--block', ...wa(mensajeAgendar(auto)) }, icon('calendar-blank'), t('ficha.agendar')),
     h(
       'button',
       { type: 'button', class: 'btn btn--texto', onclick: (e) => compartir(auto, e.currentTarget) },
       icon('share-network'),
-      h('span', {}, 'compartir'),
+      h('span', {}, t('ficha.compartir')),
     ),
   );
 }
@@ -126,25 +88,27 @@ function pestanas(id, paneles) {
   );
 
   const activar = (i) => {
-    tabs.forEach((t, j) => {
-      t.setAttribute('aria-selected', String(i === j));
-      t.tabIndex = i === j ? 0 : -1;
+    tabs.forEach((tab, j) => {
+      tab.setAttribute('aria-selected', String(i === j));
+      tab.tabIndex = i === j ? 0 : -1;
       cuerpos[j].hidden = i !== j;
     });
     tabs[i].focus();
   };
-  tabs.forEach((t, i) => {
-    t.addEventListener('click', () => activar(i));
-    t.addEventListener('keydown', (e) => {
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => activar(i));
+    tab.addEventListener('keydown', (e) => {
       const paso = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
       if (paso) activar((i + paso + tabs.length) % tabs.length);
     });
   });
 
-  return h('div', { class: 'pestanas' }, h('div', { class: 'pestanas__lista', role: 'tablist', 'aria-label': 'Información del auto' }, tabs), cuerpos);
+  return h('div', { class: 'pestanas' }, h('div', { class: 'pestanas__lista', role: 'tablist', 'aria-label': t('ficha.tabs') }, tabs), cuerpos);
 }
 
 function contenido(auto, similares) {
+  const extras = campoAuto(auto, 'extras') ?? [];
+  const descripcion = campoAuto(auto, 'descripcion');
   return h(
     'div',
     { class: 'ficha' },
@@ -155,46 +119,41 @@ function contenido(auto, similares) {
       h(
         'div',
         { class: 'panel ficha__panel' },
-        h('p', { class: 'ficha__marca' }, `ficha ${auto.id}`),
+        h('p', { class: 'ficha__marca' }, t('ficha.ficha', { id: auto.id.toLowerCase() })),
         h('h2', { class: 'ficha__titulo', id: 'ficha-titulo' }, `${auto.marca} ${auto.modelo}`),
         h('p', { class: 'ficha__meta' }, [auto.version, metaAuto(auto)].filter(Boolean).join(' · ')),
         precioAuto(auto, 'ficha'),
         acciones(auto),
-        checks(['Vendido por su dueño, sin lotes', 'Anuncio revisado por Solera', 'Coordinamos la visita por WhatsApp']),
+        checks([t('ficha.check1'), t('ficha.check2'), t('ficha.check3')]),
       ),
     ),
     pestanas(`ficha-${auto.id}`, [
       [
-        'descripción',
+        t('ficha.tabDescripcion'),
         h(
           'div',
           { class: 'ficha__descripcion-grid' },
           h(
             'div',
             {},
-            auto.descripcion && h('p', { class: 'ficha__descripcion' }, auto.descripcion),
-            h(
-              'p',
-              { class: 'ficha__nota' },
-              icon('shield-check'),
-              'Antes de pagar, pedí el estudio registral en el Registro Nacional y llevalo a revisar con tu mecánico.',
-            ),
-            auto.publicado && h('p', { class: 'ficha__fecha' }, `Publicado el ${formatFecha(auto.publicado)}`),
+            descripcion && h('p', { class: 'ficha__descripcion' }, descripcion),
+            h('p', { class: 'ficha__nota' }, icon('shield-check'), t('ficha.nota')),
+            auto.publicado && h('p', { class: 'ficha__fecha' }, t('ficha.publicado', { fecha: formatFecha(auto.publicado) })),
           ),
-          auto.extras.length > 0 && checks(auto.extras),
+          extras.length > 0 && checks(extras),
         ),
       ],
       [
-        'ficha técnica',
+        t('ficha.tabTecnica'),
         h('dl', { class: 'specs' }, especificaciones(auto).map(([k, v]) => h('div', { class: 'specs__item' }, h('dt', {}, k), h('dd', {}, v)))),
       ],
       [
-        'proceso de compra',
+        t('ficha.tabProceso'),
         h(
           'ol',
           { class: 'proceso' },
-          PROCESO.map(([titulo, texto], i) =>
-            h('li', { class: 'proceso__paso' }, h('span', { class: 'proceso__num' }, `0${i + 1}`), h('h3', {}, titulo), h('p', {}, texto)),
+          [1, 2, 3].map((n) =>
+            h('li', { class: 'proceso__paso' }, h('span', { class: 'proceso__num' }, `0${n}`), h('h3', {}, t(`proceso.${n}t`)), h('p', {}, t(`proceso.${n}p`))),
           ),
         ),
       ],
@@ -203,8 +162,8 @@ function contenido(auto, similares) {
       h(
         'section',
         { class: 'similares', 'aria-labelledby': 'similares-titulo' },
-        h('span', { class: 'sobretitulo' }, 'te puede interesar'),
-        h('h2', { class: 'titulo titulo--sm', id: 'similares-titulo' }, 'autos similares'),
+        h('span', { class: 'sobretitulo' }, t('ficha.similaresSobre')),
+        h('h2', { class: 'titulo titulo--sm', id: 'similares-titulo' }, t('ficha.similares')),
         h('div', { class: 'grid-autos grid-autos--3' }, similares.map((a, i) => carCard(a, { index: i }))),
       ),
   );
@@ -217,9 +176,12 @@ function contenido(auto, similares) {
  */
 export function createCarDialog({ dialog, onClose, obtenerSimilares = () => [] }) {
   const cuerpo = dialog.querySelector('[data-dialog-body]');
+  let autoActual = null;
 
   dialog.addEventListener('close', () => {
     document.documentElement.classList.remove('dialogo-abierto');
+    liberarPortadas(cuerpo);
+    autoActual = null;
     onClose?.();
   });
   // Clic en el fondo (fuera del panel) cierra.
@@ -229,11 +191,17 @@ export function createCarDialog({ dialog, onClose, obtenerSimilares = () => [] }
 
   return {
     abrir(auto) {
+      autoActual = auto;
+      liberarPortadas(cuerpo);
       cuerpo.replaceChildren(contenido(auto, obtenerSimilares(auto)));
       document.title = `${tituloAuto(auto)} | Solera`;
       if (!dialog.open) dialog.showModal();
       document.documentElement.classList.add('dialogo-abierto');
       cuerpo.scrollTop = 0;
+    },
+    /** Vuelve a pintar la ficha abierta (por ejemplo, al cambiar de idioma). */
+    refrescar() {
+      if (dialog.open && autoActual) cuerpo.replaceChildren(contenido(autoActual, obtenerSimilares(autoActual)));
     },
     cerrar() {
       if (dialog.open) dialog.close();

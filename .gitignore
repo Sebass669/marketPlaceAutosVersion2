@@ -1,0 +1,21 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Herramientas locales y pruebas
+.claude/
+.playwright/
+.playwright-cli/
+node_modules/
+*.log
+
+# Vercel y secretos (nunca subir claves ni tokens)
+.vercel/
+.env
+.env.*

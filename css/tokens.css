@@ -2,7 +2,7 @@
  * Tokens de diseño de Solera (versión 2).
  * Lenguaje premium automotriz: superficies redondeadas, acento dorado, títulos extendidos
  * en cursiva (Michroma) y texto corrido en Inter.
- * Tres temas tomados de las maquetas: negro (por defecto), hueso y dorado.
+ * Dos temas: negro (por defecto) y hueso (claro).
  * El tema se elige con el selector del header y se guarda en el navegador.
  */
 :root,
@@ -27,6 +27,7 @@
   --logo-fg: #0c0c0c;
   --scrim: rgb(0 0 0 / 0.72);
   --error: #ff8a7a;
+  --portada: url('../assets/portada/portada-oscura.webp');
 }
 
 [data-tema='hueso'] {
@@ -50,30 +51,9 @@
   --logo-fg: #e9e4d8;
   --scrim: rgb(12 12 12 / 0.55);
   --error: #a3261a;
+  --portada: url('../assets/portada/portada-clara.webp');
 }
 
-[data-tema='dorado'] {
-  color-scheme: light;
-  --bg: #b08d57;
-  --surface: #a28049;
-  --surface-2: #977642;
-  --field: #b08d57;
-  --line: rgb(12 12 12 / 0.16);
-  --text: #0c0c0c;
-  --text-soft: #3b2e1b;
-  --eyebrow: #3b2e1b;
-  --accent: #0c0c0c;
-  --btn: #0c0c0c;
-  --btn-text: #e9e4d8;
-  --btn-hover: #2a2926;
-  --ghost: #0c0c0c;
-  --tag-bg: rgb(12 12 12 / 0.82);
-  --tag-text: #d9b884;
-  --logo-bg: #0c0c0c;
-  --logo-fg: #e9e4d8;
-  --scrim: rgb(12 12 12 / 0.6);
-  --error: #6e0f06;
-}
 
 :root {
   /* Tipografía */

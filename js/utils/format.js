@@ -1,4 +1,5 @@
 import { SITE } from '../config.js';
+import { locale } from '../i18n.js';
 
 const precioFmt = new Intl.NumberFormat(SITE.locale, {
   style: 'currency',
@@ -8,11 +9,6 @@ const precioFmt = new Intl.NumberFormat(SITE.locale, {
 
 const numeroFmt = new Intl.NumberFormat(SITE.locale, { maximumFractionDigits: 0 });
 
-const fechaFmt = new Intl.DateTimeFormat(SITE.locale, {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
 
 /** 13900000 -> "₡13 900 000" */
 export const formatPrecio = (valor) => precioFmt.format(valor);
@@ -23,11 +19,12 @@ export const formatKm = (valor) => `${numeroFmt.format(valor)} km`;
 /** 15000000 -> "₡15 millones" (para selects compactos) */
 export const formatMillones = (valor) => `₡${numeroFmt.format(valor / 1_000_000)} millones`;
 
-/** "2026-10-09" -> "9 de octubre de 2026" */
+/** "2026-10-09" -> "9 de octubre de 2026" (o "October 9, 2026" en inglés) */
 export function formatFecha(iso) {
   // Mediodía local para evitar que la zona horaria corra el día.
   const fecha = new Date(`${iso}T12:00:00`);
-  return Number.isNaN(fecha.getTime()) ? '' : fechaFmt.format(fecha);
+  if (Number.isNaN(fecha.getTime())) return '';
+  return new Intl.DateTimeFormat(locale(), { day: 'numeric', month: 'long', year: 'numeric' }).format(fecha);
 }
 
 /** Texto en minúsculas y sin tildes, para búsquedas tolerantes. */

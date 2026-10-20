@@ -1,20 +1,24 @@
+import { t, valor } from '../../i18n.js';
 import { h, icon } from '../../utils/dom.js';
 import { formatDolares, formatKm, formatPrecio, tituloAuto } from '../../utils/format.js';
-import { imagenesAuto, respaldoFoto } from '../../utils/portada.js';
-import { linkWhatsApp, mensajeInteres } from '../../utils/whatsapp.js';
+import { crearPortada } from '../../utils/portada.js';
 import { favoritos } from './favoritos.js';
-
-export const ETIQUETA_ESTADO = { reservado: 'reservado', vendido: 'vendido' };
 
 export const hrefAuto = (auto) => `#carro/${encodeURIComponent(auto.id)}`;
 
+const NO_DISPONIBLE = ['reservado', 'vendido'];
+
 /** Etiqueta sobre la imagen: el estado si no está disponible, si no el tipo de auto. */
 export const etiquetaAuto = (auto) =>
-  h('span', { class: `tag${ETIQUETA_ESTADO[auto.estado] ? ' tag--claro' : ''}` }, ETIQUETA_ESTADO[auto.estado] ?? auto.tipo);
+  NO_DISPONIBLE.includes(auto.estado)
+    ? h('span', { class: 'tag tag--claro' }, valor('estado', auto.estado))
+    : h('span', { class: 'tag' }, valor('tipo', auto.tipo));
 
 /** Línea de datos: año, km, transmisión y combustible. */
 export const metaAuto = (auto) =>
-  [auto.anio, formatKm(auto.kilometraje), auto.transmision, auto.combustible].map((v) => String(v).toLowerCase()).join(' • ');
+  [auto.anio, formatKm(auto.kilometraje), valor('transmision', auto.transmision), valor('combustible', auto.combustible)]
+    .map((v) => String(v).toLowerCase())
+    .join(' • ');
 
 /** Precio en colones + aproximado en dólares (si hay tipo de cambio configurado). */
 export const precioAuto = (auto, clase = 'card') =>
@@ -25,20 +29,22 @@ export const precioAuto = (auto, clase = 'card') =>
     formatDolares(auto.precio) && h('span', { class: `${clase}__usd` }, formatDolares(auto.precio)),
   );
 
+/** Portada animada con la descripción accesible del auto. */
+export const portadaAuto = (auto, opciones = {}) =>
+  crearPortada(auto, { alt: t('card.ilustracion', { auto: tituloAuto(auto), color: auto.color || '' }), ...opciones });
+
 /** Corazón de favoritos. Queda por encima del link estirado de la tarjeta. */
 export function botonFavorito(auto) {
-  const activo = favoritos.tiene(auto.id);
   return h(
     'button',
     {
       type: 'button',
       class: 'favorito',
-      'aria-pressed': String(activo),
-      'aria-label': `Guardar ${tituloAuto(auto)} en favoritos`,
+      'aria-pressed': String(favoritos.tiene(auto.id)),
+      'aria-label': t('card.favorito', { auto: tituloAuto(auto) }),
       onclick: (e) => {
         e.preventDefault();
-        const nuevo = favoritos.alternar(auto.id);
-        e.currentTarget.setAttribute('aria-pressed', String(nuevo));
+        e.currentTarget.setAttribute('aria-pressed', String(favoritos.alternar(auto.id)));
       },
     },
     icon('heart', 'favorito__vacio'),
@@ -46,49 +52,31 @@ export function botonFavorito(auto) {
   );
 }
 
-export function portadaImg(auto, { eager = false } = {}) {
-  return h('img', {
-    src: imagenesAuto(auto)[0],
-    alt: `${tituloAuto(auto)}, color ${auto.color || 'no indicado'}`,
-    loading: eager ? 'eager' : 'lazy',
-    decoding: 'async',
-    width: 800,
-    height: 600,
-    onerror: respaldoFoto(auto),
-  });
-}
-
 /**
- * Tarjeta del inventario. El título es un link "estirado" que cubre toda la tarjeta
- * (abre la ficha); el corazón y el botón de WhatsApp quedan por encima, sin anidar links.
+ * Tarjeta del inventario. El título es un link "estirado" que cubre toda la tarjeta y abre
+ * la ficha; el botón "ver detalles" hace lo mismo. El corazón queda por encima.
  */
 export function carCard(auto, { index = 0 } = {}) {
-  const vendido = auto.estado === 'vendido';
-
   return h(
     'article',
     { class: 'card', dataset: { estado: auto.estado, id: auto.id }, style: `--i:${index}` },
-    h('div', { class: 'card__media' }, portadaImg(auto, { eager: index < 3 }), etiquetaAuto(auto), botonFavorito(auto)),
+    h('div', { class: 'card__media' }, portadaAuto(auto, { eager: index < 3 }), etiquetaAuto(auto), botonFavorito(auto)),
     h(
       'div',
       { class: 'card__body' },
       h('h3', { class: 'card__title' }, h('a', { class: 'card__link', href: hrefAuto(auto) }, `${auto.marca} ${auto.modelo}`)),
       h('p', { class: 'card__meta' }, metaAuto(auto)),
       precioAuto(auto),
-      vendido
-        ? h('span', { class: 'btn btn--ghost btn--block card__cta', 'aria-disabled': 'true' }, 'vendido')
-        : h(
-            'a',
-            {
-              class: 'btn btn--primary btn--block card__cta',
-              href: linkWhatsApp(mensajeInteres(auto)),
-              target: '_blank',
-              rel: 'noopener',
-              'aria-label': `Consultar por WhatsApp: ${tituloAuto(auto)}`,
-            },
-            icon('chat-circle'),
-            'consultar por whatsapp',
-          ),
+      h(
+        'a',
+        {
+          class: `btn btn--block card__cta ${auto.estado === 'vendido' ? 'btn--ghost' : 'btn--primary'}`,
+          href: hrefAuto(auto),
+          'aria-label': t('card.verDetallesDe', { auto: tituloAuto(auto) }),
+        },
+        h('span', {}, auto.estado === 'vendido' ? t('card.vendido') : t('card.verDetalles')),
+        h('span', { class: 'btn__icono' }, icon('arrow-right')),
+      ),
     ),
   );
 }

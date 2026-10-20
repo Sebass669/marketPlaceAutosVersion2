@@ -257,15 +257,13 @@
   background: var(--surface-2);
 }
 
-.card__media img {
-  width: 100%;
+.card__media .portada {
   height: 100%;
-  object-fit: cover;
   transition: transform 700ms var(--ease-out);
 }
 
-.card:hover .card__media img {
-  transform: scale(1.05);
+.card:hover .card__media .portada {
+  transform: scale(1.04);
 }
 
 .card__media .tag {
@@ -289,7 +287,7 @@
   line-height: 1.35;
 }
 
-/* Link estirado: toda la tarjeta abre la ficha, sin anidar el botón de WhatsApp */
+/* Link estirado: toda la tarjeta abre la ficha; corazón y botón quedan por encima */
 .card__link {
   text-decoration: none;
 }
@@ -345,7 +343,7 @@
   margin-top: var(--space-3);
 }
 
-.card[data-estado='vendido'] .card__media img {
+.card[data-estado='vendido'] .card__media .portada {
   filter: grayscale(1);
   opacity: 0.6;
 }
@@ -545,46 +543,6 @@ html.dialogo-abierto {
   left: var(--space-4);
 }
 
-.galeria__principal {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.galeria__thumbs {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-3);
-}
-
-.galeria__thumb {
-  aspect-ratio: 4 / 3;
-  padding: 0;
-  overflow: hidden;
-  border: 2px solid transparent;
-  border-radius: var(--radius-md);
-  background: none;
-  cursor: pointer;
-  opacity: 0.55;
-  transition:
-    opacity var(--dur) var(--ease-out),
-    border-color var(--dur) var(--ease-out);
-}
-
-.galeria__thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.galeria__thumb:hover,
-.galeria__thumb[aria-current='true'] {
-  opacity: 1;
-}
-
-.galeria__thumb[aria-current='true'] {
-  border-color: var(--accent);
-}
 
 .ficha__panel {
   display: grid;
@@ -1003,4 +961,125 @@ fieldset.filtros__grupo legend {
   .grid-autos--3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
+
+/* ---------- Portada animada de cada auto ----------
+   Fondo ilustrado (imagen estática) + carretera con líneas que avanzan + auto en SVG.
+   Posiciones en % de la escena de 800x600 que arma tools/ilustraciones.py. */
+.portada {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.portada__fondo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portada__ruta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 93.6%;
+  height: 0.6%;
+  overflow: hidden;
+}
+
+/* Guiones de 38px cada 76px sobre 800px (4,75% / 9,5%), en una tira del doble de ancho */
+.portada__ruta span {
+  display: block;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.16) 0 2.375%, transparent 2.375% 4.75%);
+}
+
+.portada__carro {
+  position: absolute;
+  left: 13.9%;
+  top: 50%;
+  width: 71.8%;
+}
+
+.portada__carro svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.portada .rueda {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* Solo se anima mientras está en pantalla (clase .en-vista, ver utils/portada.js) */
+@media (prefers-reduced-motion: no-preference) {
+  .portada.en-vista .portada__ruta span {
+    animation: ruta-avanza 0.9s linear infinite;
+  }
+
+  .portada.en-vista .portada__carro svg {
+    animation: andar 1.3s ease-in-out infinite;
+  }
+
+  .portada.en-vista .rueda {
+    animation: rueda-gira 0.9s linear infinite;
+  }
+}
+
+/* El auto mira a la izquierda: la ruta corre hacia la derecha y las ruedas giran al revés */
+@keyframes ruta-avanza {
+  from {
+    transform: translateX(-4.75%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes rueda-gira {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes andar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1.2%);
+  }
+}
+
+/* ---------- Formularios: campo trampa y avisos ---------- */
+/* Invisible para personas (fuera de pantalla), visible para bots que llenan todo */
+.campo-trampa {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__aviso {
+  color: var(--error);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.form__aviso:empty {
+  display: none;
+}
+
+.form__aviso:not(:empty) {
+  margin-top: var(--space-3);
 }

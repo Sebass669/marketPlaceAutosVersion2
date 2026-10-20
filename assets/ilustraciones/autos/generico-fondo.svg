@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" >
+<defs>
+  <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#47463a"/><stop offset="1" stop-color="#9a9078"/>
+  </linearGradient>
+  <linearGradient id="colina-lejos" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#9d9077"/><stop offset="1" stop-color="#71654f"/>
+  </linearGradient>
+  <linearGradient id="colina-cerca" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#5b5242"/><stop offset="1" stop-color="#38322a"/>
+  </linearGradient>
+  <linearGradient id="suelo" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2b2520"/><stop offset="1" stop-color="#121110"/>
+  </linearGradient>
+  <filter id="grano" filterUnits="userSpaceOnUse" x="0" y="0" width="800" height="600">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="ruido"/>
+  <feColorMatrix in="ruido" values="0 0 0 0 0.08  0 0 0 0 0.06  0 0 0 0 0.04  0 0 0 0.35 -0.05" result="ruidoA"/>
+  <feComposite in="ruidoA" in2="SourceGraphic" operator="in" result="ruidoC"/>
+  <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="ruidoC"/></feMerge>
+</filter>
+  <clipPath id="cielo-recorte"><rect width="800" height="362"/></clipPath>
+</defs>
+<g filter="url(#grano)">
+  <rect width="800" height="362" fill="url(#cielo)"/>
+  <g clip-path="url(#cielo-recorte)"><circle cx="400" cy="250" r="564" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="522" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="480" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="438" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="396" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="354" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="312" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="270" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="228" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="186" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="144" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="102" fill="#ece4c8" opacity="0.13"/>
+<circle cx="400" cy="250" r="60" fill="#ece4c8" opacity="0.13"/>
+  <circle cx="250" cy="330" r="54.400000000000006" fill="#fff4d6" opacity="0.25"/><circle cx="250" cy="330" r="34" fill="#f6e6c0"/></g>
+  <path d="M0 308 C 144.0 264, 256.0 290, 384.0 302 S 640.0 256, 800 294 V 360 H 0 Z" fill="url(#colina-lejos)"/>
+  <path d="M0 342 C 176.0 308, 320.0 340, 496.0 326 S 720.0 314, 800 338 V 360 H 0 Z" fill="url(#colina-cerca)"/>
+  <rect y="360" width="800" height="240" fill="url(#suelo)"/>
+  <rect y="360" width="800" height="1.5" fill="#f3e2c0" opacity="0.18"/>
+  <line x1="400.0" y1="360" x2="-800" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="-600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="-400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="-200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="0" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="800" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="1000" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="1200" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="1400" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+<line x1="400.0" y1="360" x2="1600" y2="600" stroke="#fff" stroke-opacity="0.045" stroke-width="1.5"/>
+  
+</g>
+</svg>
