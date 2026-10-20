@@ -1,7 +1,6 @@
 import { CATALOGO } from '../../config.js';
 import { alCambiarIdioma, t, valor } from '../../i18n.js';
 import { $, $$, h, icon } from '../../utils/dom.js';
-import { liberarPortadas } from '../../utils/portada.js';
 import { limpiarTexto } from '../../utils/seguridad.js';
 import { carCard, cardSkeleton } from './carCard.js';
 import { favoritos } from './favoritos.js';
@@ -98,7 +97,6 @@ export function createCatalog({ root }) {
             disponibles: t(disponibles === 1 ? 'conteo.disponible' : 'conteo.disponibles'),
           });
 
-    liberarPortadas(grid);
     grid.replaceChildren(...(lista.length ? lista.map((auto, index) => carCard(auto, { index })) : [estadoVacio()]));
   }
 

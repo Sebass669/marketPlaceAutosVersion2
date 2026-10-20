@@ -1,7 +1,7 @@
 import { t, valor } from '../../i18n.js';
 import { h, icon } from '../../utils/dom.js';
 import { formatDolares, formatKm, formatPrecio, tituloAuto } from '../../utils/format.js';
-import { crearPortada } from '../../utils/portada.js';
+import { fotoAuto } from '../../utils/portada.js';
 import { favoritos } from './favoritos.js';
 
 export const hrefAuto = (auto) => `#carro/${encodeURIComponent(auto.id)}`;
@@ -29,9 +29,9 @@ export const precioAuto = (auto, clase = 'card') =>
     formatDolares(auto.precio) && h('span', { class: `${clase}__usd` }, formatDolares(auto.precio)),
   );
 
-/** Portada animada con la descripción accesible del auto. */
+/** Foto de portada del auto (la primera de "fotos"). */
 export const portadaAuto = (auto, opciones = {}) =>
-  crearPortada(auto, { alt: t('card.ilustracion', { auto: tituloAuto(auto), color: auto.color || '' }), ...opciones });
+  fotoAuto(auto.fotos[0], { alt: t('card.foto', { auto: tituloAuto(auto), color: auto.color || '' }), ...opciones });
 
 /** Corazón de favoritos. Queda por encima del link estirado de la tarjeta. */
 export function botonFavorito(auto) {

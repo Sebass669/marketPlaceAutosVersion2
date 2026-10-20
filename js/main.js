@@ -5,7 +5,8 @@ import { createContactForm, initPestanasContacto, pintarDatosContacto } from './
 import { renderDestacados } from './features/destacados/destacados.js';
 import { createCarDialog } from './features/detail/carDialog.js';
 import { createSellForm } from './features/sell/sellForm.js';
-import { initAnclas, initNav, initReveal, initTema } from './features/ui/enhancements.js';
+import { renderHeroDatos } from './features/hero/hero.js';
+import { initAnclas, initNav, initPausables, initReveal, initTema } from './features/ui/enhancements.js';
 import { alCambiarIdioma, initIdioma, t } from './i18n.js';
 import { $, $$ } from './utils/dom.js';
 import { formatFecha } from './utils/format.js';
@@ -52,6 +53,7 @@ async function init() {
   initNav();
   initAnclas();
   initReveal();
+  initPausables();
   pintarLinksWhatsApp();
   pintarDatosContacto();
   initPestanasContacto($('[data-contacto]'));
@@ -92,12 +94,14 @@ async function init() {
     catalogo.setAutos(autos);
     contacto.setAutos(autos);
     renderDestacados($('[data-destacados]'), autos);
+    renderHeroDatos(autos);
     pintarActualizado();
     initRouter(autos, dialogo);
   } catch (error) {
     console.error(error);
     catalogo.mostrarError(error.message);
     $('[data-destacados]').hidden = true;
+    $('[data-hero-datos]').hidden = true;
   }
 }
 

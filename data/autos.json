@@ -20,6 +20,9 @@
       "estado": "disponible",
       "destacado": true,
       "publicado": "2026-10-06",
+      "fotos": [
+        "assets/autos/montero-1.webp"
+      ],
       "extras": [
         "Siete pasajeros",
         "Aros aftermarket",
@@ -54,6 +57,10 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-10-04",
+      "fotos": [
+        "assets/autos/rav4-1.webp",
+        "assets/autos/rav4-2.webp"
+      ],
       "extras": [
         "Rieles de techo",
         "Sensores de parqueo",
@@ -86,6 +93,9 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-10-01",
+      "fotos": [
+        "assets/autos/hilux-1.webp"
+      ],
       "extras": [
         "Estribos cromados",
         "Bedliner",
@@ -118,6 +128,9 @@
       "estado": "reservado",
       "destacado": false,
       "publicado": "2026-09-28",
+      "fotos": [
+        "assets/autos/crv-1.webp"
+      ],
       "extras": [
         "Sunroof",
         "Asientos de cuero",
@@ -150,6 +163,10 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-22",
+      "fotos": [
+        "assets/autos/mazda3-1.webp",
+        "assets/autos/mazda3-2.webp"
+      ],
       "extras": [
         "Head-up display",
         "Asientos de cuero",
@@ -182,6 +199,9 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-18",
+      "fotos": [
+        "assets/autos/tucson-1.webp"
+      ],
       "extras": [
         "Pantalla con Android Auto",
         "Sensores traseros"
@@ -212,6 +232,10 @@
       "estado": "disponible",
       "destacado": false,
       "publicado": "2026-09-14",
+      "fotos": [
+        "assets/autos/swift-1.webp",
+        "assets/autos/swift-2.webp"
+      ],
       "extras": [
         "Aire acondicionado",
         "Bluetooth",
@@ -244,6 +268,10 @@
       "estado": "vendido",
       "destacado": false,
       "publicado": "2026-09-02",
+      "fotos": [
+        "assets/autos/yaris-1.webp",
+        "assets/autos/yaris-2.webp"
+      ],
       "extras": [
         "Aire acondicionado",
         "Radio con USB"

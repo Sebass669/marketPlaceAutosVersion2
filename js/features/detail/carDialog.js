@@ -1,9 +1,9 @@
 import { campoAuto, t, valor } from '../../i18n.js';
 import { h, icon } from '../../utils/dom.js';
 import { formatFecha, formatKm, tituloAuto } from '../../utils/format.js';
-import { liberarPortadas } from '../../utils/portada.js';
+import { fotoAuto } from '../../utils/portada.js';
 import { linkWhatsApp, mensajeAgendar, mensajeInteres } from '../../utils/whatsapp.js';
-import { carCard, etiquetaAuto, metaAuto, portadaAuto, precioAuto } from '../catalog/carCard.js';
+import { carCard, etiquetaAuto, metaAuto, precioAuto } from '../catalog/carCard.js';
 
 /** Ficha técnica: [etiqueta, valor]. Se omiten los campos vacíos. */
 const especificaciones = (auto) =>
@@ -21,9 +21,35 @@ const especificaciones = (auto) =>
 
 const checks = (items) => h('ul', { class: 'checks' }, items.map((texto) => h('li', {}, icon('check'), texto)));
 
-/** Galería: la portada animada del auto, en grande. */
-const galeria = (auto) =>
-  h('div', { class: 'galeria' }, h('div', { class: 'galeria__marco' }, portadaAuto(auto, { eager: true, clase: 'portada--grande' }), etiquetaAuto(auto)));
+/** Galería: foto grande + miniaturas para cambiarla. */
+function galeria(auto) {
+  const total = auto.fotos.length;
+  const altDe = (i) => t('ficha.fotoN', { auto: tituloAuto(auto), n: i + 1, total });
+  const principal = fotoAuto(auto.fotos[0], { alt: altDe(0), eager: true, clase: 'galeria__principal' });
+  const marco = h('div', { class: 'galeria__marco' }, principal, etiquetaAuto(auto));
+  if (total < 2) return h('div', { class: 'galeria' }, marco);
+
+  const miniaturas = auto.fotos.map((src, i) =>
+    h(
+      'button',
+      {
+        type: 'button',
+        class: 'galeria__thumb',
+        'aria-label': t('ficha.verFoto', { n: i + 1 }),
+        'aria-current': String(i === 0),
+        onclick: (e) => {
+          principal.classList.remove('foto--rota');
+          principal.src = src;
+          principal.alt = altDe(i);
+          for (const b of e.currentTarget.parentElement.children) b.setAttribute('aria-current', 'false');
+          e.currentTarget.setAttribute('aria-current', 'true');
+        },
+      },
+      fotoAuto(src),
+    ),
+  );
+  return h('div', { class: 'galeria' }, marco, h('div', { class: 'galeria__thumbs' }, miniaturas));
+}
 
 async function compartir(auto, boton) {
   const url = location.href;
@@ -180,7 +206,6 @@ export function createCarDialog({ dialog, onClose, obtenerSimilares = () => [] }
 
   dialog.addEventListener('close', () => {
     document.documentElement.classList.remove('dialogo-abierto');
-    liberarPortadas(cuerpo);
     autoActual = null;
     onClose?.();
   });
@@ -192,7 +217,6 @@ export function createCarDialog({ dialog, onClose, obtenerSimilares = () => [] }
   return {
     abrir(auto) {
       autoActual = auto;
-      liberarPortadas(cuerpo);
       cuerpo.replaceChildren(contenido(auto, obtenerSimilares(auto)));
       document.title = `${tituloAuto(auto)} | Solera`;
       if (!dialog.open) dialog.showModal();

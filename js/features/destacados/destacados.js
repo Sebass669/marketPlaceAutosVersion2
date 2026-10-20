@@ -1,6 +1,5 @@
 import { alCambiarIdioma } from '../../i18n.js';
 import { $ } from '../../utils/dom.js';
-import { liberarPortadas } from '../../utils/portada.js';
 import { carCard } from '../catalog/carCard.js';
 
 const MAXIMO = 6;
@@ -30,7 +29,6 @@ export function renderDestacados(root, autos) {
   const barra = $('[data-progreso]', root);
 
   const pintar = () => {
-    liberarPortadas(pista);
     pista.replaceChildren(...lista.map((auto, index) => carCard(auto, { index })));
   };
   pintar();
