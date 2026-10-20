@@ -1,10 +1,11 @@
 # Créditos
 
-- **Auto de la portada** (`assets/portada/`): "2018 Aston Martin DB11 V8 Automatic 4.0 Side" de Vauxford,
-  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2018_Aston_Martin_DB11_V8_Automatic_4.0_Side.jpg),
-  licencia [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
-  Recortado (sin fondo), con corrección de color y en versión silueta; las versiones modificadas
-  se comparten bajo la misma licencia.
+- **Fotos de portada** (`assets/portada/`, `assets/og.jpg`), con recorte y corrección de color
+  (las versiones modificadas se comparten bajo la misma licencia, CC BY-SA 4.0):
+  - Tema claro: "Mercedes-AMG GLE 63 S 4MATIC Coupe IMG 5234" de Alexander Migl,
+    [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mercedes-AMG_GLE_63_S_4MATIC_Coupe_IMG_5234.jpg).
+  - Tema negro: "Land Rover Range Rover Autobiography L460 Santorini Black (2)" de Damian B Oh,
+    [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Land_Rover_Range_Rover_Autobiography_L460_Santorini_Black_(2).jpg).
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 

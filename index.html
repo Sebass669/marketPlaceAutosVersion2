@@ -79,23 +79,13 @@
   </header>
 
   <main id="inicio">
-    <!-- PORTADA: póster con el auto de perfil (luces en tema negro, estudio en tema claro) -->
-    <section class="hero" aria-labelledby="hero-titulo" data-pausable>
-      <div class="hero__escenario" aria-hidden="true">
-        <div class="hero__luces">
-          <span class="luz luz--1"></span>
-          <span class="luz luz--2"></span>
-          <span class="luz luz--3"></span>
-          <span class="luz luz--4"></span>
-          <span class="luz luz--5"></span>
-        </div>
-        <div class="hero__franja"></div>
-        <div class="hero__piso"></div>
-      </div>
+    <!-- PORTADA: foto de un auto de lujo que se funde con el fondo -->
+    <section class="hero" aria-labelledby="hero-titulo">
+      <div class="hero__foto" role="img" aria-label="Auto de lujo en exhibición" data-i18n-attr="aria-label:hero.fotoAlt"></div>
 
       <div class="container hero__contenido">
         <span class="sobretitulo hero__anim" data-i18n="hero.sobre">automotriz · costa rica</span>
-        <h1 class="hero__titulo" id="hero-titulo" data-i18n="hero.titulo">autos con historia, listos para tu camino</h1>
+        <h1 class="hero__titulo hero__anim" id="hero-titulo" data-i18n="hero.titulo">autos con historia, listos para tu camino</h1>
         <p class="hero__sub hero__anim" data-i18n="hero.sub">Nuevos, usados y clásicos seleccionados uno a uno, con revisión mecánica y un traspaso sin complicaciones.</p>
         <div class="hero__ctas hero__anim">
           <a class="btn btn--primary btn--lg" href="#carros"><span data-i18n="hero.ver">ver inventario</span>
@@ -106,31 +96,6 @@
           </a>
         </div>
       </div>
-
-      <figure class="hero__auto" role="img" aria-label="Aston Martin plateado de perfil" data-i18n-attr="aria-label:hero.autoAlt">
-        <div class="hero__auto-mover">
-          <div class="hero__auto-cuerpo"><span class="hero__brillo"></span></div>
-          <div class="hero__auto-reflejo"></div>
-        </div>
-      </figure>
-
-      <div class="container hero__pie">
-        <dl class="hero__datos" data-hero-datos>
-          <div class="hero__dato"><dt data-i18n="hero.datoAutos">autos disponibles</dt><dd data-dato-hero="disponibles">00</dd></div>
-          <div class="hero__dato"><dt data-i18n="hero.datoDesde">precio desde</dt><dd data-dato-hero="desde">₡0</dd></div>
-          <div class="hero__dato"><dt data-i18n="hero.datoMarcas">marcas en inventario</dt><dd data-dato-hero="marcas">00</dd></div>
-          <div class="hero__dato hero__dato--lema"><dt data-i18n="hero.datoLema">de dueño a dueño</dt><dd>costa rica</dd></div>
-        </dl>
-      </div>
-    </section>
-
-    <!-- MARCAS: cinta en movimiento -->
-    <section class="marcas" aria-label="Marcas que buscamos para vos" data-i18n-attr="aria-label:marcas.titulo" data-pausable>
-      <div class="marcas__pista" aria-hidden="true">
-        <span>mercedes-benz</span><span>porsche</span><span>bmw</span><span>audi</span><span>land rover</span><span>lexus</span><span>toyota</span><span>aston martin</span>
-        <span>mercedes-benz</span><span>porsche</span><span>bmw</span><span>audi</span><span>land rover</span><span>lexus</span><span>toyota</span><span>aston martin</span>
-      </div>
-      <p class="sr-only">Mercedes-Benz, Porsche, BMW, Audi, Land Rover, Lexus, Toyota, Aston Martin</p>
     </section>
 
     <!-- DESTACADOS -->
@@ -516,7 +481,7 @@
       </div>
     </div>
     <div class="container footer__base">
-      <p><span data-i18n="pie.derechos">© 2026 Solera Automotriz. Todos los derechos reservados.</span> <span data-actualizado></span> <a href="assets/CREDITOS.md" data-i18n="pie.creditos">Fotos de ejemplo de Wikimedia Commons; auto de portada de Vauxford (CC BY-SA 4.0).</a></p>
+      <p><span data-i18n="pie.derechos">© 2026 Solera Automotriz. Todos los derechos reservados.</span> <span data-actualizado></span> <a href="assets/CREDITOS.md" data-i18n="pie.creditos">Fotos de ejemplo y de portada de Wikimedia Commons (CC BY-SA 4.0).</a></p>
       <p class="footer__firma"><span data-i18n="pie.firma">Hecho con calma y café por DODO Estudio ·</span> <a href="mailto:contacto@dodo-estudio.com">contacto@dodo-estudio.com</a></p>
     </div>
   </footer>

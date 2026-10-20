@@ -117,19 +117,3 @@ export function initTema() {
 
   aplicar(TEMAS.includes(document.documentElement.dataset.tema) ? document.documentElement.dataset.tema : 'negro', { guardar: false });
 }
-
-/**
- * Pausa las animaciones infinitas (luces de la portada, cinta de marcas) mientras su sección
- * no está en pantalla. El CSS hace la pausa con [data-pausable]:not(.en-vista).
- */
-export function initPausables() {
-  const secciones = $$('[data-pausable]');
-  if (!('IntersectionObserver' in window)) {
-    secciones.forEach((el) => el.classList.add('en-vista'));
-    return;
-  }
-  const observer = new IntersectionObserver((entradas) => {
-    for (const e of entradas) e.target.classList.toggle('en-vista', e.isIntersecting);
-  });
-  secciones.forEach((el) => observer.observe(el));
-}
