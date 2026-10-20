@@ -323,7 +323,7 @@
   position: absolute;
   left: 50%;
   top: var(--piso);
-  width: min(64vw, 1080px);
+  width: min(60vw, 1000px);
   margin: 0;
   translate: -54% -92%;
 }
@@ -420,7 +420,7 @@
   .hero__rayas i:nth-child(2) { animation-delay: 1180ms; }
   .hero__rayas i:nth-child(3) { animation-delay: 1260ms; }
 
-  /* El auto llega desde la izquierda y frena; la sombra lo acompaña */
+  /* El auto llega desde la derecha (mira a la izquierda) y frena; la sombra lo acompaña */
   .hero__auto img {
     animation: auto-llega 1.7s cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
   }
@@ -442,7 +442,7 @@
     animation-delay: 200ms;
   }
 
-  /* Paralaje al bajar: la marca sube y el auto avanza (navegadores con scroll-driven animations) */
+  /* Paralaje al bajar: la marca sube y el auto avanza hacia la izquierda (navegadores con scroll-driven animations) */
   @supports (animation-timeline: scroll()) {
     .hero__marca {
       animation: marca-sube 1.4s cubic-bezier(0.16, 1, 0.3, 1) 150ms both, marca-paralaje linear both;
@@ -494,7 +494,7 @@
 @keyframes auto-llega {
   from {
     opacity: 0;
-    transform: translateX(-22%);
+    transform: translateX(22%);
   }
 
   35% {
@@ -505,7 +505,7 @@
 @keyframes sombra-llega {
   from {
     opacity: 0;
-    transform: translateX(-22%) scaleX(0.6);
+    transform: translateX(22%) scaleX(0.6);
   }
 }
 
@@ -528,7 +528,7 @@
 
 @keyframes auto-paralaje {
   to {
-    transform: translateX(5%);
+    transform: translateX(-5%);
   }
 }
 
@@ -549,13 +549,13 @@
     left: auto;
     top: auto;
     translate: none;
-    width: 100%;
-    margin: clamp(5rem, 22vw, 9rem) 0 var(--space-8);
+    width: 94%;
+    margin: clamp(5rem, 22vw, 9rem) auto var(--space-8);
   }
 
   .hero__escena {
     bottom: auto;
-    height: calc(var(--space-5) + 2.2rem + clamp(5rem, 22vw, 9rem) + 31vw + var(--space-8));
+    height: calc(var(--space-5) + 2.2rem + clamp(5rem, 22vw, 9rem) + 39vw + var(--space-8));
     -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent);
     mask-image: linear-gradient(180deg, #000 78%, transparent);
   }

@@ -1,9 +1,9 @@
 # Créditos
 
-- **Auto de la portada** (`assets/portada/`): "2018 Aston Martin DB11 V8 Automatic 4.0 Side" de Vauxford,
-  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2018_Aston_Martin_DB11_V8_Automatic_4.0_Side.jpg),
-  licencia [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Recortado sin fondo (llantas redondeadas,
-  sin la sombra de la calle y con vidrios oscurecidos); la versión modificada se comparte bajo la misma licencia.
+- **Auto de la portada** (`assets/portada/`): Porsche 911 GT3 RS (992), foto "DSC_3759" de John Bauld,
+  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:DSC_3759_(53531707699).jpg),
+  licencia [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/). Modificada: recortada sin fondo, alerón
+  reconstruido sobre la foto, llantas redondeadas y sin la sombra del piso.
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 
