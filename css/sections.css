@@ -192,7 +192,8 @@
   isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: clamp(560px, calc(100dvh - var(--header-h)), 820px);
+  /* Alto justo para el contenido: sin hueco grande antes de "destacados" */
+  min-height: clamp(520px, calc(80dvh - var(--header-h)), 660px);
   overflow: hidden;
 }
 
@@ -202,23 +203,24 @@
   right: 0;
   top: 50%;
   z-index: -1;
-  width: min(68%, 1240px);
+  /* La foto empieza donde termina el texto: el auto nunca queda detrás del título */
+  width: min(52%, 980px);
   /* La caja tiene la proporción de la foto: el auto entra completo y la máscara funde sus bordes */
   aspect-ratio: var(--portada-ratio);
   translate: 0 -50%;
   background: var(--portada) center / cover no-repeat;
   -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 40%),
-    linear-gradient(0deg, transparent 0%, #000 22%, #000 82%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, #000 32%),
+    linear-gradient(0deg, transparent 0%, #000 18%, #000 86%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image:
-    linear-gradient(90deg, transparent 0%, #000 40%),
-    linear-gradient(0deg, transparent 0%, #000 22%, #000 82%, transparent 100%);
+    linear-gradient(90deg, transparent 0%, #000 32%),
+    linear-gradient(0deg, transparent 0%, #000 18%, #000 86%, transparent 100%);
   mask-composite: intersect;
 }
 
 .hero__contenido {
-  padding-block: var(--space-8);
+  padding-block: var(--space-7);
 }
 
 .hero__titulo {
@@ -1260,4 +1262,9 @@ ul.lista-info {
     width: 42px;
     height: 42px;
   }
+}
+
+/* "Destacados" viene justo después de la portada: menos aire arriba */
+.destacados {
+  padding-top: var(--space-6);
 }

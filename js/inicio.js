@@ -13,4 +13,16 @@
   } catch (e) {
     /* Sin almacenamiento (navegación privada): quedan los valores por defecto. */
   }
+
+  // Precarga la foto de portada del tema y tamaño de pantalla actuales: como es un fondo
+  // de CSS, sin esto el navegador la descubre tarde y la portada aparece con retraso.
+  var claro = raiz.dataset.tema === 'hueso';
+  var movil = window.matchMedia('(max-width: 899px)').matches;
+  var link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'image';
+  link.type = 'image/webp';
+  link.href = 'assets/portada/portada-' + (claro ? 'clara' : 'oscura') + (movil ? '-movil' : '') + '.webp';
+  link.setAttribute('fetchpriority', 'high');
+  document.head.appendChild(link);
 })();

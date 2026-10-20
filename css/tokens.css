@@ -100,3 +100,15 @@
   --z-flotante: 25;
   --z-skip: 30;
 }
+
+/* Celular: versiones livianas de la foto de portada (1100 px en vez de 2200 px) */
+@media (max-width: 899px) {
+  [data-tema='negro'],
+  :root:not([data-tema='hueso']) {
+    --portada: url('../assets/portada/portada-oscura-movil.webp');
+  }
+
+  [data-tema='hueso'] {
+    --portada: url('../assets/portada/portada-clara-movil.webp');
+  }
+}
