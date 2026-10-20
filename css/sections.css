@@ -573,8 +573,10 @@
   }
 
   .hero__marca {
-    top: calc(var(--space-5) + 3.4rem);
-    font-size: 21vw;
+    /* em = tamaño de la propia palabra: el techo del auto siempre cruza su base */
+    top: calc(var(--space-5) + 3.4rem + 0.38em);
+    /* La palabra mide ~6.1em: así entra completa entre los márgenes */
+    font-size: calc((100vw - 2 * var(--gutter)) / 6.15);
   }
 
   .hero__puntos,
