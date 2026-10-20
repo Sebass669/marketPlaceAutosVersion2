@@ -79,20 +79,33 @@
   </header>
 
   <main id="inicio">
-    <!-- PORTADA: foto de un auto de lujo que se funde con el fondo -->
+    <!-- PORTADA: póster editorial. Marca gigante vertical, auto de perfil, sombra arquitectónica
+         y línea dorada (referencias: nuevosEstilos, portada2.jpg, portada3.jpg). -->
     <section class="hero" aria-labelledby="hero-titulo">
-      <div class="hero__foto" role="img" aria-label="Auto de lujo en exhibición" data-i18n-attr="aria-label:hero.fotoAlt"></div>
+      <div class="hero__escena" aria-hidden="true">
+        <span class="hero__muro"></span>
+        <span class="hero__piso"></span>
+        <span class="hero__linea"></span>
+        <span class="hero__marca">solera</span>
+        <span class="hero__puntos"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="hero__rayas"><i></i><i></i><i></i></span>
+      </div>
 
-      <div class="container hero__contenido">
+      <div class="container hero__cabecera">
         <span class="sobretitulo hero__anim" data-i18n="hero.sobre">automotriz · costa rica</span>
-        <h1 class="hero__titulo hero__anim" id="hero-titulo" data-i18n="hero.titulo">autos con historia, listos para tu camino</h1>
-        <p class="hero__sub hero__anim" data-i18n="hero.sub">Nuevos, usados y clásicos seleccionados uno a uno, con revisión mecánica y un traspaso sin complicaciones.</p>
-        <div class="hero__ctas hero__anim">
+      </div>
+
+      <figure class="hero__auto">
+        <img src="assets/portada/auto.webp" srcset="assets/portada/auto-movil.webp 1000w, assets/portada/auto.webp 2000w" sizes="(max-width: 899px) 100vw, 64vw" width="2000" height="609" alt="Aston Martin plateado de perfil" data-i18n-attr="alt:hero.autoAlt" fetchpriority="high" decoding="async">
+        <span class="hero__sombra" aria-hidden="true"></span>
+      </figure>
+
+      <div class="container hero__pie">
+        <h1 class="hero__titulo" id="hero-titulo" data-i18n="hero.titulo">autos con historia, listos para tu camino</h1>
+        <div class="hero__accion hero__anim">
+          <p class="hero__sub" data-i18n="hero.sub">Nuevos, usados y clásicos seleccionados uno a uno, con revisión mecánica y un traspaso sin complicaciones.</p>
           <a class="btn btn--primary btn--lg" href="#carros"><span data-i18n="hero.ver">ver inventario</span>
             <span class="btn__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
-          </a>
-          <a class="btn btn--ghost btn--lg" href="#" data-wa="wa.info">
-            <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="hero.whatsapp">escribinos por whatsapp</span>
           </a>
         </div>
       </div>
@@ -481,7 +494,7 @@
       </div>
     </div>
     <div class="container footer__base">
-      <p><span data-i18n="pie.derechos">© 2026 Solera Automotriz. Todos los derechos reservados.</span> <span data-actualizado></span> <a href="assets/CREDITOS.md" data-i18n="pie.creditos">Fotos de ejemplo y de portada de Wikimedia Commons (CC BY-SA 4.0).</a></p>
+      <p><span data-i18n="pie.derechos">© 2026 Solera Automotriz. Todos los derechos reservados.</span> <span data-actualizado></span> <a href="assets/CREDITOS.md" data-i18n="pie.creditos">Fotos de ejemplo de Wikimedia Commons; auto de portada de Vauxford (CC BY-SA 4.0).</a></p>
       <p class="footer__firma"><span data-i18n="pie.firma">Hecho con calma y café por DODO Estudio ·</span> <a href="mailto:contacto@dodo-estudio.com">contacto@dodo-estudio.com</a></p>
     </div>
   </footer>

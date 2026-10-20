@@ -1,9 +1,9 @@
 # Créditos
 
-- **Fotos de portada** (`assets/portada/`, `assets/og.jpg`), con recorte y corrección de color
-  (las versiones modificadas se comparten bajo la misma licencia, CC BY-SA 4.0):
-  - Temas claro y negro (en el negro, recortado y montado sobre un fondo oscuro): "Mercedes-AMG GLE 63 S 4MATIC Coupe IMG 5234" de Alexander Migl,
-    [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mercedes-AMG_GLE_63_S_4MATIC_Coupe_IMG_5234.jpg).
+- **Auto de la portada** (`assets/portada/`): "2018 Aston Martin DB11 V8 Automatic 4.0 Side" de Vauxford,
+  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:2018_Aston_Martin_DB11_V8_Automatic_4.0_Side.jpg),
+  licencia [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Recortado sin fondo y con
+  corrección de color; la versión modificada se comparte bajo la misma licencia.
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 

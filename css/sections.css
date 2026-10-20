@@ -183,97 +183,284 @@
 }
 
 /* =========================================================
-   PORTADA: foto de un auto de lujo que se funde con el fondo
-   (referencias: portada.jpeg y portada2.jpeg). La foto cambia con el tema
-   (--portada en tokens.css): solo se descarga la del tema activo.
+   PORTADA: póster editorial
+   - Marca gigante vertical detrás del auto (referencias nuevosEstilos / portada3)
+   - Auto de perfil apoyado en el piso, con sombra de contacto
+   - Muro con sombra diagonal y línea dorada que baja (referencia portada2.jpg)
+   - Título como pie de póster abajo a la izquierda, acción abajo a la derecha
+   Animaciones: solo transform / opacity / clip-path, y nada si se pide reducir movimiento.
    ========================================================= */
 .hero {
+  --piso: 66%;
+  --muro: color-mix(in srgb, var(--text) 5%, var(--bg));
+  --muro-sombra: color-mix(in srgb, var(--text) 10%, var(--bg));
+  --piso-color: color-mix(in srgb, var(--text) 4%, var(--bg));
+  --marca: color-mix(in srgb, var(--text) 12%, var(--bg));
   position: relative;
   isolation: isolate;
-  display: flex;
-  align-items: center;
-  /* Alto justo para el contenido: sin hueco grande antes de "destacados" */
-  min-height: clamp(520px, calc(80dvh - var(--header-h)), 660px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: clamp(600px, calc(100dvh - var(--header-h)), 860px);
   overflow: hidden;
 }
 
-/* La máscara la desvanece hacia la izquierda (donde va el texto), arriba y abajo */
-.hero__foto {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  z-index: -1;
-  /* La foto empieza donde termina el texto: el auto nunca queda detrás del título */
-  width: min(52%, 980px);
-  /* La caja tiene la proporción de la foto: el auto entra completo y la máscara funde sus bordes */
-  aspect-ratio: var(--portada-ratio);
-  translate: 0 -50%;
-  background: var(--portada) center / cover no-repeat;
-  -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 32%),
-    linear-gradient(0deg, transparent 0%, #000 18%, #000 86%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(90deg, transparent 0%, #000 32%),
-    linear-gradient(0deg, transparent 0%, #000 18%, #000 86%, transparent 100%);
-  mask-composite: intersect;
+[data-tema='negro'] .hero {
+  --muro: #121211;
+  --muro-sombra: #0f0f0e;
+  --piso-color: #151413;
+  --marca: #1f1d1a;
 }
 
-.hero__contenido {
-  padding-block: var(--space-7);
+.hero__escena {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Muro: plano iluminado arriba y sombra arquitectónica en diagonal */
+.hero__muro {
+  position: absolute;
+  inset: 0 0 calc(100% - var(--piso)) 0;
+  background:
+    linear-gradient(160deg, transparent 0 46%, var(--muro-sombra) 46.2% 100%),
+    var(--muro);
+}
+
+[data-tema='negro'] .hero__muro {
+  background:
+    radial-gradient(60% 70% at 48% 100%, rgb(176 141 87 / 0.13), transparent 70%),
+    linear-gradient(160deg, transparent 0 46%, rgb(0 0 0 / 0.35) 46.2% 100%),
+    var(--muro);
+}
+
+/* Piso: tono apenas distinto, con luz suave donde apoya el auto */
+.hero__piso {
+  position: absolute;
+  inset: var(--piso) 0 0 0;
+  background:
+    radial-gradient(50% 60% at 46% 0%, color-mix(in srgb, var(--text) 5%, transparent), transparent 70%),
+    var(--piso-color);
+  border-top: 1px solid var(--line);
+}
+
+/* Línea dorada fina que baja desde el borde superior */
+.hero__linea {
+  position: absolute;
+  top: 0;
+  left: 46%;
+  width: 1px;
+  height: calc(var(--piso) - 46%);
+  background: linear-gradient(180deg, transparent, var(--accent));
+  transform-origin: top;
+}
+
+.hero__linea::after {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: -14px;
+  width: 29px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Marca gigante detrás del auto: el techo del auto cruza por delante de las letras */
+.hero__marca {
+  position: absolute;
+  left: 50%;
+  top: 19%;
+  color: var(--marca);
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 0.5rem + 13vw, 17rem);
+  font-style: italic;
+  line-height: 0.8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  translate: -50% 0;
+}
+
+/* Columna de puntos y bloque rayado: marcas de póster */
+.hero__puntos {
+  position: absolute;
+  top: 16%;
+  right: var(--gutter);
+  display: grid;
+  gap: 22px;
+}
+
+.hero__puntos i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.8;
+}
+
+.hero__rayas {
+  position: absolute;
+  right: var(--gutter);
+  bottom: calc(100% - var(--piso) + var(--space-5));
+  display: grid;
+  gap: 6px;
+  width: clamp(90px, 9vw, 150px);
+}
+
+.hero__rayas i {
+  height: 9px;
+  background: repeating-linear-gradient(135deg, var(--accent) 0 1px, transparent 1px 5px);
+  opacity: 0.55;
+}
+
+/* ---- Cabecera del póster ---- */
+.hero__cabecera {
+  padding-top: var(--space-6);
+}
+
+/* ---- Auto ---- */
+.hero__auto {
+  position: absolute;
+  left: 50%;
+  top: var(--piso);
+  width: min(64vw, 1080px);
+  margin: 0;
+  translate: -54% -92%;
+}
+
+.hero__auto img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+}
+
+/* Sombra de contacto bajo las ruedas */
+.hero__sombra {
+  position: absolute;
+  left: 4%;
+  right: 3%;
+  bottom: 0;
+  height: 7%;
+  translate: 0 45%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.55), rgb(0 0 0 / 0.18) 60%, transparent);
+}
+
+[data-tema='negro'] .hero__sombra {
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.9), rgb(0 0 0 / 0.4) 60%, transparent);
+}
+
+/* ---- Pie del póster: título + acción ---- */
+.hero__pie {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: var(--space-6);
+  align-items: end;
+  padding-bottom: var(--space-7);
 }
 
 .hero__titulo {
   font-family: var(--font-display);
-  font-size: var(--text-hero);
+  font-size: clamp(1.7rem, 0.9rem + 2.2vw, 3rem);
   font-style: italic;
   text-transform: lowercase;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  max-width: 17ch;
+  line-height: 1.12;
+  max-width: 21ch;
+}
+
+.hero__accion {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+  padding-left: var(--space-6);
+  border-left: 1px solid var(--line);
 }
 
 .hero__sub {
-  max-width: 44ch;
-  margin-top: var(--space-5);
+  max-width: 38ch;
   color: var(--text-soft);
-  font-size: var(--text-lg);
 }
 
-.hero__ctas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
-}
-
-/* Entrada: la foto aparece acercándose lento y el texto sube en cascada */
+/* ---- Animaciones de entrada ---- */
 @media (prefers-reduced-motion: no-preference) {
-  .hero__foto {
-    animation: acercar 2.4s var(--ease-out) both;
+  .hero__muro,
+  .hero__piso {
+    animation: aparecer 1.2s ease both;
+  }
+
+  .hero__linea {
+    animation: linea-baja 1.1s cubic-bezier(0.65, 0, 0.35, 1) 300ms both;
+  }
+
+  .hero__marca {
+    animation: marca-sube 1.4s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+  }
+
+  .hero__puntos i {
+    animation: aparecer 600ms ease both;
+  }
+
+  .hero__puntos i:nth-child(1) { animation-delay: 900ms; }
+  .hero__puntos i:nth-child(2) { animation-delay: 960ms; }
+  .hero__puntos i:nth-child(3) { animation-delay: 1020ms; }
+  .hero__puntos i:nth-child(4) { animation-delay: 1080ms; }
+  .hero__puntos i:nth-child(5) { animation-delay: 1140ms; }
+  .hero__puntos i:nth-child(6) { animation-delay: 1200ms; }
+  .hero__puntos i:nth-child(7) { animation-delay: 1260ms; }
+
+  .hero__rayas i {
+    animation: raya-entra 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transform-origin: right;
+  }
+
+  .hero__rayas i:nth-child(1) { animation-delay: 1100ms; }
+  .hero__rayas i:nth-child(2) { animation-delay: 1180ms; }
+  .hero__rayas i:nth-child(3) { animation-delay: 1260ms; }
+
+  /* El auto llega desde la izquierda y frena; la sombra lo acompaña */
+  .hero__auto img {
+    animation: auto-llega 1.7s cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
+  }
+
+  .hero__sombra {
+    animation: sombra-llega 1.7s cubic-bezier(0.16, 1, 0.3, 1) 250ms both;
+  }
+
+  /* El título se descubre de abajo hacia arriba */
+  .hero__titulo {
+    animation: revelar 1.1s cubic-bezier(0.65, 0, 0.35, 1) 600ms both;
   }
 
   .hero__anim {
-    animation: subir-texto 900ms var(--ease-out) both;
+    animation: subir-texto 900ms var(--ease-out) 800ms both;
   }
 
-  .hero__titulo {
-    animation-delay: 100ms;
-  }
-
-  .hero__sub {
+  .hero__cabecera .hero__anim {
     animation-delay: 200ms;
   }
 
-  .hero__ctas {
-    animation-delay: 300ms;
+  /* Paralaje al bajar: la marca sube y el auto avanza (navegadores con scroll-driven animations) */
+  @supports (animation-timeline: scroll()) {
+    .hero__marca {
+      animation: marca-sube 1.4s cubic-bezier(0.16, 1, 0.3, 1) 150ms both, marca-paralaje linear both;
+      animation-timeline: auto, scroll(root);
+      animation-range: normal, 0 100vh;
+    }
+
+    .hero__auto {
+      animation: auto-paralaje linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
   }
 }
 
-@keyframes acercar {
+@keyframes aparecer {
   from {
     opacity: 0;
-    transform: scale(1.08);
   }
 }
 
@@ -284,30 +471,126 @@
   }
 }
 
-/* Móvil y tablet: foto arriba, texto abajo */
+@keyframes linea-baja {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes marca-sube {
+  from {
+    opacity: 0;
+    transform: translateY(18%);
+    letter-spacing: -0.02em;
+  }
+}
+
+@keyframes raya-entra {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes auto-llega {
+  from {
+    opacity: 0;
+    transform: translateX(-22%);
+  }
+
+  35% {
+    opacity: 1;
+  }
+}
+
+@keyframes sombra-llega {
+  from {
+    opacity: 0;
+    transform: translateX(-22%) scaleX(0.6);
+  }
+}
+
+@keyframes revelar {
+  from {
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(22px);
+  }
+
+  to {
+    clip-path: inset(0 0 -12% 0);
+  }
+}
+
+@keyframes marca-paralaje {
+  to {
+    transform: translateY(-14%);
+  }
+}
+
+@keyframes auto-paralaje {
+  to {
+    transform: translateX(5%);
+  }
+}
+
+/* ---- Tablet y celular: el póster se apila ---- */
 @media (max-width: 899px) {
   .hero {
-    flex-direction: column;
-    align-items: stretch;
+    --piso: 54%;
     min-height: 0;
+    grid-template-rows: auto auto auto;
   }
 
-  .hero__foto {
+  .hero__cabecera {
+    padding-top: var(--space-5);
+  }
+
+  .hero__auto {
     position: relative;
+    left: auto;
     top: auto;
-    right: auto;
     translate: none;
     width: 100%;
-    aspect-ratio: auto;
-    height: clamp(260px, 62vw, 460px);
-    background-position: 45% 60%;
-    -webkit-mask-image: linear-gradient(0deg, transparent 0%, #000 30%);
-    mask-image: linear-gradient(0deg, transparent 0%, #000 30%);
+    margin: clamp(5rem, 22vw, 9rem) 0 var(--space-8);
   }
 
-  .hero__contenido {
-    margin-top: calc(-1 * var(--space-6));
-    padding-block: 0 var(--space-8);
+  .hero__escena {
+    bottom: auto;
+    height: calc(var(--space-5) + 2.2rem + clamp(5rem, 22vw, 9rem) + 31vw + var(--space-8));
+    -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent);
+    mask-image: linear-gradient(180deg, #000 78%, transparent);
+  }
+
+  .hero__muro {
+    inset: 0 0 18% 0;
+  }
+
+  .hero__piso {
+    inset: 82% 0 0 0;
+  }
+
+  .hero__linea {
+    display: none;
+  }
+
+  .hero__marca {
+    top: calc(var(--space-5) + 3.4rem);
+    font-size: 21vw;
+  }
+
+  .hero__puntos,
+  .hero__rayas {
+    display: none;
+  }
+
+  .hero__pie {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding-bottom: var(--space-8);
+  }
+
+  .hero__accion {
+    padding-left: 0;
+    border-left: 0;
   }
 }
 
@@ -1264,7 +1547,3 @@ ul.lista-info {
   }
 }
 
-/* "Destacados" viene justo después de la portada: menos aire arriba */
-.destacados {
-  padding-top: var(--space-6);
-}
