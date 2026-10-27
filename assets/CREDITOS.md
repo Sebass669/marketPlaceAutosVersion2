@@ -1,9 +1,5 @@
 # Créditos
 
-- **Auto de la portada** (`assets/portada/`): Porsche 911 GT3 RS (992), foto "DSC_3759" de John Bauld,
-  [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:DSC_3759_(53531707699).jpg),
-  licencia [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/). Modificada: recortada sin fondo, alerón
-  reconstruido sobre la foto, llantas redondeadas y sin la sombra del piso.
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 
