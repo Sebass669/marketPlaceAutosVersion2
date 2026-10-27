@@ -1,8 +1,7 @@
 import { t, valor } from '../../i18n.js';
-import { h, icon } from '../../utils/dom.js';
+import { h } from '../../utils/dom.js';
 import { formatDolares, formatKm, formatPrecio, tituloAuto } from '../../utils/format.js';
 import { fotoAuto } from '../../utils/portada.js';
-import { favoritos } from './favoritos.js';
 
 export const hrefAuto = (auto) => `#carro/${encodeURIComponent(auto.id)}`;
 
@@ -33,35 +32,19 @@ export const precioAuto = (auto, clase = 'card') =>
 export const portadaAuto = (auto, opciones = {}) =>
   fotoAuto(auto.fotos[0], { alt: t('card.foto', { auto: tituloAuto(auto), color: valor('color', auto.color || '') }), ...opciones });
 
-/** Corazón de favoritos. Queda por encima del link estirado de la tarjeta. */
-export function botonFavorito(auto) {
-  return h(
-    'button',
-    {
-      type: 'button',
-      class: 'favorito',
-      'aria-pressed': String(favoritos.tiene(auto.id)),
-      'aria-label': t('card.favorito', { auto: tituloAuto(auto) }),
-      onclick: (e) => {
-        e.preventDefault();
-        e.currentTarget.setAttribute('aria-pressed', String(favoritos.alternar(auto.id)));
-      },
-    },
-    icon('heart', 'favorito__vacio'),
-    icon('heart-fill', 'favorito__lleno'),
-  );
-}
+/** Etiqueta solo si el auto no está disponible (reservado / vendido); el tipo ya no se muestra en la tarjeta. */
+const estadoAuto = (auto) => NO_DISPONIBLE.includes(auto.estado) && h('span', { class: 'tag tag--claro' }, valor('estado', auto.estado));
 
 /**
  * Tarjeta del inventario, al estilo de catálogo de lujo: la foto manda y debajo, centrado,
  * solo el nombre y una línea con año y precio. Todo lo demás vive en la ficha que se abre.
- * El título es un link "estirado" que cubre toda la tarjeta; el corazón queda por encima.
+ * El título es un link "estirado" que cubre toda la tarjeta.
  */
 export function carCard(auto, { index = 0 } = {}) {
   return h(
     'article',
     { class: 'card', dataset: { estado: auto.estado, id: auto.id }, style: `--i:${index}` },
-    h('div', { class: 'card__media' }, portadaAuto(auto, { eager: index < 3 }), etiquetaAuto(auto), botonFavorito(auto)),
+    h('div', { class: 'card__media' }, portadaAuto(auto, { eager: index < 3 }), estadoAuto(auto)),
     h(
       'div',
       { class: 'card__body' },

@@ -3,7 +3,6 @@ import { alCambiarIdioma, t, valor } from '../../i18n.js';
 import { $, $$, h, icon } from '../../utils/dom.js';
 import { limpiarTexto } from '../../utils/seguridad.js';
 import { carCard, cardSkeleton } from './carCard.js';
-import { favoritos } from './favoritos.js';
 import { FILTROS_INICIALES, OPCIONES_ORDEN, aplicarFiltros, contarPor, hayFiltrosActivos, valoresUnicos } from './filters.js';
 
 /** Grupos de chips: campo del auto -> orden preferido de sus valores (si existe). */
@@ -18,7 +17,6 @@ export function createCatalog({ root }) {
   const grid = $('[data-grid]', root);
   const conteo = $('[data-conteo]', root);
   const listaMarcas = $('[data-marcas]', root);
-  const conteoFavoritos = $('[data-conteo-favoritos]', root);
 
   let autos = [];
   let filtros = { ...FILTROS_INICIALES, marcas: [] };
@@ -84,7 +82,7 @@ export function createCatalog({ root }) {
   }
 
   function pintarGrilla() {
-    const lista = aplicarFiltros(autos, filtros, favoritos.ids);
+    const lista = aplicarFiltros(autos, filtros);
     const disponibles = lista.filter((a) => a.estado === 'disponible').length;
 
     conteo.textContent =
@@ -101,13 +99,12 @@ export function createCatalog({ root }) {
   }
 
   function estadoVacio() {
-    const fav = filtros.soloFavoritos;
     return h(
       'div',
       { class: 'estado-panel' },
       icon('magnifying-glass', 'estado-panel__icon'),
-      h('p', { class: 'estado-panel__title' }, t(fav ? 'vacio.favTitulo' : 'vacio.titulo')),
-      h('p', {}, t(fav ? 'vacio.favTexto' : 'vacio.texto')),
+      h('p', { class: 'estado-panel__title' }, t('vacio.titulo')),
+      h('p', {}, t('vacio.texto')),
       h('button', { type: 'button', class: 'btn btn--ghost', onclick: limpiar }, t('vacio.limpiar')),
     );
   }
@@ -131,13 +128,8 @@ export function createCatalog({ root }) {
       marcas: datos.getAll('marca').map(String),
       provincia: String(datos.get('provincia') ?? ''),
       precioMax: Number(datos.get('precioMax')) || 0,
-      soloFavoritos: datos.has('soloFavoritos'),
       orden: String(datos.get('orden') || 'recientes'),
     });
-  }
-
-  function pintarConteoFavoritos() {
-    conteoFavoritos.textContent = favoritos.ids.size;
   }
 
   function pintarError() {
@@ -160,11 +152,6 @@ export function createCatalog({ root }) {
   });
   form.addEventListener('submit', (e) => e.preventDefault());
   form.addEventListener('reset', () => queueMicrotask(limpiar));
-
-  favoritos.alCambiar(() => {
-    pintarConteoFavoritos();
-    if (filtros.soloFavoritos) pintarGrilla();
-  });
 
   alCambiarIdioma(() => {
     if (mensajeError) return pintarError();
@@ -192,7 +179,6 @@ export function createCatalog({ root }) {
       grid.removeAttribute('aria-busy');
       pintarMarcas();
       pintarSelects();
-      pintarConteoFavoritos();
       actualizar({});
     },
 

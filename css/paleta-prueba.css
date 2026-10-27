@@ -23,7 +23,7 @@
 
 /* Verde, azul y burdeos son tan oscuros que casi se pierden sobre el negro:
    un filete fino del tono claro de cada paleta (--filete) le da borde a los botones */
-:root[data-tema='negro']:is([data-paleta='bosque'], [data-paleta='marino'], [data-paleta='burdeos']) :is(.btn--primary, .btn-icono--activo, .acceso--primario, .acceso__flecha, .idiomas button[aria-pressed='true']) {
+:root[data-tema='negro']:is([data-paleta='bosque'], [data-paleta='marino'], [data-paleta='burdeos']) :is(.btn--primary, .btn-icono--activo, .idiomas button[aria-pressed='true']) {
   box-shadow: inset 0 0 0 1px var(--filete);
 }
 

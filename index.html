@@ -107,23 +107,13 @@
       </div>
     </section>
 
-    <!-- ACCESOS: comprar o vender, justo debajo de la portada -->
-    <section class="accesos" aria-label="Comprar o vender" data-i18n-attr="aria-label:accesos.grupo">
-      <div class="container accesos__grid">
-        <a class="acceso acceso--primario" href="#carros" data-reveal>
-          <span class="acceso__texto">
-            <span class="acceso__titulo" data-i18n="accesos.ver">ver inventario</span>
-            <span class="acceso__desc" data-i18n="accesos.verDesc">Todos los autos disponibles, con revisión mecánica y traspaso sin complicaciones.</span>
-          </span>
-          <span class="acceso__flecha" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
-        </a>
-        <a class="acceso" href="#contacto" data-abrir-venta data-reveal>
-          <span class="acceso__texto">
-            <span class="acceso__titulo" data-i18n="accesos.vender">vender mi auto</span>
-            <span class="acceso__desc" data-i18n="accesos.venderDesc">Contanos de tu auto por WhatsApp y te ayudamos a venderlo.</span>
-          </span>
-          <span class="acceso__flecha" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
-        </a>
+    <!-- VENDER: franja fina antes de los destacados (el inventario ya está justo abajo) -->
+    <section class="accesos" aria-label="Vender tu auto" data-i18n-attr="aria-label:accesos.grupo">
+      <div class="container">
+        <div class="vender" data-reveal>
+          <p class="vender__texto" data-i18n="accesos.venderDesc">¿Querés vender tu auto? Contanos por WhatsApp y te ayudamos.</p>
+          <a class="vender__link" href="#contacto" data-abrir-venta><span data-i18n="accesos.vender">vender mi auto</span><span class="vender__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
+        </div>
       </div>
     </section>
 
@@ -197,12 +187,6 @@
               <span class="campo"><select name="precioMax"></select></span>
             </label>
 
-            <label class="check check--favoritos">
-              <input type="checkbox" name="soloFavoritos">
-              <span class="check__caja" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-check"/></svg></span>
-              <span class="check__texto" data-i18n="inv.favoritos">solo mis favoritos</span>
-              <span class="check__num" data-conteo-favoritos>0</span>
-            </label>
 
             <button class="btn btn--ghost btn--block filtros__limpiar" type="reset" data-i18n="inv.limpiar">limpiar filtros</button>
           </form>

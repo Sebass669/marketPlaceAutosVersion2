@@ -8,7 +8,6 @@ export const FILTROS_INICIALES = Object.freeze({
   combustible: '',
   provincia: '',
   precioMax: 0,
-  soloFavoritos: false,
   orden: 'recientes',
 });
 
@@ -28,8 +27,8 @@ export const OPCIONES_ORDEN = ['recientes', 'precio-asc', 'precio-desc', 'km', '
 const textoBuscable = (auto) =>
   normalizarTexto([auto.marca, auto.modelo, auto.version, auto.anio, auto.color, auto.provincia, auto.canton].join(' '));
 
-/** Función pura: recibe autos + filtros (+ ids favoritos) y devuelve la lista a mostrar. */
-export function aplicarFiltros(autos, f, favoritos = new Set()) {
+/** Función pura: recibe autos + filtros y devuelve la lista a mostrar. */
+export function aplicarFiltros(autos, f) {
   const terminos = normalizarTexto(f.q).split(/\s+/).filter(Boolean);
   const ordenar = ORDENES[f.orden] ?? ORDENES.recientes;
 
@@ -41,7 +40,6 @@ export function aplicarFiltros(autos, f, favoritos = new Set()) {
       if (f.combustible && auto.combustible !== f.combustible) return false;
       if (f.provincia && auto.provincia !== f.provincia) return false;
       if (f.precioMax && auto.precio > f.precioMax) return false;
-      if (f.soloFavoritos && !favoritos.has(auto.id)) return false;
       if (terminos.length) {
         const texto = textoBuscable(auto);
         if (!terminos.every((t) => texto.includes(t))) return false;
