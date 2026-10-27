@@ -616,7 +616,6 @@
    ========================================================= */
 .destacados,
 .inventario,
-.conocenos,
 .preguntas,
 .contacto {
   padding-block: var(--space-8);
@@ -625,7 +624,6 @@
 @media (min-width: 1024px) {
   .destacados,
   .inventario,
-  .conocenos,
   .preguntas,
   .contacto {
     padding-block: var(--space-9) var(--space-8);
@@ -713,7 +711,8 @@
 
 @media (min-width: 1024px) {
   .inventario__layout {
-    grid-template-columns: 270px minmax(0, 1fr);
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: var(--space-7);
   }
 
   .filtros {
@@ -730,7 +729,8 @@
   .filtros {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-4);
-    padding: var(--space-5);
+    padding: var(--space-5) 0;
+    border-block: 1px solid var(--line);
   }
 
   .filtros__grupo {
@@ -778,11 +778,11 @@
 }
 
 /* =========================================================
-   CONÓCENOS: banda de foto a sangre, la misma idea que la portada
+   PEDÍ UN AUTO: banda de foto a sangre, la misma idea que la portada
    La foto es oscura en los dos temas; en el tema claro la banda y el mosaico
    traen sus propios colores oscuros para que el texto se lea sobre la foto.
    ========================================================= */
-.conocenos {
+.pedido {
   padding-block: 0;
 }
 
@@ -1163,45 +1163,39 @@
 /* =========================================================
    CONTACTO
    ========================================================= */
+/* Título y datos a la izquierda (quedan fijos al bajar en pantallas grandes), formulario a la derecha */
 .contacto__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-4);
+  gap: var(--space-8);
   align-items: start;
 }
 
 @media (min-width: 1024px) {
   .contacto__grid {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-9);
+  }
+
+  .contacto__lado {
+    position: sticky;
+    top: var(--space-6);
   }
 }
 
-.contacto__formularios {
-  padding: var(--space-5);
-}
-
-@media (min-width: 640px) {
-  .contacto__formularios {
-    padding: var(--space-7) var(--space-6);
-  }
-}
-
-/* Pestañas comprar / vender en forma de interruptor */
+/* Pestañas comprar / vender: texto en mayúsculas con línea debajo, como las de la ficha */
 .segmentos {
-  display: inline-flex;
-  gap: 4px;
-  margin-bottom: var(--space-6);
-  padding: 4px;
-  border-radius: var(--radius-pill);
-  background: var(--field);
-  box-shadow: inset 0 0 0 1px var(--line);
+  display: flex;
+  gap: var(--space-6);
+  margin-bottom: var(--space-7);
+  border-bottom: 1px solid var(--line);
 }
 
 .segmentos button {
-  min-height: 40px;
-  padding: 0 var(--space-5);
+  position: relative;
+  min-height: 48px;
+  padding: 0;
   border: 0;
-  border-radius: var(--radius-pill);
   background: transparent;
   color: var(--text-soft);
   font-family: var(--font-display);
@@ -1214,16 +1208,27 @@
     color var(--dur) var(--ease-out);
 }
 
+.segmentos button:hover {
+  color: var(--text);
+}
+
 .segmentos button[aria-selected='true'] {
-  background: var(--btn);
-  color: var(--btn-text);
+  color: var(--text);
+}
+
+.segmentos button[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: var(--accent);
 }
 
 .form__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
+  gap: var(--space-6) var(--space-5);
+  margin-bottom: var(--space-7);
 }
 
 @media (min-width: 640px) {
@@ -1243,10 +1248,41 @@
 }
 
 .campo-form label {
-  font-size: 0.72rem;
+  color: var(--text-soft);
+  font-size: 0.66rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+/* Campos del formulario sin caja: solo un filete debajo que se vuelve dorado al enfocarlo */
+.campo-form :is(input, select, textarea) {
+  min-height: 44px;
+  padding-inline: 0;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 28%, transparent);
+  border-radius: 0;
+  background-color: transparent;
+  font-size: var(--text-base);
+}
+
+.campo-form select {
+  padding-right: var(--space-6);
+  background-position: right 0 center;
+}
+
+.campo-form select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* Ejemplos y "Elegir" más tenues, para que no parezcan datos ya cargados */
+.campo-form :is(input, textarea)::placeholder {
+  color: color-mix(in srgb, var(--text-soft) 70%, transparent);
+}
+
+.campo-form select:has(option[value='']:checked) {
+  color: var(--text-soft);
 }
 
 .opcional {
@@ -1263,12 +1299,13 @@
 
 .campo-form :is(input, select, textarea):focus-visible {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+  border-bottom-color: var(--accent);
+  box-shadow: 0 1px 0 var(--accent);
 }
 
 .campo-form [aria-invalid='true'] {
-  border-color: var(--error);
+  border-bottom-color: var(--error);
+  box-shadow: 0 1px 0 var(--error);
 }
 
 .campo-form__ayuda {
@@ -1298,130 +1335,45 @@
   font-size: 1.2rem;
 }
 
-.contacto__lado {
+/* Datos del negocio: filas con filete, etiqueta chica arriba y el dato grande */
+.datos {
   display: grid;
-  gap: var(--space-4);
-}
-
-/* ul.panel: más específico que la regla base ul[class] { padding: 0 } */
-ul.lista-info {
-  display: grid;
-  padding: var(--space-3) var(--space-5);
-}
-
-.lista-info li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  padding-block: var(--space-4);
-}
-
-.lista-info li + li {
   border-top: 1px solid var(--line);
 }
 
-.lista-info__icono {
+.datos li {
   display: grid;
-  place-items: center;
-  flex: none;
-  width: 46px;
-  height: 46px;
-  border-radius: var(--radius-sm);
-  background: var(--surface-2);
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.datos__etiqueta {
+  color: var(--eyebrow);
+  font-family: var(--font-display);
+  font-size: 0.56rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.datos__valor {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+a.datos__valor {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 5px;
+  transition:
+    color var(--dur) var(--ease-out),
+    text-decoration-color var(--dur) var(--ease-out);
+}
+
+a.datos__valor:hover {
   color: var(--accent);
-  font-size: 1.2rem;
-}
-
-.lista-info small {
-  display: block;
-  color: var(--text-soft);
-  font-size: var(--text-xs);
-}
-
-.lista-info a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.lista-info a:hover {
-  color: var(--accent);
-}
-
-/* Mapa ilustrado (calles + pin que late) */
-.mapa {
-  position: relative;
-  height: 280px;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--line);
-}
-
-.mapa__calles {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.mapa__calles path {
-  fill: none;
-  stroke: var(--text);
-  stroke-opacity: 0.12;
-  stroke-width: 9;
-}
-
-.mapa__pin {
-  position: absolute;
-  top: 50%;
-  left: 56%;
-  display: grid;
-  place-items: center;
-  width: 96px;
-  height: 96px;
-  margin: -48px 0 0 -48px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--accent) 22%, transparent);
-}
-
-.mapa__pin span {
-  width: 26px;
-  height: 26px;
-  border: 8px solid var(--accent);
-  border-radius: 50%;
-  background: var(--bg);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .mapa__pin {
-    animation: latido 2.6s var(--ease-out) infinite;
-  }
-}
-
-@keyframes latido {
-  0%,
-  100% {
-    transform: scale(0.85);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-}
-
-.mapa__direccion {
-  position: absolute;
-  left: var(--space-4);
-  bottom: var(--space-4);
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: 8px 14px;
-  border-radius: var(--radius-md);
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  font-size: var(--text-sm);
-  font-weight: 600;
+  text-decoration-color: currentColor;
 }
 
 /* =========================================================

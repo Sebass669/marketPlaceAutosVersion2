@@ -53,10 +53,9 @@ export function botonFavorito(auto) {
 }
 
 /**
- * Tarjeta del inventario: foto a sangre arriba; marca como sobretítulo y modelo en mayúsculas;
- * abajo, separado por un filete, el precio y una flecha redonda.
- * El título es un link "estirado" que cubre toda la tarjeta y abre la ficha; la flecha hace
- * lo mismo (con su nombre accesible). El corazón queda por encima.
+ * Tarjeta del inventario, al estilo de catálogo de lujo: la foto manda y debajo, centrado,
+ * solo el nombre y una línea con año y precio. Todo lo demás vive en la ficha que se abre.
+ * El título es un link "estirado" que cubre toda la tarjeta; el corazón queda por encima.
  */
 export function carCard(auto, { index = 0 } = {}) {
   return h(
@@ -69,24 +68,9 @@ export function carCard(auto, { index = 0 } = {}) {
       h(
         'h3',
         { class: 'card__title' },
-        h('a', { class: 'card__link', href: hrefAuto(auto) }, h('span', { class: 'card__marca' }, auto.marca), ' ', auto.modelo),
+        h('a', { class: 'card__link', href: hrefAuto(auto), 'aria-label': t('card.verDetallesDe', { auto: tituloAuto(auto) }) }, `${auto.marca} ${auto.modelo}`),
       ),
-      h('p', { class: 'card__meta' }, metaAuto(auto)),
-      h(
-        'div',
-        { class: 'card__pie' },
-        precioAuto(auto),
-        h(
-          'a',
-          {
-            class: 'card__cta',
-            href: hrefAuto(auto),
-            'aria-label': t('card.verDetallesDe', { auto: tituloAuto(auto) }),
-            title: auto.estado === 'vendido' ? t('card.vendido') : t('card.verDetalles'),
-          },
-          icon('arrow-right'),
-        ),
-      ),
+      h('p', { class: 'card__meta' }, `${auto.anio} · `, h('span', { class: 'card__price' }, formatPrecio(auto.precio))),
     ),
   );
 }
@@ -101,8 +85,7 @@ export function cardSkeleton() {
       'div',
       { class: 'card__body' },
       h('div', { class: 'skeleton skeleton--title' }),
-      h('div', { class: 'skeleton skeleton--line', style: 'width:70%' }),
-      h('div', { class: 'skeleton skeleton--line', style: 'width:40%;height:1.4rem' }),
+      h('div', { class: 'skeleton skeleton--line', style: 'width:50%' }),
     ),
   );
 }

@@ -61,8 +61,8 @@
       <nav class="nav" id="nav" aria-label="Principal" data-i18n-attr="aria-label:nav.principal">
         <a href="#inicio" data-i18n="nav.inicio">inicio</a>
         <a href="#carros" data-i18n="nav.inventario">inventario</a>
+        <a href="#pedi-un-auto" data-i18n="nav.pedir">pedí un auto</a>
         <a href="#contacto" data-i18n="nav.contacto">contacto</a>
-        <a href="#conocenos" data-i18n="nav.conocenos">conócenos</a>
       </nav>
 
       <div class="header__acciones">
@@ -221,16 +221,58 @@
       </div>
     </section>
 
-    <!-- CONTACTO -->
+    <!-- PEDÍ UN AUTO: banda de foto grande (como la portada) con lo justo: título, una línea, valores y el botón -->
+    <section class="pedido" id="pedi-un-auto" aria-labelledby="pedido-titulo">
+      <div class="banda">
+        <img class="banda__foto" src="assets/conocenos/bentley.webp" srcset="assets/conocenos/bentley-movil.webp 1200w, assets/conocenos/bentley.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
+        <div class="container banda__contenido" data-reveal>
+          <span class="sobretitulo" data-i18n="cono.sobre">por encargo</span>
+          <h2 class="titulo banda__titulo" id="pedido-titulo" data-i18n="cono.titulo">pedí el auto de tus sueños.</h2>
+          <p class="banda__sub" data-i18n="cono.p2">¿No está en el inventario? Contanos marca, modelo y presupuesto, y lo buscamos por vos.</p>
+          <ul class="banda__valores">
+            <li data-i18n="cono.v1">marcas reconocidas</li>
+            <li data-i18n="cono.v2">transparencia</li>
+            <li data-i18n="cono.v3">respaldo</li>
+            <li data-i18n="cono.v4">trato personal</li>
+          </ul>
+          <a class="btn btn--primary btn--lg banda__cta" href="#" data-wa="wa.info">
+            <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="cono.pedir">pedinos un auto</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO: a la izquierda el título y los datos en filas con filete; a la derecha el
+         formulario sin cajas (campos subrayados y pestañas de texto), en la voz del resto de la página -->
     <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
       <div class="container">
-        <div class="encabezado" data-reveal>
-          <span class="sobretitulo" data-i18n="con.sobre">contacto</span>
-          <h2 class="titulo" id="contacto-titulo" data-i18n="con.titulo">hablemos de tu próximo auto</h2>
-        </div>
-
         <div class="contacto__grid">
-          <div class="panel contacto__formularios" data-contacto>
+          <div class="contacto__lado" data-reveal>
+            <div class="encabezado">
+              <span class="sobretitulo" data-i18n="con.sobre">contacto</span>
+              <h2 class="titulo" id="contacto-titulo" data-i18n="con.titulo">hablemos de tu próximo auto</h2>
+            </div>
+            <ul class="datos">
+              <li>
+                <span class="datos__etiqueta" data-i18n="dat.whatsapp">whatsapp</span>
+                <a class="datos__valor" href="#" data-wa="wa.consulta" data-dato="whatsapp">+506 6237 9935</a>
+              </li>
+              <li>
+                <span class="datos__etiqueta" data-i18n="dat.correo">correo</span>
+                <a class="datos__valor" href="mailto:solera.automotriz@gmail.com" data-dato="correo">solera.automotriz@gmail.com</a>
+              </li>
+              <li>
+                <span class="datos__etiqueta" data-i18n="dat.horario">horario</span>
+                <span class="datos__valor" data-dato="horario"></span>
+              </li>
+              <li>
+                <span class="datos__etiqueta" data-i18n="dat.ubicacion">ubicación</span>
+                <span class="datos__valor" data-dato="direccion"></span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contacto__formularios" data-contacto>
             <div class="segmentos" role="tablist" aria-label="Tipo de consulta" data-i18n-attr="aria-label:con.tipo">
               <button type="button" role="tab" id="tab-comprar" aria-controls="panel-comprar" aria-selected="true" data-i18n="con.comprar">quiero comprar</button>
               <button type="button" role="tab" id="tab-vender" aria-controls="panel-vender" aria-selected="false" tabindex="-1" data-i18n="con.vender">quiero vender</button>
@@ -340,59 +382,16 @@
             </form>
           </div>
 
-          <div class="contacto__lado">
-            <ul class="panel lista-info">
-              <li>
-                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg></span>
-                <span><small data-i18n="dat.whatsapp">whatsapp</small><a href="#" data-wa="wa.consulta" data-dato="whatsapp">+506 6237 9935</a></span>
-              </li>
-              <li>
-                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-envelope-simple"/></svg></span>
-                <span><small data-i18n="dat.correo">correo</small><a href="mailto:solera.automotriz@gmail.com" data-dato="correo">solera.automotriz@gmail.com</a></span>
-              </li>
-              <li>
-                <span class="lista-info__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-clock"/></svg></span>
-                <span><small data-i18n="dat.horario">horario</small><span data-dato="horario"></span></span>
-              </li>
-            </ul>
-
-            <div class="mapa">
-              <svg class="mapa__calles" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <path d="M-10 18 L410 64 M-10 128 L410 112 M-10 214 L410 166 M70 -10 L84 270 M170 -10 L160 270 M262 -10 L252 270 M346 -10 L360 270"/>
-              </svg>
-              <span class="mapa__pin" aria-hidden="true"><span></span></span>
-              <p class="mapa__direccion"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-map-pin"/></svg><span data-dato="direccion"></span></p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- CONÓCENOS: banda de foto grande (como la portada) con lo justo: título, una línea, valores y el botón -->
-    <section class="conocenos" id="conocenos" aria-labelledby="conocenos-titulo">
-      <div class="banda">
-        <img class="banda__foto" src="assets/conocenos/bentley.webp" srcset="assets/conocenos/bentley-movil.webp 1200w, assets/conocenos/bentley.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
-        <div class="container banda__contenido" data-reveal>
-          <span class="sobretitulo" data-i18n="cono.sobre">conócenos</span>
-          <h2 class="titulo banda__titulo" id="conocenos-titulo" data-i18n="cono.titulo">el auto de tus sueños, a tu alcance.</h2>
-          <p class="banda__sub" data-i18n="cono.p2">¿No está en el inventario? Contanos marca, modelo y presupuesto, y lo buscamos por vos.</p>
-          <ul class="banda__valores">
-            <li data-i18n="cono.v1">marcas reconocidas</li>
-            <li data-i18n="cono.v2">transparencia</li>
-            <li data-i18n="cono.v3">respaldo</li>
-            <li data-i18n="cono.v4">trato personal</li>
-          </ul>
-          <a class="btn btn--primary btn--lg banda__cta" href="#" data-wa="wa.info">
-            <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="cono.pedir">pedinos un auto</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- POR QUÉ SOLERA: mosaico de fotos a sangre, sin espacios (estilo Ferrari) -->
+    <!-- POR QUÉ SOLERA: mosaico de fotos a sangre, sin espacios (estilo Ferrari) -->
+    <section class="porque" id="por-que-solera" aria-labelledby="porque-titulo">
       <div class="respaldo">
         <div class="container encabezado" data-reveal>
           <span class="sobretitulo" data-i18n="res.sobre">por qué solera</span>
-          <h3 class="titulo" data-i18n="res.titulo">comprar y vender con respaldo</h3>
+          <h2 class="titulo" id="porque-titulo" data-i18n="res.titulo">comprar y vender con respaldo</h2>
         </div>
 
         <ul class="mosaico">
@@ -400,7 +399,7 @@
           <img class="mosaico__foto" src="assets/respaldo/mecanica.webp" srcset="assets/respaldo/mecanica-movil.webp 800w, assets/respaldo/mecanica.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
           <div class="mosaico__texto">
             <span class="mosaico__ceja" data-i18n="res.1e">inspección</span>
-            <h4 class="mosaico__titulo" data-i18n="res.1t">revisión mecánica certificada</h4>
+            <h3 class="mosaico__titulo" data-i18n="res.1t">revisión mecánica certificada</h3>
             <p class="mosaico__desc" data-i18n="res.1p">Cada auto se inspecciona antes de publicarse, sin sorpresas.</p>
             <a class="mosaico__link" href="#carros"><span data-i18n="res.1l">ver inventario</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
           </div>
@@ -409,7 +408,7 @@
           <img class="mosaico__foto" src="assets/respaldo/firma.webp" srcset="assets/respaldo/firma-movil.webp 800w, assets/respaldo/firma.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
           <div class="mosaico__texto">
             <span class="mosaico__ceja" data-i18n="res.2e">papeleo</span>
-            <h4 class="mosaico__titulo" data-i18n="res.2t">traspaso con abogado</h4>
+            <h3 class="mosaico__titulo" data-i18n="res.2t">traspaso con abogado</h3>
             <p class="mosaico__desc" data-i18n="res.2p">Un abogado se encarga del traspaso y los trámites. Vos solo firmás.</p>
             <a class="mosaico__link" href="#preguntas"><span data-i18n="res.2l">preguntas</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
           </div>
@@ -418,7 +417,7 @@
           <img class="mosaico__foto" src="assets/respaldo/puerta.webp" srcset="assets/respaldo/puerta-movil.webp 800w, assets/respaldo/puerta.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
           <div class="mosaico__texto">
             <span class="mosaico__ceja" data-i18n="res.3e">acompañamiento</span>
-            <h4 class="mosaico__titulo" data-i18n="res.3t">trato personal</h4>
+            <h3 class="mosaico__titulo" data-i18n="res.3t">trato personal</h3>
             <p class="mosaico__desc" data-i18n="res.3p">Te acompañamos desde la primera consulta hasta la entrega.</p>
             <a class="mosaico__link" href="#" data-wa="wa.consulta"><span data-i18n="res.3l">escribinos</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
           </div>
@@ -427,7 +426,7 @@
           <img class="mosaico__foto" src="assets/respaldo/llave.webp" srcset="assets/respaldo/llave-movil.webp 800w, assets/respaldo/llave.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
           <div class="mosaico__texto">
             <span class="mosaico__ceja" data-i18n="res.4e">seguridad</span>
-            <h4 class="mosaico__titulo" data-i18n="res.4t">pago en custodia</h4>
+            <h3 class="mosaico__titulo" data-i18n="res.4t">pago en custodia</h3>
             <p class="mosaico__desc" data-i18n="res.4p">Tu dinero queda protegido hasta que el traspaso se concreta.</p>
             <a class="mosaico__link" href="#preguntas"><span data-i18n="res.4l">cómo funciona</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
           </div>
@@ -479,8 +478,8 @@
         <p class="footer__titulo display" data-i18n="pie.navegacion">navegación</p>
         <a href="#inicio" data-i18n="nav.inicio">inicio</a>
         <a href="#carros" data-i18n="nav.inventario">inventario</a>
+        <a href="#pedi-un-auto" data-i18n="nav.pedir">pedí un auto</a>
         <a href="#contacto" data-i18n="nav.contacto">contacto</a>
-        <a href="#conocenos" data-i18n="nav.conocenos">conócenos</a>
       </nav>
       <nav class="footer__col" aria-label="Autos por tipo" data-i18n-attr="aria-label:pie.autos">
         <p class="footer__titulo display" data-i18n="pie.autos">autos</p>
