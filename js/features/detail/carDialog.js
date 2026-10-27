@@ -2,7 +2,7 @@ import { campoAuto, t, valor } from '../../i18n.js';
 import { h, icon } from '../../utils/dom.js';
 import { formatFecha, formatKm, tituloAuto } from '../../utils/format.js';
 import { fotoAuto } from '../../utils/portada.js';
-import { linkWhatsApp, mensajeAgendar, mensajeInteres } from '../../utils/whatsapp.js';
+import { linkWhatsApp, mensajeInteres } from '../../utils/whatsapp.js';
 import { carCard, etiquetaAuto, metaAuto, precioAuto } from '../catalog/carCard.js';
 
 /** Ficha técnica: [etiqueta, valor]. Se omiten los campos vacíos. */
@@ -82,7 +82,6 @@ function acciones(auto) {
     'div',
     { class: 'ficha__acciones' },
     h('a', { class: 'btn btn--primary btn--lg btn--block', ...wa(mensajeInteres(auto)) }, icon('chat-circle'), t('ficha.consultar')),
-    h('a', { class: 'btn btn--ghost btn--lg btn--block', ...wa(mensajeAgendar(auto)) }, icon('calendar-blank'), t('ficha.agendar')),
     h(
       'button',
       { type: 'button', class: 'btn btn--texto', onclick: (e) => compartir(auto, e.currentTarget) },
@@ -144,13 +143,13 @@ function contenido(auto, similares) {
       galeria(auto),
       h(
         'div',
-        { class: 'panel ficha__panel' },
+        { class: 'ficha__panel' },
         h('p', { class: 'ficha__marca' }, t('ficha.ficha', { id: auto.id.toLowerCase() })),
         h('h2', { class: 'ficha__titulo', id: 'ficha-titulo' }, `${auto.marca} ${auto.modelo}`),
         h('p', { class: 'ficha__meta' }, [auto.version, metaAuto(auto)].filter(Boolean).join(' · ')),
         precioAuto(auto, 'ficha'),
         acciones(auto),
-        checks([t('ficha.check1'), t('ficha.check2'), t('ficha.check3')]),
+        checks([t('ficha.check1'), t('ficha.check2')]),
       ),
     ),
     pestanas(`ficha-${auto.id}`, [
@@ -178,7 +177,7 @@ function contenido(auto, similares) {
         h(
           'ol',
           { class: 'proceso' },
-          [1, 2, 3].map((n) =>
+          [1, 2].map((n) =>
             h('li', { class: 'proceso__paso' }, h('span', { class: 'proceso__num' }, `0${n}`), h('h3', {}, t(`proceso.${n}t`)), h('p', {}, t(`proceso.${n}p`))),
           ),
         ),

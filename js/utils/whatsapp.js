@@ -15,8 +15,6 @@ export function linkWhatsApp(mensaje = '') {
 
 export const mensajeInteres = (auto) => t('wa.interes', { auto: tituloAuto(auto), id: auto.id, precio: formatPrecio(auto.precio) });
 
-export const mensajeAgendar = (auto) => t('wa.agendar', { auto: tituloAuto(auto), id: auto.id });
-
 /** Mensaje del formulario de venta (los datos ya vienen limpios y validados). */
 export function mensajeVenta(d) {
   const lineas = [

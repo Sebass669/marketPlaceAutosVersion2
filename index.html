@@ -84,7 +84,7 @@
           <div class="paleta-prueba__menu" id="paleta-prueba-menu" role="radiogroup" aria-label="Paleta del modo oscuro (prueba)" hidden data-paleta-menu></div>
         </div>
         <a class="btn btn--primary btn--sm header__wa" href="#" data-wa="wa.consulta">
-          <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span class="header__wa-texto">whatsapp</span>
+          <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span class="header__wa-texto" data-i18n="cta.escribinos">escribinos</span>
         </a>
         <button class="nav-toggle" type="button" data-nav-toggle aria-controls="nav" aria-expanded="false" aria-label="Abrir menú">
           <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-list"/></svg>
@@ -111,7 +111,7 @@
     <section class="accesos" aria-label="Vender tu auto" data-i18n-attr="aria-label:accesos.grupo">
       <div class="container">
         <div class="vender" data-reveal>
-          <p class="vender__texto" data-i18n="accesos.venderDesc">¿Querés vender tu auto? Contanos por WhatsApp y te ayudamos.</p>
+          <p class="vender__texto" data-i18n="accesos.venderDesc">¿Querés vender tu auto? Escribinos y te ayudamos.</p>
           <a class="vender__link" href="#contacto" data-abrir-venta><span data-i18n="accesos.vender">vender mi auto</span><span class="vender__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
         </div>
       </div>
@@ -238,7 +238,7 @@
             </div>
             <ul class="datos">
               <li>
-                <span class="datos__etiqueta" data-i18n="dat.whatsapp">whatsapp</span>
+                <span class="datos__etiqueta" data-i18n="dat.whatsapp">escribinos</span>
                 <a class="datos__valor" href="#" data-wa="wa.consulta" data-dato="whatsapp">+506 6237 9935</a>
               </li>
               <li>
@@ -290,7 +290,7 @@
                 </div>
               </div>
               <button class="btn btn--primary btn--lg btn--block" type="submit">
-                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="con.enviar">enviar por whatsapp</span>
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="con.enviar">enviar mensaje</span>
               </button>
               <p class="form__aviso" data-aviso role="status" aria-live="polite"></p>
               <p class="form__exito" data-exito hidden role="status">
@@ -348,7 +348,7 @@
                 <div class="campo-form campo-form--full">
                   <label for="f-precio" data-i18n="ven.precio">Precio que esperás (colones)</label>
                   <input id="f-precio" name="precio" type="number" inputmode="numeric" min="100000" max="2000000000" step="1000" placeholder="9500000" aria-describedby="ayuda-precio error-precio" required>
-                  <p class="campo-form__ayuda" id="ayuda-precio" data-i18n="ven.precioAyuda">Solo números, sin puntos ni el símbolo ₡. Las fotos las mandás por WhatsApp.</p>
+                  <p class="campo-form__ayuda" id="ayuda-precio" data-i18n="ven.precioAyuda">Solo números, sin puntos ni el símbolo ₡. Las fotos nos las mandás después por mensaje.</p>
                   <p class="campo-form__error" id="error-precio"></p>
                 </div>
                 <div class="campo-form campo-form--full">
@@ -357,7 +357,7 @@
                 </div>
               </div>
               <button class="btn btn--primary btn--lg btn--block" type="submit">
-                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="con.enviar">enviar por whatsapp</span>
+                <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="con.enviar">enviar mensaje</span>
               </button>
               <p class="form__aviso" data-aviso role="status" aria-live="polite"></p>
               <p class="form__exito" data-exito hidden role="status">
@@ -425,17 +425,13 @@
         <div class="preguntas__lado" data-reveal>
           <span class="sobretitulo" data-i18n="faq.sobre">preguntas</span>
           <h2 class="titulo" id="preguntas-titulo" data-i18n="faq.titulo">lo que más nos preguntan</h2>
-          <p class="preguntas__cta"><span data-i18n="faq.otra">¿Otra duda?</span> <a href="#" data-wa="wa.consulta" data-i18n="faq.escribinos">Escribinos por WhatsApp</a></p>
+          <p class="preguntas__cta"><span data-i18n="faq.otra">¿Otra duda?</span> <a href="#" data-wa="wa.consulta" data-i18n="faq.escribinos">Escribinos</a></p>
         </div>
 
         <div class="acordeon" data-reveal>
           <details>
             <summary data-i18n="faq.1q">¿Pueden conseguirme un auto que no está en el inventario?</summary>
-            <p data-i18n="faq.1a">Sí. Mandanos por WhatsApp la marca, el modelo, el año y tu presupuesto, y lo buscamos por vos.</p>
-          </details>
-          <details>
-            <summary data-i18n="faq.2q">¿Puedo ver el auto antes de comprarlo?</summary>
-            <p data-i18n="faq.2a">Sí. Escribinos desde la ficha del auto y coordinamos un día y un lugar para verlo y probarlo.</p>
+            <p data-i18n="faq.1a">Sí. Escribinos con la marca, el modelo, el año y tu presupuesto, y lo buscamos por vos.</p>
           </details>
           <details>
             <summary data-i18n="faq.3q">¿Qué debo revisar antes de pagar?</summary>
@@ -443,7 +439,7 @@
           </details>
           <details>
             <summary data-i18n="faq.4q">¿Puedo vender mi auto con Solera?</summary>
-            <p data-i18n="faq.4a">Sí. Usá la pestaña "quiero vender" en la sección de contacto y mandanos las fotos por WhatsApp. Revisamos el auto antes de publicarlo.</p>
+            <p data-i18n="faq.4a">Sí. Usá la pestaña "quiero vender" en la sección de contacto y después nos mandás las fotos por mensaje. Revisamos el auto antes de publicarlo.</p>
           </details>
         </div>
       </div>
