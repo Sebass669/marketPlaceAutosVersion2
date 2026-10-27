@@ -3,6 +3,7 @@
  * Cada una cambia el color que acompaña al negro: botones, acentos, etiquetas, logo y el
  * tono del texto claro. El modo claro (hueso) no se toca. Todas pasan contraste AA:
  * texto de botón >= 5:1 y acentos sobre el fondo >= 7:1.
+ * Verde, azul y burdeos tienen la misma oscuridad (luminancia ~0.03).
  * Cuando se decida, pasar los valores elegidos a [data-tema='negro'] en tokens.css y borrar este archivo.
  */
 :root[data-tema='negro'][data-paleta='bosque'] {
@@ -17,15 +18,17 @@
   --ghost: #e9e8dc;
   --tag-text: #afc9b0;
   --logo-bg: #e9e8dc;
+  --filete: rgb(157 187 159 / 0.4);
 }
 
-/* Verde tan oscuro casi se pierde sobre el negro: un filete verde salvia le da borde a los botones */
-:root[data-tema='negro'][data-paleta='bosque'] :is(.btn--primary, .btn-icono--activo, .acceso--primario, .acceso__flecha, .idiomas button[aria-pressed='true']) {
-  box-shadow: inset 0 0 0 1px rgb(157 187 159 / 0.4);
+/* Verde, azul y burdeos son tan oscuros que casi se pierden sobre el negro:
+   un filete fino del tono claro de cada paleta (--filete) le da borde a los botones */
+:root[data-tema='negro']:is([data-paleta='bosque'], [data-paleta='marino'], [data-paleta='burdeos']) :is(.btn--primary, .btn-icono--activo, .acceso--primario, .acceso__flecha, .idiomas button[aria-pressed='true']) {
+  box-shadow: inset 0 0 0 1px var(--filete);
 }
 
-:root[data-tema='negro'][data-paleta='bosque'] .wa-flotante {
-  box-shadow: inset 0 0 0 1px rgb(157 187 159 / 0.4), 0 18px 36px -16px rgb(0 0 0 / 0.6);
+:root[data-tema='negro']:is([data-paleta='bosque'], [data-paleta='marino'], [data-paleta='burdeos']) .wa-flotante {
+  box-shadow: inset 0 0 0 1px var(--filete), 0 18px 36px -16px rgb(0 0 0 / 0.6);
 }
 
 :root[data-tema='negro'][data-paleta='oliva'] {
@@ -43,31 +46,33 @@
 }
 
 :root[data-tema='negro'][data-paleta='marino'] {
-  --text: #e6e9ef;
-  --text-soft: #9aa2b0;
-  --line: rgb(230 233 239 / 0.1);
-  --eyebrow: #8fabd9;
-  --accent: #8fabd9;
-  --btn: #30558c;
-  --btn-text: #eef1f7;
-  --btn-hover: #3963a0;
-  --ghost: #e6e9ef;
-  --tag-text: #a3bce3;
-  --logo-bg: #e6e9ef;
+  --text: #e6e8ec;
+  --text-soft: #a0a5b0;
+  --line: rgb(230 232 236 / 0.1);
+  --eyebrow: #9fb0cf;
+  --accent: #9fb0cf;
+  --btn: #223150;
+  --btn-text: #eef0f6;
+  --btn-hover: #2a3b5e;
+  --ghost: #e6e8ec;
+  --tag-text: #b2c0da;
+  --logo-bg: #e6e8ec;
+  --filete: rgb(159 176 207 / 0.4);
 }
 
 :root[data-tema='negro'][data-paleta='burdeos'] {
-  --text: #ede6e2;
-  --text-soft: #a99e9b;
-  --line: rgb(237 230 226 / 0.1);
-  --eyebrow: #d98f96;
-  --accent: #d98f96;
-  --btn: #9a3441;
-  --btn-text: #f4ece7;
-  --btn-hover: #ab3f4c;
-  --ghost: #ede6e2;
-  --tag-text: #e3a3a9;
-  --logo-bg: #ede6e2;
+  --text: #ece6e2;
+  --text-soft: #aaa09e;
+  --line: rgb(236 230 226 / 0.1);
+  --eyebrow: #c79fa3;
+  --accent: #c79fa3;
+  --btn: #4e252b;
+  --btn-text: #f2ebe7;
+  --btn-hover: #5c2d33;
+  --ghost: #ece6e2;
+  --tag-text: #d4b1b4;
+  --logo-bg: #ece6e2;
+  --filete: rgb(199 159 163 / 0.4);
 }
 
 :root[data-tema='negro'][data-paleta='plata'] {
@@ -132,11 +137,11 @@
 }
 
 .paleta-prueba__muestra--marino {
-  background: #30558c;
+  background: #223150;
 }
 
 .paleta-prueba__muestra--burdeos {
-  background: #9a3441;
+  background: #4e252b;
 }
 
 .paleta-prueba__muestra--plata {
