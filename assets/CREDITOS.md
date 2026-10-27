@@ -3,7 +3,18 @@
 - **Foto de portada** (`assets/portada/`): Porsche 911 GT3 RS en movimiento, de Zieben VH en
   [Unsplash](https://unsplash.com/photos/RvLLYTVBKpk), bajo la [Licencia de Unsplash](https://unsplash.com/license)
   (uso comercial libre, sin atribución obligatoria). Color ajustado para la paleta del sitio y placa retirada.
-- **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
+- **Fotos de conócenos y "por qué Solera"** (`assets/conocenos/`, `assets/respaldo/`), todas de
+  [Unsplash](https://unsplash.com/license) bajo la Licencia de Unsplash (uso comercial libre, sin atribución obligatoria).
+  Tono ajustado en el sitio; a la del Bentley se le borraron los datos de la placa.
+
+| Archivo | Original | Autor |
+|---|---|---|
+| conocenos/bentley.webp | [Bentley Flying Spur de noche](https://unsplash.com/photos/0mchrVHAYzg) | Victor Furtuna |
+| respaldo/mecanica.webp | [Mecánico inspeccionando un motor](https://unsplash.com/photos/erWc6mrOq_I) | Dextar Studio |
+| respaldo/firma.webp | [Hombre escribiendo en papel](https://unsplash.com/photos/OQMZwNd3ThU) | Scott Graham |
+| respaldo/puerta.webp | [Mano abriendo la puerta de un auto](https://unsplash.com/photos/4lABgIYDITQ) | Alan Quirvan |
+| respaldo/llave.webp | [Llave de auto](https://unsplash.com/photos/iTHT1gXJuS8) | Bence Balla-Schottner |
+
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 
 | Archivo | Original | Autor | Licencia |

@@ -31,7 +31,7 @@ export const precioAuto = (auto, clase = 'card') =>
 
 /** Foto de portada del auto (la primera de "fotos"). */
 export const portadaAuto = (auto, opciones = {}) =>
-  fotoAuto(auto.fotos[0], { alt: t('card.foto', { auto: tituloAuto(auto), color: auto.color || '' }), ...opciones });
+  fotoAuto(auto.fotos[0], { alt: t('card.foto', { auto: tituloAuto(auto), color: valor('color', auto.color || '') }), ...opciones });
 
 /** Corazón de favoritos. Queda por encima del link estirado de la tarjeta. */
 export function botonFavorito(auto) {

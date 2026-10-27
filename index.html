@@ -368,79 +368,71 @@
       </div>
     </section>
 
-    <!-- CONÓCENOS -->
+    <!-- CONÓCENOS: banda de foto grande (como la portada) con lo justo: título, una línea, valores y el botón -->
     <section class="conocenos" id="conocenos" aria-labelledby="conocenos-titulo">
-      <div class="container">
-        <div class="conocenos__grid">
-          <figure class="conocenos__imagen" data-reveal>
-            <img src="assets/ilustraciones/atardecer.svg" alt="" width="800" height="640" loading="lazy">
-          </figure>
-          <div class="conocenos__texto" data-reveal>
-            <span class="sobretitulo" data-i18n="cono.sobre">conócenos</span>
-            <h2 class="titulo" id="conocenos-titulo" data-i18n="cono.titulo">el auto de tus sueños, a tu alcance</h2>
-            <p data-i18n="cono.p1">Solera nació con una idea sencilla: que cualquier persona pueda conseguir el auto que siempre quiso. Buscamos y seleccionamos autos de marcas reconocidas, revisamos cada detalle y te acompañamos hasta que lo tengas en tu garaje.</p>
-            <p data-i18n="cono.p2">¿No ves en el inventario el que buscás? Contanos marca, modelo y presupuesto, y lo buscamos por vos.</p>
-            <blockquote class="cita" data-i18n="cono.cita">solera: herencia, tradición y calidad que mejora con el tiempo.</blockquote>
-            <ul class="valores">
-              <li data-i18n="cono.v1">marcas reconocidas</li>
-              <li data-i18n="cono.v2">transparencia</li>
-              <li data-i18n="cono.v3">respaldo</li>
-              <li data-i18n="cono.v4">trato personal</li>
-            </ul>
-            <a class="btn btn--primary conocenos__cta" href="#" data-wa="wa.info">
-              <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="cono.pedir">pedinos un auto</span>
-            </a>
-          </div>
+      <div class="banda">
+        <img class="banda__foto" src="assets/conocenos/bentley.webp" srcset="assets/conocenos/bentley-movil.webp 1200w, assets/conocenos/bentley.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy" decoding="async">
+        <div class="container banda__contenido" data-reveal>
+          <span class="sobretitulo" data-i18n="cono.sobre">conócenos</span>
+          <h2 class="titulo banda__titulo" id="conocenos-titulo" data-i18n="cono.titulo">el auto de tus sueños, a tu alcance.</h2>
+          <p class="banda__sub" data-i18n="cono.p2">¿No está en el inventario? Contanos marca, modelo y presupuesto, y lo buscamos por vos.</p>
+          <ul class="banda__valores">
+            <li data-i18n="cono.v1">marcas reconocidas</li>
+            <li data-i18n="cono.v2">transparencia</li>
+            <li data-i18n="cono.v3">respaldo</li>
+            <li data-i18n="cono.v4">trato personal</li>
+          </ul>
+          <a class="btn btn--primary btn--lg banda__cta" href="#" data-wa="wa.info">
+            <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg><span data-i18n="cono.pedir">pedinos un auto</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- POR QUÉ SOLERA: mosaico de fotos a sangre, sin espacios (estilo Ferrari) -->
+      <div class="respaldo">
+        <div class="container encabezado" data-reveal>
+          <span class="sobretitulo" data-i18n="res.sobre">por qué solera</span>
+          <h3 class="titulo" data-i18n="res.titulo">comprar y vender con respaldo</h3>
         </div>
 
-        <div class="respaldo">
-          <div class="encabezado" data-reveal>
-            <span class="sobretitulo" data-i18n="res.sobre">por qué solera</span>
-            <h3 class="titulo" data-i18n="res.titulo">comprar y vender con respaldo</h3>
+        <ul class="mosaico">
+        <li class="mosaico__item" data-reveal>
+          <img class="mosaico__foto" src="assets/respaldo/mecanica.webp" srcset="assets/respaldo/mecanica-movil.webp 800w, assets/respaldo/mecanica.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
+          <div class="mosaico__texto">
+            <span class="mosaico__ceja" data-i18n="res.1e">inspección</span>
+            <h4 class="mosaico__titulo" data-i18n="res.1t">revisión mecánica certificada</h4>
+            <p class="mosaico__desc" data-i18n="res.1p">Cada auto se inspecciona antes de publicarse, sin sorpresas.</p>
+            <a class="mosaico__link" href="#carros"><span data-i18n="res.1l">ver inventario</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
           </div>
-
-          <ul class="pasos__grid">
-            <li class="paso" data-reveal>
-              <div class="paso__cabeza">
-                <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-wrench"/></svg></span>
-                <span class="paso__num display" aria-hidden="true">01</span>
-              </div>
-              <h4 class="paso__titulo display" data-i18n="res.1t">revisión mecánica certificada</h4>
-              <p data-i18n="res.1p">Inspeccionamos cada vehículo antes de publicarlo para que compres con información real, sin sorpresas.</p>
-            </li>
-            <li class="paso" data-reveal>
-              <div class="paso__cabeza">
-                <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-file-text"/></svg></span>
-                <span class="paso__num display" aria-hidden="true">02</span>
-              </div>
-              <h4 class="paso__titulo display" data-i18n="res.2t">traspaso sin complicaciones</h4>
-              <p data-i18n="res.2p">Un abogado se encarga del traspaso y los trámites. Vos solo firmás.</p>
-            </li>
-            <li class="paso" data-reveal>
-              <div class="paso__cabeza">
-                <span class="paso__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-users-three"/></svg></span>
-                <span class="paso__num display" aria-hidden="true">03</span>
-              </div>
-              <h4 class="paso__titulo display" data-i18n="res.3t">trato personal</h4>
-              <p data-i18n="res.3p">Te acompañamos en toda la negociación, desde la primera consulta hasta la entrega.</p>
-            </li>
-          </ul>
-
-          <ul class="garantias" data-reveal>
-            <li class="garantias__item">
-              <p class="garantias__titulo display" data-i18n="gar.1t">revisión mecánica</p>
-              <p data-i18n="gar.1p">Cada auto se inspecciona antes de publicarse.</p>
-            </li>
-            <li class="garantias__item">
-              <p class="garantias__titulo display" data-i18n="gar.2t">traspaso con abogado</p>
-              <p data-i18n="gar.2p">Nos encargamos del papeleo de principio a fin.</p>
-            </li>
-            <li class="garantias__item">
-              <p class="garantias__titulo display" data-i18n="gar.3t">pago en custodia</p>
-              <p data-i18n="gar.3p">Tu dinero queda protegido hasta que el traspaso se concreta.</p>
-            </li>
-          </ul>
-        </div>
+        </li>
+        <li class="mosaico__item" data-reveal>
+          <img class="mosaico__foto" src="assets/respaldo/firma.webp" srcset="assets/respaldo/firma-movil.webp 800w, assets/respaldo/firma.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
+          <div class="mosaico__texto">
+            <span class="mosaico__ceja" data-i18n="res.2e">papeleo</span>
+            <h4 class="mosaico__titulo" data-i18n="res.2t">traspaso con abogado</h4>
+            <p class="mosaico__desc" data-i18n="res.2p">Un abogado se encarga del traspaso y los trámites. Vos solo firmás.</p>
+            <a class="mosaico__link" href="#preguntas"><span data-i18n="res.2l">preguntas</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
+          </div>
+        </li>
+        <li class="mosaico__item" data-reveal>
+          <img class="mosaico__foto" src="assets/respaldo/puerta.webp" srcset="assets/respaldo/puerta-movil.webp 800w, assets/respaldo/puerta.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
+          <div class="mosaico__texto">
+            <span class="mosaico__ceja" data-i18n="res.3e">acompañamiento</span>
+            <h4 class="mosaico__titulo" data-i18n="res.3t">trato personal</h4>
+            <p class="mosaico__desc" data-i18n="res.3p">Te acompañamos desde la primera consulta hasta la entrega.</p>
+            <a class="mosaico__link" href="#" data-wa="wa.consulta"><span data-i18n="res.3l">escribinos</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
+          </div>
+        </li>
+        <li class="mosaico__item" data-reveal>
+          <img class="mosaico__foto" src="assets/respaldo/llave.webp" srcset="assets/respaldo/llave-movil.webp 800w, assets/respaldo/llave.webp 1400w" sizes="(min-width: 720px) 50vw, 100vw" width="1400" height="934" alt="" loading="lazy" decoding="async">
+          <div class="mosaico__texto">
+            <span class="mosaico__ceja" data-i18n="res.4e">seguridad</span>
+            <h4 class="mosaico__titulo" data-i18n="res.4t">pago en custodia</h4>
+            <p class="mosaico__desc" data-i18n="res.4p">Tu dinero queda protegido hasta que el traspaso se concreta.</p>
+            <a class="mosaico__link" href="#preguntas"><span data-i18n="res.4l">cómo funciona</span><span class="mosaico__circulo" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span></a>
+          </div>
+        </li>
+        </ul>
       </div>
     </section>
 

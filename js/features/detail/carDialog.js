@@ -14,7 +14,7 @@ const especificaciones = (auto) =>
     [t('spec.combustible'), valor('combustible', auto.combustible)],
     [t('spec.motor'), auto.motor],
     [t('spec.traccion'), auto.traccion],
-    [t('spec.color'), auto.color],
+    [t('spec.color'), valor('color', auto.color)],
     [t('spec.tipo'), valor('tipo', auto.tipo)],
     [t('spec.ubicacion'), [auto.canton, auto.provincia].filter(Boolean).join(', ')],
   ].filter(([, v]) => v !== '' && v !== undefined);

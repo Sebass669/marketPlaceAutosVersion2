@@ -584,7 +584,7 @@
    ========================================================= */
 .encabezado .sobretitulo,
 .preguntas__lado .sobretitulo,
-.conocenos__texto .sobretitulo {
+.banda__contenido .sobretitulo {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -592,7 +592,7 @@
 
 .encabezado .sobretitulo::before,
 .preguntas__lado .sobretitulo::before,
-.conocenos__texto .sobretitulo::before {
+.banda__contenido .sobretitulo::before {
   content: '';
   width: 32px;
   height: 1px;
@@ -702,82 +702,6 @@
 }
 
 /* =========================================================
-   POR QUÉ SOLERA
-   ========================================================= */
-.pasos__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-4);
-}
-
-@media (min-width: 900px) {
-  .pasos__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.paso {
-  display: flex;
-  flex-direction: column;
-  min-height: 280px;
-  padding: var(--space-6);
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--line);
-  transition: transform 500ms var(--ease-out);
-}
-
-.paso:hover {
-  transform: translateY(-4px);
-}
-
-.paso__cabeza {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  margin-bottom: auto;
-  padding-bottom: var(--space-7);
-}
-
-.paso__icono {
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
-  border-radius: var(--radius-md);
-  background: var(--surface-2);
-  color: var(--accent);
-  font-size: 1.4rem;
-}
-
-.paso__num {
-  color: var(--accent);
-  font-size: 0.85rem;
-}
-
-.paso__titulo {
-  margin-bottom: var(--space-3);
-  font-size: 0.92rem;
-}
-
-/* Mismo alto de texto en las tres tarjetas para que los títulos queden alineados */
-.paso p {
-  min-height: calc(1.6em * 3);
-  color: var(--text-soft);
-  font-size: var(--text-sm);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .paso:nth-child(2) {
-    transition-delay: 100ms;
-  }
-
-  .paso:nth-child(3) {
-    transition-delay: 200ms;
-  }
-}
-
-/* =========================================================
    INVENTARIO
    ========================================================= */
 .inventario__layout {
@@ -854,73 +778,304 @@
 }
 
 /* =========================================================
-   CONÓCENOS
+   CONÓCENOS: banda de foto a sangre, la misma idea que la portada
+   La foto es oscura en los dos temas; en el tema claro la banda y el mosaico
+   traen sus propios colores oscuros para que el texto se lea sobre la foto.
    ========================================================= */
-.conocenos__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-7);
-  align-items: center;
+.conocenos {
+  padding-block: 0;
 }
 
-@media (min-width: 1024px) {
-  .conocenos__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-9);
+[data-tema='hueso'] :is(.banda, .mosaico) {
+  --bg: #0c0c0c;
+  --text: #e9e4d8;
+  --text-soft: #b3ada1;
+  --eyebrow: #c9a46c;
+  --accent: #c9a46c;
+  --line: rgb(233 228 216 / 0.14);
+  --btn: #e9e4d8;
+  --btn-text: #0c0c0c;
+  --btn-hover: #ffffff;
+  color: var(--text);
+}
+
+.banda {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: clamp(560px, 86svh, 820px);
+  overflow: hidden;
+  background: #0b0b0a;
+}
+
+/* La foto ocupa la parte derecha (el auto queda lejos del texto) y se funde con el negro a la izquierda */
+.banda__foto {
+  position: absolute;
+  inset: 0 0 0 auto;
+  z-index: -2;
+  width: min(74%, 1500px);
+  height: 100%;
+  object-fit: cover;
+  object-position: 80% 60%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 30%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 30%);
+}
+
+/* Velo a la izquierda (donde va el texto) y un poco arriba y abajo, como en la portada */
+.banda::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgb(11 11 10 / 0.94) 0%, rgb(11 11 10 / 0.72) 32%, transparent 60%),
+    linear-gradient(180deg, rgb(11 11 10 / 0.55), transparent 20%, transparent 80%, rgb(11 11 10 / 0.7));
+}
+
+.banda__contenido {
+  padding-block: var(--space-9);
+}
+
+.banda__titulo {
+  max-width: 12em;
+  font-size: clamp(1.7rem, 0.95rem + 2.6vw, 3.3rem);
+  line-height: 1.08;
+}
+
+.banda__sub {
+  max-width: 40ch;
+  margin-top: var(--space-5);
+  color: var(--text-soft);
+  font-size: var(--text-lg);
+}
+
+/* Valores en una sola línea separada por puntos, sin pastillas */
+.banda__valores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  margin-top: var(--space-6);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.banda__valores li + li::before {
+  content: '·';
+  margin-right: var(--space-3);
+  color: var(--accent);
+}
+
+.banda__cta {
+  margin-top: var(--space-7);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .banda__foto {
+    transform: scale(1.06);
+    transition: transform 1800ms var(--ease-out);
+  }
+
+  .banda:has(.is-visible) .banda__foto {
+    transform: none;
   }
 }
 
-.conocenos__imagen {
+/* Tablet y celular: la foto arriba a todo el ancho y el texto abajo, sobre negro */
+@media (max-width: 1023px) {
+  .banda {
+    display: block;
+    min-height: 0;
+  }
+
+  .banda__foto {
+    position: relative;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-position: 80% 60%;
+  }
+
+  .banda::after {
+    inset: 0 0 auto;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(180deg, rgb(11 11 10 / 0.4), transparent 25%, transparent 55%, #0b0b0a);
+  }
+
+  .banda__foto {
+    width: 100%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  /* Valores en dos columnas: sin puntos que queden colgando al partirse la línea */
+  .banda__valores {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .banda__valores li + li::before {
+    content: none;
+  }
+
+  .banda__contenido {
+    margin-top: calc(-1 * var(--space-6));
+    padding-block: 0 var(--space-8);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .banda__foto,
+  .banda::after {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* =========================================================
+   POR QUÉ SOLERA: mosaico de fotos a sangre sin espacios (inspirado en ferrari.com)
+   Cada foto lleva abajo una categoría, el título en mayúsculas, una línea y un link con
+   círculo. Toda la foto es clicable (link estirado).
+   ========================================================= */
+.respaldo {
+  padding-top: var(--space-9);
+}
+
+.mosaico {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 720px) {
+  .mosaico {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.mosaico__item {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  justify-items: center;
+  min-height: clamp(360px, 36vw, 580px);
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  box-shadow: inset 0 0 0 1px var(--line);
+  background: #0b0b0a;
+  color: var(--text);
+  text-align: center;
 }
 
-.conocenos__imagen img {
+/* Las cuatro fotos vienen de autores distintos: un tono común, más sobrio */
+.mosaico__foto {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
   width: 100%;
-  aspect-ratio: 5 / 5.6;
+  height: 100%;
   object-fit: cover;
-  object-position: center 70%;
+  filter: saturate(0.72) contrast(1.06) brightness(0.92);
+  transition:
+    transform 1200ms var(--ease-out),
+    filter 1200ms var(--ease-out);
 }
 
-.conocenos__texto > p {
-  max-width: 56ch;
-  margin-top: var(--space-4);
-  color: var(--text-soft);
+.mosaico__item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(11 11 10 / 0.08) 0%, rgb(11 11 10 / 0.45) 34%, rgb(11 11 10 / 0.86) 62%, rgb(11 11 10 / 0.95) 100%);
 }
 
-.conocenos__texto .titulo {
-  max-width: 16ch;
+.mosaico__item:hover .mosaico__foto {
+  transform: scale(1.05);
+  filter: saturate(0.9) contrast(1.06) brightness(0.95);
 }
 
-.cita {
-  margin-block: var(--space-6);
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--accent);
+.mosaico__texto {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  max-width: 36rem;
+  padding: var(--space-7) var(--space-5);
+}
+
+.mosaico__ceja {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.mosaico__titulo {
   font-family: var(--font-display);
-  font-size: 0.74rem;
-  letter-spacing: 0.04em;
-  line-height: 1.9;
+  font-size: clamp(1.1rem, 0.75rem + 1.2vw, 1.7rem);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
-.valores {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+.mosaico__desc {
+  max-width: 38ch;
+  color: color-mix(in srgb, var(--text) 84%, transparent);
+  font-size: var(--text-sm);
 }
 
-.valores li {
-  padding: 8px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--line);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+.mosaico__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
+.mosaico__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.mosaico__link:focus-visible {
+  outline: none;
+}
+
+.mosaico__item:has(.mosaico__link:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: -6px;
+}
+
+.mosaico__circulo {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.mosaico__item:hover .mosaico__circulo {
+  background: var(--text);
+  color: var(--bg);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mosaico__item:nth-child(2) {
+    transition-delay: 90ms;
+  }
+
+  .mosaico__item:nth-child(4) {
+    transition-delay: 90ms;
+  }
+}
 
 /* =========================================================
    PREGUNTAS
@@ -1411,62 +1566,6 @@ ul.lista-info {
   .carrusel__flechas {
     display: none;
   }
-}
-
-/* =========================================================
-   CONÓCENOS: respaldo (por qué Solera) y garantías
-   ========================================================= */
-.conocenos__cta {
-  margin-top: var(--space-6);
-}
-
-.respaldo {
-  margin-top: var(--space-9);
-}
-
-.respaldo .titulo {
-  font-size: clamp(1.4rem, 1rem + 1.6vw, 2.2rem);
-}
-
-.garantias {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-5);
-  margin-top: var(--space-6);
-  padding-top: var(--space-6);
-  border-top: 1px solid var(--line);
-}
-
-@media (min-width: 768px) {
-  .garantias {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.garantias__item {
-  position: relative;
-  padding-left: var(--space-5);
-}
-
-.garantias__item::before {
-  content: '';
-  position: absolute;
-  left: 4px;
-  top: 2px;
-  bottom: 2px;
-  width: 2px;
-  background: var(--accent);
-  transform: skewX(-14deg);
-}
-
-.garantias__titulo {
-  margin-bottom: var(--space-1);
-  font-size: 0.8rem;
-}
-
-.garantias__item p:last-child {
-  color: var(--text-soft);
-  font-size: var(--text-sm);
 }
 
 /* =========================================================
