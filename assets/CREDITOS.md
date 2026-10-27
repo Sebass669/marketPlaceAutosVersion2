@@ -1,5 +1,8 @@
 # Créditos
 
+- **Foto de portada** (`assets/portada/`): Porsche 911 GT3 RS en movimiento, de Zieben VH en
+  [Unsplash](https://unsplash.com/photos/RvLLYTVBKpk), bajo la [Licencia de Unsplash](https://unsplash.com/license)
+  (uso comercial libre, sin atribución obligatoria). Color ajustado para la paleta del sitio.
 - **Ilustración de conócenos** (`assets/ilustraciones/`): propia, generada con `tools/ilustraciones.py`.
 - **Fotos de los autos de ejemplo** (`assets/autos/`), de Wikimedia Commons (reemplazalas por las fotos reales):
 
