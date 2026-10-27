@@ -9,7 +9,7 @@ import { $, $$ } from '../../utils/dom.js';
 const CLAVE = 'solera-paleta-prueba';
 const PALETAS = [
   { id: 'dorado', nombre: 'dorado', nota: 'la actual' },
-  { id: 'bosque', nombre: 'verde bosque' },
+  { id: 'bosque', nombre: 'verde bosque oscuro' },
   { id: 'oliva', nombre: 'verde oliva' },
   { id: 'marino', nombre: 'azul marino' },
   { id: 'burdeos', nombre: 'burdeos' },

@@ -6,17 +6,26 @@
  * Cuando se decida, pasar los valores elegidos a [data-tema='negro'] en tokens.css y borrar este archivo.
  */
 :root[data-tema='negro'][data-paleta='bosque'] {
-  --text: #e7eae1;
-  --text-soft: #9ba599;
-  --line: rgb(231 234 225 / 0.1);
-  --eyebrow: #7fb595;
-  --accent: #7fb595;
-  --btn: #2b6549;
+  --text: #e9e8dc;
+  --text-soft: #a2a596;
+  --line: rgb(233 232 220 / 0.1);
+  --eyebrow: #9dbb9f;
+  --accent: #9dbb9f;
+  --btn: #213722;
   --btn-text: #eef0e6;
-  --btn-hover: #317252;
-  --ghost: #e7eae1;
-  --tag-text: #93c4a6;
-  --logo-bg: #e7eae1;
+  --btn-hover: #2a462b;
+  --ghost: #e9e8dc;
+  --tag-text: #afc9b0;
+  --logo-bg: #e9e8dc;
+}
+
+/* Verde tan oscuro casi se pierde sobre el negro: un filete verde salvia le da borde a los botones */
+:root[data-tema='negro'][data-paleta='bosque'] :is(.btn--primary, .btn-icono--activo, .acceso--primario, .acceso__flecha, .idiomas button[aria-pressed='true']) {
+  box-shadow: inset 0 0 0 1px rgb(157 187 159 / 0.4);
+}
+
+:root[data-tema='negro'][data-paleta='bosque'] .wa-flotante {
+  box-shadow: inset 0 0 0 1px rgb(157 187 159 / 0.4), 0 18px 36px -16px rgb(0 0 0 / 0.6);
 }
 
 :root[data-tema='negro'][data-paleta='oliva'] {
@@ -115,7 +124,7 @@
 }
 
 .paleta-prueba__muestra--bosque {
-  background: #2b6549;
+  background: #213722;
 }
 
 .paleta-prueba__muestra--oliva {
