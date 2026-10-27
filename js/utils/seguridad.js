@@ -14,10 +14,16 @@ const MAX_MENSAJE = 1_500; // largo máximo del texto que se manda a WhatsApp
 const cargaPagina = performance.now();
 const ultimosEnvios = new Map();
 
-/** Quita caracteres de control y espacios repetidos, y corta al largo máximo. */
+/**
+ * Quita etiquetas HTML (<script>, <a ...>), los signos < >, caracteres de control y espacios
+ * repetidos, y corta al largo máximo. El texto nunca se pinta como HTML (solo viaja en el link
+ * de WhatsApp), pero así ni siquiera llega código pegado en un campo.
+ */
 export function limpiarTexto(valor, max = 500) {
   return String(valor ?? '')
     .normalize('NFC')
+    .replace(/<\/?[a-z!][^>]*>?/gi, '')
+    .replace(/[<>]/g, '')
     .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F​-‏‪-‮⁦-⁩]/g, '')
     .replace(/[ \t]+/g, ' ')
     .replace(/\n{3,}/g, '\n\n')

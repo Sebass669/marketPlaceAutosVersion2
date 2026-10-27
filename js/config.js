@@ -12,7 +12,7 @@ export const SITE = Object.freeze({
   // Datos que se muestran en la sección de contacto y en el pie de página.
   correo: 'solera.automotriz@gmail.com',
   horario: 'lun a sáb · 9:00 a. m. a 6:00 p. m.',
-  direccion: '[dirección], Costa Rica',
+  direccion: 'Costa Rica', // no hay local físico: solo el país
   redes: {
     instagram: '', // ej: https://instagram.com/solera.cr  (vacío = no se muestra)
     facebook: '',
