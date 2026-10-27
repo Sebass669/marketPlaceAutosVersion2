@@ -53,8 +53,10 @@ export function botonFavorito(auto) {
 }
 
 /**
- * Tarjeta del inventario. El título es un link "estirado" que cubre toda la tarjeta y abre
- * la ficha; el botón "ver detalles" hace lo mismo. El corazón queda por encima.
+ * Tarjeta del inventario: foto a sangre arriba; marca como sobretítulo y modelo en mayúsculas;
+ * abajo, separado por un filete, el precio y una flecha redonda.
+ * El título es un link "estirado" que cubre toda la tarjeta y abre la ficha; la flecha hace
+ * lo mismo (con su nombre accesible). El corazón queda por encima.
  */
 export function carCard(auto, { index = 0 } = {}) {
   return h(
@@ -64,18 +66,26 @@ export function carCard(auto, { index = 0 } = {}) {
     h(
       'div',
       { class: 'card__body' },
-      h('h3', { class: 'card__title' }, h('a', { class: 'card__link', href: hrefAuto(auto) }, `${auto.marca} ${auto.modelo}`)),
-      h('p', { class: 'card__meta' }, metaAuto(auto)),
-      precioAuto(auto),
       h(
-        'a',
-        {
-          class: `btn btn--block card__cta ${auto.estado === 'vendido' ? 'btn--ghost' : 'btn--primary'}`,
-          href: hrefAuto(auto),
-          'aria-label': t('card.verDetallesDe', { auto: tituloAuto(auto) }),
-        },
-        h('span', {}, auto.estado === 'vendido' ? t('card.vendido') : t('card.verDetalles')),
-        h('span', { class: 'btn__icono' }, icon('arrow-right')),
+        'h3',
+        { class: 'card__title' },
+        h('a', { class: 'card__link', href: hrefAuto(auto) }, h('span', { class: 'card__marca' }, auto.marca), ' ', auto.modelo),
+      ),
+      h('p', { class: 'card__meta' }, metaAuto(auto)),
+      h(
+        'div',
+        { class: 'card__pie' },
+        precioAuto(auto),
+        h(
+          'a',
+          {
+            class: 'card__cta',
+            href: hrefAuto(auto),
+            'aria-label': t('card.verDetallesDe', { auto: tituloAuto(auto) }),
+            title: auto.estado === 'vendido' ? t('card.vendido') : t('card.verDetalles'),
+          },
+          icon('arrow-right'),
+        ),
       ),
     ),
   );

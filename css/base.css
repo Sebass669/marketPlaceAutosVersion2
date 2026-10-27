@@ -132,22 +132,22 @@ ol[class] {
 
 /* ---------- Tipografía de marca ---------- */
 
-/* Display extendido: siempre en minúscula, como en las maquetas */
+/* Display extendido en mayúsculas rectas, como el título de la portada */
 .display {
   font-family: var(--font-display);
   font-weight: 400;
-  text-transform: lowercase;
-  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* Títulos de sección: display en cursiva */
+/* Títulos de sección: misma voz que la portada (mayúsculas, sin cursiva), un escalón más chico */
 .titulo {
   font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-style: italic;
+  font-size: clamp(1.45rem, 0.95rem + 1.9vw, 2.55rem);
   font-weight: 400;
-  text-transform: lowercase;
-  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
 }
 
 /* Sobretítulo: mayúsculas muy espaciadas en dorado */
