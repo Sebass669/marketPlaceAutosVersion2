@@ -11,6 +11,9 @@
     var tema = localStorage.getItem('solera-tema');
     if (tema === 'negro' || tema === 'hueso') raiz.dataset.tema = tema;
     if (localStorage.getItem('solera-idioma') === 'en') raiz.lang = 'en';
+    // PALETA-PRUEBA (temporal): paleta elegida para el modo oscuro; borrar junto con paletaPrueba.js.
+    var paleta = localStorage.getItem('solera-paleta-prueba');
+    if (/^(bosque|oliva|marino|burdeos|plata)$/.test(paleta)) raiz.dataset.paleta = paleta;
   } catch (e) {
     /* Sin almacenamiento (navegación privada): quedan los valores por defecto. */
   }

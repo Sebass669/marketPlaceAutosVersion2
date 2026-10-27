@@ -5,7 +5,8 @@ import { createContactForm, initPestanasContacto, pintarDatosContacto } from './
 import { renderDestacados } from './features/destacados/destacados.js';
 import { createCarDialog } from './features/detail/carDialog.js';
 import { createSellForm } from './features/sell/sellForm.js';
-import { initAnclas, initNav, initReveal, initTema } from './features/ui/enhancements.js';
+import { initAnclas, initHeaderAuto, initNav, initReveal, initTema } from './features/ui/enhancements.js';
+import { initPaletaPrueba } from './features/ui/paletaPrueba.js'; // PRUEBA (temporal)
 import { alCambiarIdioma, initIdioma, t } from './i18n.js';
 import { $, $$ } from './utils/dom.js';
 import { formatFecha } from './utils/format.js';
@@ -49,7 +50,9 @@ function initRouter(autos, dialogo) {
 async function init() {
   initIdioma();
   initTema();
+  initPaletaPrueba(); // PRUEBA (temporal)
   initNav();
+  initHeaderAuto();
   initAnclas();
   initReveal();
   pintarLinksWhatsApp();

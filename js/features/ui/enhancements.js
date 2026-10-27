@@ -51,6 +51,54 @@ export function initNav() {
   }
 }
 
+/** Distancia al borde superior (px) a la que el mouse hace aparecer el header. */
+const ZONA_MOUSE = 56;
+
+/**
+ * Header que se esconde (CSS: .header[data-auto]).
+ * - Con mouse: aparece solo cuando el puntero se acerca al borde de arriba, en cualquier
+ *   parte de la página, y se queda mientras el puntero esté sobre él.
+ * - Pantallas táctiles (no hay mouse): aparece arriba del todo y al subir; se esconde al bajar.
+ * - Teclado y menú abierto: lo resuelve el CSS (:focus-visible y data-menu-abierto).
+ */
+export function initHeaderAuto() {
+  const header = $('[data-header]');
+  const conMouse = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let espera = null;
+
+  const mostrar = (visible) => {
+    clearTimeout(espera);
+    espera = null;
+    header.toggleAttribute('data-visible', visible);
+  };
+
+  document.addEventListener(
+    'pointermove',
+    (e) => {
+      if (e.pointerType !== 'mouse') return;
+      if (e.clientY <= ZONA_MOUSE || header.contains(e.target)) mostrar(true);
+      // Pequeña espera al salir para que no parpadee si el mouse pasa rozando el borde.
+      else if (header.hasAttribute('data-visible') && espera === null) espera = setTimeout(() => mostrar(false), 280);
+    },
+    { passive: true },
+  );
+
+  let ultimaY = window.scrollY;
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (conMouse.matches) return;
+      const y = window.scrollY;
+      if (y < 8 || y < ultimaY - 6) mostrar(true);
+      else if (y > ultimaY + 6 && y > header.offsetHeight) mostrar(false);
+      ultimaY = y;
+    },
+    { passive: true },
+  );
+
+  header.setAttribute('data-auto', '');
+  mostrar(!conMouse.matches && window.scrollY < 8);
+}
 
 /**
  * Scroll suave para enlaces internos (#carros, #contacto...). Se hace por JS para

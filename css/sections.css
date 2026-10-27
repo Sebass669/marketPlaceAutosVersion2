@@ -1,13 +1,30 @@
 /* =========================================================
    HEADER
+   Flota sobre la página. Con data-auto (lo pone initHeaderAuto en enhancements.js) se
+   esconde arriba y solo aparece con data-visible: mouse cerca del borde superior, o en
+   pantallas táctiles arriba del todo y al subir. Con teclado aparece al enfocar un link
+   y queda fijo mientras el menú del celular está abierto. Sin JS se queda siempre visible.
    ========================================================= */
 .header {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0 0 auto;
   z-index: var(--z-header);
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
+  transition: transform 220ms var(--ease-out);
+}
+
+.header[data-auto] {
+  transform: translateY(calc(-100% - 2px));
+}
+
+.header[data-auto][data-visible],
+.header[data-auto][data-menu-abierto],
+.header[data-auto]:has([aria-expanded='true']),
+.header[data-auto]:has(:focus-visible) {
+  transform: none;
+  transition-duration: 360ms;
 }
 
 .header__inner {
@@ -252,13 +269,13 @@
    pantalla de carga y no corren si se pide reducir movimiento.
    ========================================================= */
 .hero {
-  --hero-luz: rgb(176 141 87 / 0.09);
+  --hero-luz: color-mix(in srgb, var(--accent) 9%, transparent);
   --foto-filtro: brightness(0.82) contrast(1.06) saturate(0.95);
   position: relative;
   isolation: isolate;
   display: grid;
   align-items: center;
-  min-height: clamp(600px, calc(100svh - var(--header-h)), 880px);
+  min-height: clamp(600px, 100svh, 920px);
   overflow: hidden;
   background:
     radial-gradient(55% 70% at 72% 52%, var(--hero-luz), transparent 72%),
@@ -308,35 +325,31 @@
   mask-image: linear-gradient(180deg, #000 0 54%, transparent 72%);
 }
 
-/* ---- Texto ---- */
+/* ---- Texto: corto y en mayúsculas, como la referencia (título en dos líneas + una bajada) ---- */
 .hero__contenido {
   padding-block: var(--space-8);
 }
 
 .hero__titulo {
-  max-width: 13.5em;
-  margin-top: var(--space-5);
+  max-width: 10.5em;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 0.85rem + 2.1vw, 2.9rem);
-  font-style: italic;
-  text-transform: lowercase;
-  letter-spacing: -0.03em;
-  line-height: 1.14;
+  font-size: clamp(1.9rem, 0.9rem + 3.3vw, 4.1rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   text-wrap: balance;
 }
 
 .hero__sub {
-  max-width: 40ch;
+  max-width: 52ch;
   margin-top: var(--space-5);
-  color: var(--text-soft);
-  font-size: var(--text-lg);
-}
-
-.hero__ctas {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
+  font-size: clamp(0.8rem, 0.72rem + 0.3vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-wrap: balance;
 }
 
 /* ---- Animaciones de entrada (después de la pantalla de carga) ---- */
@@ -350,15 +363,7 @@
   }
 
   .cargado .hero__anim {
-    animation: subir-texto 900ms var(--ease-out) 550ms both;
-  }
-
-  .cargado .hero__contenido .sobretitulo {
-    animation-delay: 100ms;
-  }
-
-  .cargado .hero__ctas {
-    animation-delay: 700ms;
+    animation: subir-texto 900ms var(--ease-out) 600ms both;
   }
 
   /* Paralaje al bajar: la foto se queda un poco atrás (navegadores con scroll-driven animations) */
@@ -411,6 +416,7 @@
   .hero {
     display: block;
     min-height: 0;
+    padding-top: var(--header-h);
   }
 
   .hero__foto {
@@ -431,7 +437,7 @@
 
   .hero__contenido {
     margin-top: -6vw;
-    padding-block: 0 var(--space-8);
+    padding-block: 0 var(--space-5);
   }
 }
 
@@ -441,6 +447,109 @@
     width: 118vw;
     margin-left: -12vw;
   }
+}
+
+/* =========================================================
+   ACCESOS: ver inventario / vender mi auto (debajo de la portada)
+   Dos paneles grandes: el primero con el color de los botones, el segundo con borde.
+   ========================================================= */
+.accesos {
+  padding-top: var(--space-6);
+}
+
+.accesos__grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+@media (min-width: 720px) {
+  .accesos__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+}
+
+.acceso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 132px;
+  padding: var(--space-5) var(--space-6);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.acceso:hover {
+  border-color: var(--ghost);
+}
+
+.acceso:active {
+  transform: scale(0.99);
+}
+
+.acceso--primario {
+  border-color: transparent;
+  background: var(--btn);
+  color: var(--btn-text);
+}
+
+.acceso--primario:hover {
+  border-color: transparent;
+  background: var(--btn-hover);
+}
+
+.acceso__texto {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.acceso__titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 0.85rem + 0.6vw, 1.35rem);
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.acceso__desc {
+  max-width: 44ch;
+  color: var(--text-soft);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.acceso--primario .acceso__desc {
+  color: inherit;
+  opacity: 0.82;
+}
+
+.acceso__flecha {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--btn);
+  color: var(--btn-text);
+  font-size: 1.3rem;
+  transition: transform 500ms var(--ease-out);
+}
+
+.acceso--primario .acceso__flecha {
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  color: inherit;
+}
+
+.acceso:hover .acceso__flecha {
+  transform: translateX(4px);
 }
 
 /* =========================================================
@@ -658,8 +767,8 @@
 
   .filtros {
     position: sticky;
-    top: calc(var(--header-h) + var(--space-4));
-    max-height: calc(100dvh - var(--header-h) - 2 * var(--space-4));
+    top: var(--space-5);
+    max-height: calc(100dvh - 2 * var(--space-5));
     overflow-y: auto;
     scrollbar-width: thin;
   }
@@ -800,7 +909,7 @@
 
   .preguntas__lado {
     position: sticky;
-    top: calc(var(--header-h) + var(--space-6));
+    top: var(--space-6);
   }
 }
 

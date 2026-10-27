@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/paleta-prueba.css"><!-- PRUEBA (temporal) -->
 
   <script type="module" src="js/main.js"></script>
 </head>
@@ -73,6 +74,15 @@
           <button type="button" class="temas__punto temas__punto--negro" role="radio" aria-checked="true" data-tema-opcion="negro" aria-label="Tema negro" data-i18n-attr="aria-label:tema.negro"></button>
           <button type="button" class="temas__punto temas__punto--hueso" role="radio" aria-checked="false" data-tema-opcion="hueso" aria-label="Tema claro" data-i18n-attr="aria-label:tema.hueso"></button>
         </div>
+        <!-- PRUEBA (temporal): paletas para el modo oscuro. Cuando se decida el color, borrar este bloque,
+             css/paleta-prueba.css, js/features/ui/paletaPrueba.js y su import en main.js (ver PALETA-PRUEBA en inicio.js) -->
+        <div class="paleta-prueba" data-paleta-prueba>
+          <button type="button" class="paleta-prueba__boton" aria-expanded="false" aria-controls="paleta-prueba-menu" aria-haspopup="true" data-paleta-boton>
+            <span class="paleta-prueba__muestra" aria-hidden="true"></span>
+            <span class="paleta-prueba__texto">paleta</span>
+          </button>
+          <div class="paleta-prueba__menu" id="paleta-prueba-menu" role="radiogroup" aria-label="Paleta del modo oscuro (prueba)" hidden data-paleta-menu></div>
+        </div>
         <a class="btn btn--primary btn--sm header__wa" href="#" data-wa="wa.consulta">
           <svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-chat-circle"/></svg>whatsapp
         </a>
@@ -92,15 +102,28 @@
       </div>
 
       <div class="container hero__contenido">
-        <span class="sobretitulo hero__anim" data-i18n="hero.sobre">automotriz · costa rica</span>
-        <h1 class="hero__titulo" id="hero-titulo" data-i18n="hero.titulo">autos con historia, listos para tu camino</h1>
-        <p class="hero__sub hero__anim" data-i18n="hero.sub">Nuevos, usados y clásicos seleccionados uno a uno, con revisión mecánica y un traspaso sin complicaciones.</p>
-        <div class="hero__ctas hero__anim">
-          <a class="btn btn--primary btn--lg" href="#carros"><span data-i18n="hero.ver">ver inventario</span>
-            <span class="btn__icono"><svg class="icono" aria-hidden="true"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
-          </a>
-          <a class="btn btn--ghost btn--lg" href="#contacto" data-abrir-venta data-i18n="hero.vender">vender mi auto</a>
-        </div>
+        <h1 class="hero__titulo" id="hero-titulo" data-i18n="hero.titulo">Autos con historia.</h1>
+        <p class="hero__sub hero__anim" data-i18n="hero.sub">Nuevos, usados y clásicos. Elegidos uno a uno.</p>
+      </div>
+    </section>
+
+    <!-- ACCESOS: comprar o vender, justo debajo de la portada -->
+    <section class="accesos" aria-label="Comprar o vender" data-i18n-attr="aria-label:accesos.grupo">
+      <div class="container accesos__grid">
+        <a class="acceso acceso--primario" href="#carros" data-reveal>
+          <span class="acceso__texto">
+            <span class="acceso__titulo" data-i18n="accesos.ver">ver inventario</span>
+            <span class="acceso__desc" data-i18n="accesos.verDesc">Todos los autos disponibles, con revisión mecánica y traspaso sin complicaciones.</span>
+          </span>
+          <span class="acceso__flecha" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+        </a>
+        <a class="acceso" href="#contacto" data-abrir-venta data-reveal>
+          <span class="acceso__texto">
+            <span class="acceso__titulo" data-i18n="accesos.vender">vender mi auto</span>
+            <span class="acceso__desc" data-i18n="accesos.venderDesc">Contanos de tu auto por WhatsApp y te ayudamos a venderlo.</span>
+          </span>
+          <span class="acceso__flecha" aria-hidden="true"><svg class="icono"><use href="assets/icons.svg#i-arrow-right"/></svg></span>
+        </a>
       </div>
     </section>
 
